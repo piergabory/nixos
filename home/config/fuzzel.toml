@@ -1,0 +1,27 @@
+font = "JetBrainsMono Nerd Font"
+terminal = alacritty
+prompt = ""
+placeholder = "Search"
+anchor = top
+hide-prompt = false
+horizontal-pad = 10
+vertical-pad = 10
+inner-pad = 10
+lines = 10
+width = 60
+minimal-lines = true
+
+[colors]
+background = "#000000FF"
+prompt = "#FFFFFFFF"
+border = "#FFFFFFFF"
+input = "#FFFFFFFF"
+# match= "#999999FF"
+text = "#AAAAAAFF"
+selection = "#FFFFFFFF"
+selection-text = "#000000FF"
+# selection-match= "3333333FF"
+
+[border]
+width = 1
+radius = 0
