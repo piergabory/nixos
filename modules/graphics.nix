@@ -5,6 +5,10 @@
     graphics = {
       enable = true;
       enable32Bit = true;
+
+      extraPackages = with pkgs; [
+        rocmPackages.clr.icd
+      ];
     };
 
     amdgpu = {
@@ -36,6 +40,9 @@
   environment.systemPackages = with pkgs; [
     polkit_gnome
     seahorse
+
+    # opencl
+    clinfo
   ];
 
   programs.xwayland.enable = true;

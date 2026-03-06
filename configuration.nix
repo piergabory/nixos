@@ -27,6 +27,7 @@
     helix # command is hx
     mdadm
     pciutils
+    clinfo
   ];
 
 
