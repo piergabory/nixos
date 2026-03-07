@@ -10,6 +10,7 @@
     ./graphics.nix
     ./gtk.nix
     ./packages.nix
+    ./waybar.nix
     ./zen.nix
   ];
 
