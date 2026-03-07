@@ -8,6 +8,7 @@
     ./outputs.nix
     ./layout.nix
     ./startup.nix
+    ./window-rules.nix
   ];
 
   programs.niri.settings = {

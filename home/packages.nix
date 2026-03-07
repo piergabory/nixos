@@ -10,5 +10,6 @@
     bazaar
     gitui
     opencode
+    home-manager
   ];
 }
