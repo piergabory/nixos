@@ -7,8 +7,8 @@
     settings.primary = {
       height = 24;
 
-      modules-left = [ "niri/workspaces" "wlr/taskbar" ];
-      modules-center = [ "niri/window" ];
+      modules-left = [ "niri/workspaces" ];
+      modules-center = [ "wlr/taskbar" ];
       modules-right = [ "clock" ];
 
       "niri/workspaces".format = "{index}";
@@ -17,7 +17,7 @@
         separate-outputs = true;
       };
       "wlr/taskbar" = {
-        format = "{name}";
+        format = "{title}";
         tooltip = false;
       };
       "clock".format = "{:%c}"; #"{:%A %B %d %Y %H:%M}";

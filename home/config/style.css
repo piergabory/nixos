@@ -29,8 +29,11 @@ button {
 }
 
 button.focused,
-button.active {
+button.active,
+button:hover {
     color: #fff;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 button.urgent {
