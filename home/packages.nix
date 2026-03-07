@@ -8,5 +8,7 @@
     zed-editor
     webcord
     bazaar
+    gitui
+    opencode
   ];
 }

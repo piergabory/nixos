@@ -7,6 +7,8 @@ import = [
 opacity = 1
 blur = false
 decorations = "None"
+title = "console"
+dynamic_title = true
 
 [window.padding]
 x = 10
