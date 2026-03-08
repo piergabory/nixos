@@ -4,6 +4,7 @@
   imports = [
     ./niri
 
+    ./helix.nix
     ./config.nix
     ./fonts.nix
     ./git.nix
