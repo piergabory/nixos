@@ -11,5 +11,6 @@
     gitui
     opencode
     home-manager
+    kdePackages.elisa
   ];
 }
