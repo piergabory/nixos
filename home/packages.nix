@@ -13,8 +13,10 @@
     webcord
     bazaar
     gitui
-    opencode
+    aichat
+    llm
     home-manager
-    kdePackages.elisa
+
+    themix-gui
   ];
 }
