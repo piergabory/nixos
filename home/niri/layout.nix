@@ -2,10 +2,18 @@
 
 {
   programs.niri.settings.layout = {
-    gaps = 10;
-    focus-ring.enable = false;
+    struts = {
+      left = 24;
+      right = 24;
+      top = 0;
+      bottom = 0;
+    };
+    gaps = 24;
+
     default-column-width.proportion = 0.5;
     default-column-display = "normal";
+
+    focus-ring.enable = false;
 
     border = {
       enable = true;
@@ -13,13 +21,6 @@
       active.color = "#fff";
       inactive.color = "#666";
       urgent.color = "#f00";
-    };
-
-    struts = {
-      left = 10;
-      right = 10;
-      top = 0;
-      bottom = 0;
     };
 
     preset-column-widths = [

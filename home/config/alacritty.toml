@@ -4,7 +4,7 @@ import = [
 ]
 
 [window]
-opacity = 1
+opacity = 0.8
 blur = false
 decorations = "None"
 title = "console"

@@ -5,6 +5,7 @@
     btop
     fastfetch
     _1password-gui
+
     zed-editor
     nil
     nixd
