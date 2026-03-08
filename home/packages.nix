@@ -6,6 +6,9 @@
     fastfetch
     _1password-gui
     zed-editor
+    nil
+    nixd
+
     webcord
     bazaar
     gitui
