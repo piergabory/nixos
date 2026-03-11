@@ -22,5 +22,7 @@
 
     cava # Music visualiser
     rmpc # Rusty Music Player Client
+
+    parabolic
   ];
 }
