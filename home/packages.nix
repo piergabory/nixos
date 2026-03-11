@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    btop
+    btop-rocm
     fastfetch
     _1password-gui
 

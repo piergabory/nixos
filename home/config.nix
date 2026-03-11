@@ -11,5 +11,6 @@
     "alacritty/alacritty.toml".source = ./config/alacritty.toml;
     "fuzzel/fuzzel.ini".source = ./config/fuzzel.toml;
     "kdeglobals".source = ./config/kdeglobals.toml;
+    "btop/btop.conf".source = ./config/btop.conf;
   };
 }
