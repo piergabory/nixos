@@ -23,6 +23,7 @@
     cava # Music visualiser
     rmpc # Rusty Music Player Client
 
-    parabolic
+    parabolic # Youtube downloader
+    beets # Music metadata fixer
   ];
 }
