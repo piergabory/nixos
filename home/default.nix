@@ -7,7 +7,7 @@
     ./helix.nix
     ./kitty.nix
     ./config.nix
-    ./mpc.nix
+    ./mpd.nix
     ./fonts.nix
     ./git.nix
     ./graphics.nix
