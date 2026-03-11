@@ -10,5 +10,7 @@
     "fuzzel/fuzzel.ini".source = ./config/fuzzel.toml;
     "kdeglobals".source = ./config/kdeglobals.toml;
     "btop/btop.conf".source = ./config/btop.conf;
+    "rmpc/config.ron".source = ./config/rmpc/config.ron;
+    "rmpc/themes/theme.ron".source = ./config/rmpc/theme.ron;
   };
 }
