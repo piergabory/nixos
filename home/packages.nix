@@ -19,6 +19,7 @@
     home-manager
 
     themix-gui
+    swaybg
 
 
     ueberzug # Graphics in terminal for alacritty

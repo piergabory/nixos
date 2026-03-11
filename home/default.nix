@@ -5,6 +5,7 @@
     ./niri
 
     ./helix.nix
+    ./kitty.nix
     ./config.nix
     ./mpc.nix
     ./fonts.nix

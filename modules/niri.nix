@@ -8,18 +8,11 @@
   security.polkit.enable = true;
 
   environment.systemPackages = with pkgs; [
-    alacritty
     nautilus
     fuzzel
     mako
-    swaybg
-    swayidle
     xwayland-satellite
     dconf
     gsettings-desktop-schemas
-
-    adwaita-qt
-
-    nordzy-icon-theme
   ];
 }
