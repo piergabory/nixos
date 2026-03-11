@@ -18,5 +18,7 @@
     home-manager
 
     themix-gui
+
+    rmpc # Rusty Music Player Client
   ];
 }
