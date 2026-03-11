@@ -3,6 +3,6 @@
 {
   programs.niri.settings.spawn-at-startup = [
       { argv = [ "waybar" ]; }
-      { argv = [ "swaybg" "-c" "#000000" ]; }
+      { sh = [ "swaybg --image /home/piergabory/Pictures/wallpapers/tokyo-tower-skyline-night.jpg" ]; }
   ];
 }
