@@ -6,6 +6,7 @@
     fastfetch
     _1password-gui
 
+
     zed-editor
     nil
     nixd
@@ -19,6 +20,8 @@
 
     themix-gui
 
+
+    ueberzug # Graphics in terminal for alacritty
     rmpc # Rusty Music Player Client
   ];
 }
