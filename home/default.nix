@@ -15,6 +15,7 @@
     ./packages.nix
     ./waybar.nix
     ./zen.nix
+    ./transmission.nix
   ];
 
   home = {
