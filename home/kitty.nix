@@ -3,19 +3,25 @@
 {
   programs.kitty = {
     enable = true;
+
     settings = {
       confirm_os_window_close = 0;
       enable_audio_bell = false;
       scrollback_lines = 10000;
-      background_opacity = "0.8";
+      background_opacity = "0.9";
       hide_window_decorations = "yes";
-      window_padding_width = 10;
+      window_padding_width = 2;
       font_size = 12.0;
       title = "console";
     };
+
     font = {
       name = "JetBrainsMono Nerd Font";
       size = 12;
     };
+
+    # extraConfig = ''
+    #   include ./kitty-themes/themes/OneDark.conf
+    # '';
   };
 }
