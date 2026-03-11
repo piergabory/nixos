@@ -6,6 +6,7 @@
 
     ./helix.nix
     ./config.nix
+    ./mpc.nix
     ./fonts.nix
     ./git.nix
     ./graphics.nix
