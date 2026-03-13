@@ -2,43 +2,28 @@
 
 {
   home.packages = with pkgs; [
-    btop-rocm
+    btop-rocm # Supposedly system monitor with AMD support
     fastfetch
-    _1password-gui
-
-    zed-editor
-    nil
-    nixd
-
-    webcord
-    bazaar
-    gitui
-    aichat
-    llm
-    home-manager
+    _1password-gui # 1Password
+    webcord # Discord
     imv # image viewer for tiling managers
-    gnome-calculator
-    thunderbird
-
-    nyxt
-    
-    themix-gui
-    swaybg
-
+    gnome-calculator # GUI calculator
+    thunderbird # Mail client
+    swaybg # desktop wallpaper
     cava # Music visualiser
     rmpc # Rusty Music Player Client
-
     parabolic # Youtube downloader
     beets # Music metadata fixer
-    jellyfin-tui
-    termusic
+    jellyfin-tui # Jellyfin terminal client
+    superfile # TUI file managers
+    whatsapp-electron # whatsapp client
+    castero # Podcast player
 
-    # file managers
-    yazi
-    superfile
-
-    whatsapp-electron
-
-    castero
+    nautilus # GUI File manager
+    fuzzel # Program launcher
+    mako # ???
+    xwayland-satellite # Xwayland support
+    dconf # ???
+    gsettings-desktop-schemas # ???
   ];
 }

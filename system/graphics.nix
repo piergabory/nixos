@@ -18,11 +18,4 @@
 
     firmware = [ pkgs.linux-firmware ];
   };
-
-  services.displayManager.ly = {
-    enable = true;
-  };
-  
-  # Electron to use wayland
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }

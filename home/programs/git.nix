@@ -11,7 +11,6 @@
   };
 
   home.packages = with pkgs; [
-    gitg
-    smartgit
+    gitui
   ];
 }

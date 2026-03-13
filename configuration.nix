@@ -9,6 +9,7 @@
     ./hardware-configuration.nix
     ./modules
     ./services
+    ./system
   ];
 
   nix.settings.experimental-features = [

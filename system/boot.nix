@@ -1,26 +1,19 @@
-{ config, ... }:
+{ ... }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.permittedInsecurePackages = [
-    "broadcom-sta-6.30.223.271-59-6.12.74"
-  ];
-
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [ broadcom_sta ];
-
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
 
     kernelParams = [
+      # Fixes issue with MacPro dual GPUs
       "pci=nocrs"
     ];
 
-    # Disable other conflicting drivers
+    # Fixes issue with MacPro hardware
     blacklistedKernelModules = [
-      # Disable wifi
       "wl"
       "b43"
       "bcma"

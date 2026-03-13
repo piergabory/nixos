@@ -2,12 +2,10 @@
 
 {
   imports = [
-    ./boot.nix
-    ./graphics.nix
+    ./displaymanager.nix
     ./localisation.nix
     ./networking.nix
-    ./users.nix
     ./niri.nix
-    ./samba.nix
+    ./users.nix
   ];
 }

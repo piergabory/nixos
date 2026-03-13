@@ -1,3 +1,5 @@
+# Theme configuration
+
 { pkgs, ... }:
 
 {
@@ -5,8 +7,6 @@
     papirus-icon-theme
     bibata-cursors
     gnome-themes-extra
-    inter
-    inter-nerdfont
   ];
 
   gtk = {
