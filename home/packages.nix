@@ -16,7 +16,12 @@
     aichat
     llm
     home-manager
+    imv # image viewer for tiling managers
+    gnome-calculator
+    thunderbird
 
+    nyxt
+    
     themix-gui
     swaybg
 
