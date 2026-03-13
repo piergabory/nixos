@@ -25,5 +25,15 @@
 
     parabolic # Youtube downloader
     beets # Music metadata fixer
+    jellyfin-tui
+    termusic
+
+    # file managers
+    yazi
+    superfile
+
+    whatsapp-electron
+
+    castero
   ];
 }

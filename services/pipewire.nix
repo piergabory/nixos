@@ -10,6 +10,8 @@
     pulse.enable = true;
   };
 
+  security.rtkit.enable = true;
+
   environment.systemPackages = with pkgs; [
     pwvucontrol # Audio controls GUI (GNOME)
   ];
