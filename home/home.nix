@@ -1,8 +1,12 @@
 { ... }:
 
 {
-  programs.fuzzel.enable = true;
   services.mako.enable = true;
+
+  stylix = {
+    enable = true;
+    autoEnable = true;
+  };
 
   home = {
     username = "piergabory";

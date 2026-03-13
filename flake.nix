@@ -9,6 +9,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    stylix = {
+      url = "github:nix-community/stylix/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     niri = {
       url = "github:sodiboo/niri-flake";
     };
@@ -27,6 +32,7 @@
     {
       nixpkgs,
       home-manager,
+      stylix,
       zen-browser,
       niri,
       ...
@@ -35,8 +41,6 @@
       nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./configuration.nix
-
           (
             { ... }:
             {
@@ -58,6 +62,8 @@
           }
 
           niri.nixosModules.niri
+          stylix.nixosModules.stylix
+          ./configuration.nix
         ];
       };
     };

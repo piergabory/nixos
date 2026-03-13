@@ -25,5 +25,17 @@
     xwayland-satellite # Xwayland support
     dconf # ???
     gsettings-desktop-schemas # ???
+
+
+    # instagram-cli Not available
+    # endcord Not available
+    # discordo Not available
+    nchat # whatsapp and telegram
+    toot # Mastodon
+    meli # email
+
+    youtube-tui # Youtube music player
+    youtube-viewer # Youtube wrapper
+    mpv # video player
   ];
 }

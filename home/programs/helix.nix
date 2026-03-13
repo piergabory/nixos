@@ -1,10 +1,5 @@
 { ... }:
 
 {
-  programs.helix = {
-    enable = true;
-    settings = {
-      theme = "onedark";
-    };
-  };
+  programs.helix.enable = true;
 }

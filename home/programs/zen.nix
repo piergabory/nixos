@@ -1,10 +1,9 @@
 { ... }:
 
 {
-  programs.zen-browser = {
-    enable = true;
-    suppressXdgMigrationWarning = true;
-  };
+  programs.zen-browser.enable = true;
+
+  # stylix.targets.zen-browser.profileNames = [ "Default Profile" ];
 
   home.sessionVariables = {
     MOZ_ENABLE_WAYLAND = "1";

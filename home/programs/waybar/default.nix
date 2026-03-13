@@ -3,10 +3,8 @@
 {
   imports = [
     ./settings.nix
+    ./style.nix
   ];
 
-  programs.waybar = {
-    enable = true;
-    style = ./style.css;
-  };
+  programs.waybar.enable = true;
 }
