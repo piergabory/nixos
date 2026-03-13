@@ -2,6 +2,8 @@
 
 {
   boot = {
+    resumeDevice = "/dev/sda2";
+
     loader = {
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
