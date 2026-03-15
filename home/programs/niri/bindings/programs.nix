@@ -3,7 +3,7 @@
 {
   programs.niri.settings.binds = {
     "Mod+T".action.spawn = "kitty";
-    "Mod+D".action.spawn = "fuzzel";
-    "Mod+Space".action.spawn = "fuzzel";
+    "Mod+D".action.spawn = [ "rofi"  "-show"  "drun" ];
+    "Mod+Space".action.spawn = [ "rofi" "-show" "combi" ];
   };
 }
