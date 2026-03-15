@@ -1,0 +1,13 @@
+{ pkgs, ... }:
+
+{
+  services.gnome.gnome-keyring.enable = true;
+  security.pam.services.login.enableGnomeKeyring = true;
+  
+  # Optional: Add secret-tool for TUI secret management
+  environment.systemPackages = with pkgs; [
+    libsecret # provides secret-tool command
+    seahorse # credential gui
+    gnome-keyring
+  ];
+}
