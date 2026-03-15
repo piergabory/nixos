@@ -5,8 +5,8 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    # base16Scheme = "${pkgs.base16-schemes}/share/themes/ayu-dark.yaml";
-    image = ./wallpaper.jpg;
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    #  image = ./wallpaper.jpg;
 
     fonts = {
       sizes = {
