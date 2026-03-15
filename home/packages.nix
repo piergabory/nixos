@@ -37,5 +37,10 @@
     youtube-tui # Youtube music player
     youtube-viewer # Youtube wrapper
     mpv # video player
+
+    github-copilot-cli # github copilot
+    bitwarden-cli
+    bitwarden-desktop
+    rbw # Better bitwarden client that holds key in memory
   ];
 }
