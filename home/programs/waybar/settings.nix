@@ -2,10 +2,10 @@
 
 {
   programs.waybar.settings.primary = {
-    height = 24;
+    height = 18;
 
     modules-left = [ "niri/workspaces" ];
-    modules-center = [ "wlr/taskbar" ];
+    modules-center = [ "niri/window" ];
     modules-right = [ "clock" ];
 
     "niri/workspaces".format = "{index}";
@@ -13,10 +13,6 @@
       format = "{title}";
       separate-outputs = true;
     };
-    "wlr/taskbar" = {
-      format = "{title}";
-      tooltip = false;
-    };
-    "clock".format = "{:%c}"; # "{:%A %B %d %Y %H:%M}";
+    "clock".format =  "{:%H:%M, %A %B %d %Y }";
   };
 }

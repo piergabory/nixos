@@ -3,9 +3,9 @@
 {
   programs.niri.settings.layout = {
     struts = {
-      left = 24;
-      right = 24;
-      top = 0;
+      left = 0;
+      right = 0;
+      top = -24;
       bottom = 0;
     };
     gaps = 24;
@@ -18,9 +18,9 @@
     border = {
       enable = true;
       width = 1;
-      active.color = "#fff";
-      inactive.color = "#666";
-      urgent.color = "#f00";
+      active.color = "#d5c4a1";
+      inactive.color = "#3c3836";
+      urgent.color = "#fb4934";
     };
 
     preset-column-widths = [
@@ -29,5 +29,8 @@
       { proportion = 2.0 / 3.0; }
       { fixed = 1920; }
     ];
+
+    insert-hint.display.color = "#fabd2f66";
+    background-color = "#1d2021";
   };
 }
