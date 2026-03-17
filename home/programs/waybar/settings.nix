@@ -2,10 +2,10 @@
 
 {
   programs.waybar.settings.primary = {
-    height = 18;
+    height = 24;
 
-    modules-left = [ "niri/workspaces" ];
-    modules-center = [ "niri/window" ];
+    modules-left = [ "niri/window"  ];
+    modules-center = [ ];
     modules-right = [ "clock" ];
 
     "niri/workspaces".format = "{index}";

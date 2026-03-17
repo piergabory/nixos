@@ -2,7 +2,6 @@
 
 {
   home.packages = with pkgs; [
-    btop-rocm # Supposedly system monitor with AMD support
     fastfetch
     _1password-gui # 1Password
     webcord # Discord
