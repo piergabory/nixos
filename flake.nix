@@ -41,6 +41,16 @@
       nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          home-manager.nixosModules.home-manager
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users."piergabory" = import ./home;
+            };
+          }
+          niri.nixosModules.niri
+          stylix.nixosModules.stylix
           (
             { ... }:
             {
@@ -51,18 +61,6 @@
               };
             }
           )
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager = {
-              useGlobalPkgs = true;
-              useUserPackages = true;
-              users."piergabory" = import ./home;
-            };
-          }
-
-          niri.nixosModules.niri
-          stylix.nixosModules.stylix
           ./configuration.nix
         ];
       };
