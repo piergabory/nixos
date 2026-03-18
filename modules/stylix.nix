@@ -9,8 +9,8 @@
 
     icons = {
       enable = true;
-      light = "MoreWaita";
-      dark = "MoreWaita";
+      light = "Adwaita";
+      dark = "Adwaita";
       package = pkgs.morewaita-icon-theme;
     };
 
@@ -41,4 +41,9 @@
       };
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    adwaita-icon-theme
+    morewaita-icon-theme
+  ];
 }
