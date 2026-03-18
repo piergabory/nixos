@@ -6,7 +6,13 @@
     autoEnable = true;
     polarity = "dark";
     base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    #  image = ./wallpaper.jpg;
+
+    icons = {
+      enable = true;
+      light = "MoreWaita";
+      dark = "MoreWaita";
+      package = pkgs.morewaita-icon-theme;
+    };
 
     fonts = {
       sizes = {
