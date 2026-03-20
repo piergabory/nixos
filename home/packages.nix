@@ -43,5 +43,10 @@
     rbw # Better bitwarden client that holds key in memory
 
     beeper # Chat aggregator
+
+    calcurse # Calendar TUI
+    gnome-calendar
+    abook # Address book
+    gnome-contacts
   ];
 }
