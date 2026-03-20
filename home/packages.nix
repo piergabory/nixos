@@ -45,8 +45,9 @@
     beeper # Chat aggregator
 
     calcurse # Calendar TUI
-    gnome-calendar
     abook # Address book
+    gnome-online-accounts
     gnome-contacts
+    gnome-calendar
   ];
 }

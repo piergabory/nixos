@@ -6,6 +6,6 @@
     ./samba.nix
     ./pipewire.nix
     ./openssh.nix
-    ./gnome-keyring.nix
+    ./gnome.nix
   ];
 }
