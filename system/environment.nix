@@ -16,7 +16,7 @@
       pciutils
       clinfo
       mesa-demos
-      agenix-cli
+      ragenix
     ];
   };
 }

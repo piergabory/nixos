@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 
-{
+let credentials = config.age.secrets.samba-piergabory-homeserver.path; in {
   environment.systemPackages = with pkgs; [
     cifs-utils
   ];
@@ -21,7 +21,7 @@
     device = "//home-server/home";
     fsType = "cifs";
     options = [
-      "credentials=/etc/nixos/samba-credentials"
+      "credentials=${credentials}"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -33,7 +33,7 @@
     device = "//home-server/data";
     fsType = "cifs";
     options = [
-      "credentials=/etc/nixos/samba-credentials"
+      "credentials=${credentials}"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -45,7 +45,7 @@
     device = "//home-server/storage";
     fsType = "cifs";
     options = [
-      "credentials=/etc/nixos/samba-credentials"
+      "credentials=${credentials}"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"

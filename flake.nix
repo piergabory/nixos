@@ -38,6 +38,7 @@
       nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          ./configuration.nix
           niri.nixosModules.niri
           stylix.nixosModules.stylix
           agenix.nixosModules.default
@@ -55,11 +56,11 @@
               home-manager.users.piergabory = {
                 imports = [
                   zen-browser.homeModules.beta
+                  agenix.homeManagerModules.default
                 ];
               };
             }
           )
-          ./configuration.nix
         ];
       };
     };
