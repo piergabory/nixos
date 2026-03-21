@@ -1,23 +1,19 @@
 {
   inputs = {
-    nixpkgs = {
-      url = "github:NixOS/nixpkgs/nixos-25.11";
-    };
-
+    agenix.url = "github:ryantm/agenix";
+    niri.url = "github:sodiboo/niri-flake";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
+    
     stylix = {
       url = "github:nix-community/stylix/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
-    };
-
+    
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs = {
@@ -30,17 +26,21 @@
 
   outputs =
     {
-      nixpkgs,
+      agenix,
       home-manager,
+      niri,
+      nixpkgs,
       stylix,
       zen-browser,
-      niri,
       ...
     }:
     {
       nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
+          niri.nixosModules.niri
+          stylix.nixosModules.stylix
+          agenix.nixosModules.default
           home-manager.nixosModules.home-manager
           {
             home-manager = {
@@ -49,8 +49,6 @@
               users."piergabory" = import ./home;
             };
           }
-          niri.nixosModules.niri
-          stylix.nixosModules.stylix
           (
             { ... }:
             {
