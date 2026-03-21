@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
-{
+{  
   age.secrets.samba = {
     file = /etc/nixos/secrets/samba-homeserver.age;
-    mode = "0640";
+    mode = "0644";
   };
 
   environment.systemPackages = with pkgs; [
@@ -27,7 +27,6 @@
     fsType = "cifs";
     options = [
       "credentials=${config.age.secrets.samba.path}"
-      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -40,7 +39,6 @@
     fsType = "cifs";
     options = [
       "credentials=${config.age.secrets.samba.path}"
-      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -53,11 +51,15 @@
     fsType = "cifs";
     options = [
       "credentials=${config.age.secrets.samba.path}"
-      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
       "noauto"
     ];
   };
+
+  # ENable GNOME Virtual File system
+  # Used for file system virtualisation required in SMB
+  # https://wiki.nixos.org/wiki/Samba#Browsing_samba_shares_with_GVFS
+  services.gvfs.enable = true;
 }
