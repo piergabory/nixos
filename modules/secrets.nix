@@ -2,7 +2,7 @@
 
 {
   age.secrets = {
-    samba-piergabory-homeserver.file = ../secrets/samba-piergabory-homeserver.age;
+    samba-piergabory-homeserver.file = /etc/nixos/secrets/samba-piergabory-homeserver.age;
     # secret_name.file = ../secrets/secrets.age;
   };
 

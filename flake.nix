@@ -47,20 +47,30 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
-              users."piergabory" = import ./home;
-            };
-          }
-          (
-            { ... }:
-            {
-              home-manager.users.piergabory = {
+              users."piergabory" = {
+                home = {
+                  username = "piergabory";
+                  homeDirectory = "/home/piergabory";
+                };
                 imports = [
+                  ./home
                   zen-browser.homeModules.beta
                   agenix.homeManagerModules.default
                 ];
               };
-            }
-          )
+              users.root = {
+                home = {
+                  username = "root";
+                  homeDirectory = "/root";
+                };
+                imports = [
+                  ./home
+                  zen-browser.homeModules.beta
+                  agenix.homeManagerModules.default
+                ];
+              };
+            };
+          }
         ];
       };
     };

@@ -9,8 +9,6 @@
   };
 
   home = {
-    username = "piergabory";
-    homeDirectory = "/home/piergabory";
     stateVersion = "25.11";
   };
 }
