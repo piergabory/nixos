@@ -7,7 +7,6 @@
     ./networking.nix
     ./niri.nix
     ./ohmyzsh.nix
-    ./secrets.nix
     ./stylix.nix
     ./users.nix
   ];

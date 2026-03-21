@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
-let credentials = config.age.secrets.samba-piergabory-homeserver.path; in {
+{
+  age.secrets.samba = {
+    file = /etc/nixos/secrets/samba-homeserver.age;
+    mode = "0640";
+  };
+
   environment.systemPackages = with pkgs; [
     cifs-utils
   ];
@@ -21,7 +26,8 @@ let credentials = config.age.secrets.samba-piergabory-homeserver.path; in {
     device = "//home-server/home";
     fsType = "cifs";
     options = [
-      "credentials=${credentials}"
+      "credentials=${config.age.secrets.samba.path}"
+      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -33,7 +39,8 @@ let credentials = config.age.secrets.samba-piergabory-homeserver.path; in {
     device = "//home-server/data";
     fsType = "cifs";
     options = [
-      "credentials=${credentials}"
+      "credentials=${config.age.secrets.samba.path}"
+      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
@@ -45,7 +52,8 @@ let credentials = config.age.secrets.samba-piergabory-homeserver.path; in {
     device = "//home-server/storage";
     fsType = "cifs";
     options = [
-      "credentials=${credentials}"
+      "credentials=${config.age.secrets.samba.path}"
+      "username=piergabory"
       "uid=1000"
       "gid=1000"
       "x-systemd.automount"
