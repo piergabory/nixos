@@ -15,6 +15,7 @@
     superfile # TUI file managers
     whatsapp-electron # whatsapp client
     castero # Podcast player
+    transmission_4-gtk # Torrent client
 
     nautilus # GUI File manager
     fuzzel # Program launcher
