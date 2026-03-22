@@ -1,11 +1,16 @@
 { ... }:
 
 {
-  programs.zsh.enable = true;
-
-  programs.zsh.ohMyZsh = {
+  programs.zsh = {
     enable = true;
-    theme = "agnoster";
-    plugins = [ "git" ];
+    enableCompletion = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+
+    ohMyZsh = {
+      enable = true;
+      theme = "agnoster";
+      plugins = [ "git" ];
+    };
   };
 }
