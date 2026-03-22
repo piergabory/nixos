@@ -3,16 +3,14 @@
 {
   home.packages = with pkgs; [
     fastfetch
-    _1password-gui # 1Password
-    webcord # Discord
     imv # image viewer for tiling managers
-    gnome-calculator # GUI calculator
-    thunderbird # Mail client
-    swaybg # desktop wallpaper
+    mpv # video player
     cava # Music visualiser
     rmpc # Rusty Music Player Client
+    thunderbird # Mail client
+    _1password-gui # 1Password
+    webcord # Discord
     parabolic # Youtube downloader
-    beets # Music metadata fixer
     jellyfin-tui # Jellyfin terminal client
     superfile # TUI file managers
     whatsapp-electron # whatsapp client
@@ -33,9 +31,6 @@
     toot # Mastodon
     meli # email
 
-    youtube-tui # Youtube music player
-    youtube-viewer # Youtube wrapper
-    mpv # video player
 
     github-copilot-cli # github copilot
     bitwarden-cli
@@ -46,8 +41,5 @@
 
     calcurse # Calendar TUI
     abook # Address book
-    gnome-online-accounts
-    gnome-contacts
-    gnome-calendar
   ];
 }
