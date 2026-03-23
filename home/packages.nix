@@ -32,6 +32,7 @@
     toot # Mastodon
     meli # email
 
+    sirula # app launcher
 
     github-copilot-cli # github copilot
     bitwarden-cli
