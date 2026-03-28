@@ -9,13 +9,14 @@
   services.syncthing = {
     enable = true;
     openDefaultPorts = true;
+    user = "piergabory"; # User for disk permissions
     guiPasswordFile = config.age.secrets.syncthing.path;
     settings = {
       gui.user = "piergabory";
       folder = {
         "Documents" = {
-          path = /home/piergabory/Documents;
-          devices = [ "devices" ];
+          path = "/home/piergabory/Documents";
+          devices = [ "home-server" ];
         };
       };
       devices = {

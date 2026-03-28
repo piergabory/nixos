@@ -24,7 +24,6 @@
     dconf # ???
     gsettings-desktop-schemas # ???
 
-
     # instagram-cli Not available
     # endcord Not available
     # discordo Not available
@@ -43,5 +42,11 @@
 
     calcurse # Calendar TUI
     abook # Address book
+
+    # Photography:
+    xsane # Very old scanner software
+    exiftool # Metadata editor
+    darktable
+    gimp
   ];
 }

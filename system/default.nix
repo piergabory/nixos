@@ -6,5 +6,6 @@
     ./graphics.nix
     ./nas.nix
     ./environment.nix
+    ./scanner.nix
   ];
 }

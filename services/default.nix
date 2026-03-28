@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./flatpaks.nix
     ./logind.nix
     ./samba.nix
     ./syncthing.nix
