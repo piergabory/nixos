@@ -13,10 +13,20 @@
     guiPasswordFile = config.age.secrets.syncthing.path;
     settings = {
       gui.user = "piergabory";
-      folder = {
+      folders = {
         "Documents" = {
           path = "/home/piergabory/Documents";
           devices = [ "home-server" ];
+        };
+        "Music" = {
+          path = "/home/piergabory/Music";
+          devices = [ "home-server" ];
+          type = "receiveonly";
+        };
+        "Photos" = {
+          path = "/home/piergabory/Pictures/library";
+          devices = [ "home-server" ];
+          type = "receiveonly";
         };
       };
       devices = {
