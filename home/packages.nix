@@ -17,6 +17,7 @@
     castero # Podcast player
     transmission_4-gtk # Torrent client
 
+    baobab # Disk usage utility like grand perspective
     nautilus # GUI File manager
     fuzzel # Program launcher
     mako # ???
@@ -46,7 +47,15 @@
     # Photography:
     xsane # Very old scanner software
     exiftool # Metadata editor
-    darktable
     gimp
+    shotwell
+    digikam
+    gthumb
+    photoqt
+    rawtherapee
+    geeqie
+
+    # Office
+    libreoffice
   ];
 }
