@@ -6,6 +6,7 @@
     settings.user = {
       name = "Pierre Gabory";
       email = "mail@piergabory.net";
+      init.defaultBranch = "main";
       pull.rebase = true;
     };
   };

@@ -6,7 +6,9 @@
     nil
     nixd
     rustup
+    cargo-component
     vscode-css-languageserver
     vscode-json-languageserver
+    gcc
   ];
 }
