@@ -5,10 +5,17 @@
     zed-editor
     nil
     nixd
-    rustup
-    cargo-component
     vscode-css-languageserver
     vscode-json-languageserver
     gcc
+
+    rustc
+    cargo
+    rustfmt
+    rust-analyzer
+    clippy
+
+    zeal
+    wikiman
   ];
-}
+} 

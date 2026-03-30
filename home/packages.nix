@@ -16,6 +16,7 @@
     whatsapp-electron # whatsapp client
     castero # Podcast player
     transmission_4-gtk # Torrent client
+    rustmission
 
     baobab # Disk usage utility like grand perspective
     nautilus # GUI File manager
