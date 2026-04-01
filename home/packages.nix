@@ -55,8 +55,15 @@
     photoqt
     rawtherapee
     geeqie
-
-    # Office
+    
     libreoffice
+
+    # Find nix packages
+    nix-index    
+    nix-doc
+    nix-btm
+    nix-top
+    nix-tree
+    nix-health
   ];
 }

@@ -17,6 +17,8 @@
     allowUnfree = true;
     allowUnsupportedSystem = true;
   };
+
+  nix.trustedUsers = [ "root" "piergabory" ];
   
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

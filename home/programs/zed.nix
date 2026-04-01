@@ -9,13 +9,11 @@
     vscode-json-languageserver
     gcc
 
-    rustc
-    cargo
-    rustfmt
-    rust-analyzer
-    clippy
+    rustup
+    rusty-man
 
     zeal
+
     wikiman
   ];
-} 
+}
