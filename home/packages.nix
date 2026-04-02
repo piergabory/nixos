@@ -65,5 +65,7 @@
     nix-top
     nix-tree
     nix-health
+
+    zeal
   ];
 }
