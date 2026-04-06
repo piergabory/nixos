@@ -23,11 +23,6 @@
           devices = [ "home-server" ];
           type = "receiveonly";
         };
-        "Photos" = {
-          path = "/home/piergabory/Pictures/library";
-          devices = [ "home-server" ];
-          type = "receiveonly";
-        };
       };
       devices = {
         "home-server".id = "XDBFUR4-FFBPR4G-JVVWYXJ-W2CFGNR-HF66NN7-U75MNVQ-U2WRMEP-R73RPQD";
