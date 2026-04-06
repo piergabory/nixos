@@ -3,10 +3,7 @@
 {
   programs.niri.settings.input = {
     keyboard = {
-      xkb = {
-        layout = "fr";
-        variant = "mac";
-      };
+      xkb.layout = "fr";
       numlock = true;
     };
 

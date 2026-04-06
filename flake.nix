@@ -38,7 +38,7 @@
       ...
     }:
     {
-      nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
+      nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
           pkgs-unstable = nixpkgs-unstable.legacyPackages.x86_64-linux;

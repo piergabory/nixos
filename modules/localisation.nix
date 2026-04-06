@@ -24,8 +24,7 @@
 
   services.xserver.xkb = {
     layout = "fr";
-    variant = "mac";
   };
 
-  console.keyMap = "mac-fr";
+  console.keyMap = "fr";
 }
