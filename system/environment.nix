@@ -13,9 +13,6 @@
       nano
       helix # command is hx
       mdadm
-      pciutils
-      clinfo
-      mesa-demos
       ragenix
     ];
   };

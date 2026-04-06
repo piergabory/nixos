@@ -17,6 +17,7 @@
   ];
 
   programs.zsh.sessionVariables = {
-    "LD_LIBRARY_PATH" = "${pkgs.lib.makeLibraryPath [ pkgs.openssl ]}:$LD_LIBRARY_PATH";
+    EDITOR = "hx";
+    LD_LIBRARY_PATH = "${pkgs.lib.makeLibraryPath [ pkgs.openssl ]}:$LD_LIBRARY_PATH";
   };
 }
