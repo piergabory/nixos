@@ -8,6 +8,7 @@
     ./git.nix
     ./helix.nix
     ./kitty.nix
+    ./fuzzel.nix
     ./zen.nix
   ];
 }
