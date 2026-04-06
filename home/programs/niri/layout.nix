@@ -5,10 +5,10 @@
     struts = {
       left = 0;
       right = 0;
-      top = -24;
+      top = -10;
       bottom = 0;
     };
-    gaps = 24;
+    gaps = 10;
 
     default-column-width.proportion = 0.5;
     default-column-display = "normal";
