@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./modules
     ./services
+    ./programs
     ./system
   ];
 
@@ -18,7 +19,7 @@
     allowUnsupportedSystem = true;
   };
 
-  nix.trusted-users= [ "root" "piergabory" ];
+  nix.settings.trusted-users = [ "root" "piergabory" ];
   
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
