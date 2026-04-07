@@ -14,6 +14,7 @@
         force = true;
         settings = [ ];
       };
+      pinsForce = true;
     };
   };
 
