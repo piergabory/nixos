@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/master";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-    flatpaks.url = "github:in-a-dil-emma/declarative-flatpak/latest";
 
     home-manager = {
       url = "github:nix-community/home-manager/release-25.11";
@@ -34,7 +33,6 @@
   outputs =
     {
       agenix,
-      flatpaks,
       home-manager,
       niri,
       nixpkgs,
@@ -55,7 +53,6 @@
           niri.nixosModules.niri
           stylix.nixosModules.stylix
           agenix.nixosModules.default
-          flatpaks.nixosModules.default
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
           home-manager.nixosModules.home-manager
           {
