@@ -4,6 +4,7 @@
   programs.waybar.style = lib.mkAfter ''    
     * {
         font-family: "JetBrains Mono Nerd Font", "Font Awesome 6 Free";
+        font-size: 11;
         background: none;
         border: none;
         outline: none;

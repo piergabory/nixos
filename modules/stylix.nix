@@ -17,8 +17,8 @@
 
     fonts = {
       sizes = {
-        applications = 10;
-        desktop = 10;
+        applications = 9;
+        desktop = 9;
       };
 
       serif = {
