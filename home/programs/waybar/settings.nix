@@ -4,15 +4,19 @@
   programs.waybar.settings.primary = {
     height = 24;
 
-    modules-left = [ "niri/window"  ];
+    modules-left = [ "niri/window" ];
     modules-center = [ ];
-    modules-right = [ "clock" ];
+    modules-right = [
+      "network"
+      "battery"
+      "clock"
+    ];
 
     "niri/workspaces".format = "{index}";
     "niri/window" = {
       format = "{title}";
       separate-outputs = true;
     };
-    "clock".format =  "{:%H:%M, %A %B %d %Y }";
+    "clock".format = "{:%H:%M, %A %B %d %Y }";
   };
 }
