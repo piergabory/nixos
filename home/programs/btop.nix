@@ -5,7 +5,7 @@
     enable = true;
     package = pkgs.btop-rocm;
     settings = {
-      color_theme = lib.mkForce "gruvbox_dark";
+      color_theme = lib.mkForce "ayu";
       theme_background = lib.mkForce false;  
     };
   };

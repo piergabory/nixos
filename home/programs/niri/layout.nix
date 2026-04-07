@@ -18,9 +18,9 @@
     border = {
       enable = true;
       width = 1;
-      active.color = "#d5c4a1";
-      inactive.color = "#3c3836";
-      urgent.color = "#fb4934";
+      active.color = "#5A6378";
+      inactive.color = "#1B1F29";
+      urgent.color = "#D95757";
     };
 
     preset-column-widths = [
@@ -31,6 +31,6 @@
     ];
 
     insert-hint.display.color = "#fabd2f66";
-    background-color = "#1d2021";
+    background-color = "#0D1017";
   };
 }

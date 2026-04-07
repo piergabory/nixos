@@ -10,5 +10,9 @@
       systemd-boot.enable = true;
       efi.canTouchEfiVariables = true;
     };
+
+    kernelModules = [
+      "thinkpad_acpi" "intel_backlight" "acpi_backlight"
+    ];
   };
 }

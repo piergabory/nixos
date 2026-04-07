@@ -8,5 +8,6 @@
     ./gnome.nix
     ./openssh.nix
     ./fdprint.nix
+    ./laptop.nix
   ];
 }
