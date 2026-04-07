@@ -19,5 +19,6 @@
     rbw # Better bitwarden client that holds key in memory
     beeper # Chat aggregator
     libreoffice
+    opencode
   ];
 }
