@@ -16,6 +16,5 @@
       format = "{title}";
       separate-outputs = true;
     };
-    "clock".format = "{:%A %B %d - %Y %H:%M}";
   };
 }
