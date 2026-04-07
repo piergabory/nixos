@@ -2,7 +2,7 @@
 
 {  
   age.secrets.samba = {
-    file = /etc/nixos/secrets/samba-homeserver.age;
+    file = ../secrets/samba-homeserver.age;
     mode = "0644";
   };
 

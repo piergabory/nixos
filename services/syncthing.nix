@@ -2,7 +2,7 @@
 
 {
   age.secrets.syncthing = {
-    file = /etc/nixos/secrets/syncthing-gui.age;
+    file = ../secrets/syncthing-gui.age;
     mode = "0644";
   };
   
