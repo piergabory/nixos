@@ -13,7 +13,7 @@
     parabolic # Youtube downloader
     transmission_4-gtk # Torrent client
     baobab # Disk usage utility like grand perspective
-    nautilus # GUI File manager
+    xfce.thunar # file manager
     github-copilot-cli # github copilot
     bitwarden-desktop
     rbw # Better bitwarden client that holds key in memory

@@ -10,9 +10,9 @@
 
     icons = {
       enable = true;
-      light = "Adwaita";
-      dark = "Adwaita";
-      package = pkgs.morewaita-icon-theme;
+      light = "xfce4-icon-theme";
+      dark = "xfce4-icon-theme";
+      package = pkgs.xfce.xfce4-icon-theme;
     };
 
     fonts = {
@@ -44,7 +44,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    adwaita-icon-theme
-    morewaita-icon-theme
+    xfce.xfce4-icon-theme
   ];
 }

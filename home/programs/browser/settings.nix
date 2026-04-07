@@ -15,6 +15,20 @@
         settings = [ ];
       };
       pinsForce = true;
+
+      containersForce = true;
+      containers."Personal" = {
+        id = 1;
+        color = "blue";
+        icon = "fingerprint";
+      };
+
+      spacesForce = true;
+      spaces."Personal" = {
+        id = "a0000000-0000-4000-8000-000000000001";
+        position = 1000;
+        container = 1;
+      };
     };
   };
 
