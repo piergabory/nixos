@@ -31,7 +31,7 @@
   };
 
   outputs =
-    {
+    inputs@{
       agenix,
       home-manager,
       niri,
@@ -59,6 +59,7 @@
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
               users."piergabory" = {
                 home = {
                   username = "piergabory";
