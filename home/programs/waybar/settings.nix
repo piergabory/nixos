@@ -5,12 +5,13 @@
     height = 20;
 
     modules-left = [ "niri/window" ];
-    modules-center = [ "clock" ];
+    modules-center = [];
     modules-right = [
       "network"
       "pulseaudio"
       "backlight"
       "battery"
+      "clock"
     ];
 
     "niri/workspaces".format = "{index}";
@@ -34,8 +35,11 @@
       };
     };
     "network" = {
-      format = "{icon} ";
-      tooltip-format-wifi = "{essid}";
+      format = "{ifname}";
+      format-wifi = "{icon} {essid}";
+      format-ethernet = "{ipaddr}/{cidr}";
+      format-disconnected = "offline";
+      tooltip = false;
       format-icons = [
         "󰤯"
         "󰤟"
@@ -43,6 +47,7 @@
         "󰤥"
         "󰤨"
       ];
+      max-length = 15;
     };
     "backlight" = {
       device = "intel_backlight";
@@ -73,6 +78,9 @@
         no-sound = 0;
       };
       tooltip = false;
+    };
+    "clock" = {
+      format = "{:%x %H:%M}";
     };
   };
 }
