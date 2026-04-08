@@ -6,7 +6,7 @@
     ./syncthing.nix
     ./pipewire.nix
     ./openssh.nix
-    ./fdprint.nix
+    ./fprintd.nix
     ./laptop.nix
   ];
 }
