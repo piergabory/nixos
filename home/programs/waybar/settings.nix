@@ -8,6 +8,8 @@
     modules-center = [ "clock" ];
     modules-right = [
       "network"
+      "pulseaudio"
+      "backlight"
       "battery"
     ];
 
@@ -33,6 +35,7 @@
     };
     "network" = {
       format = "{icon} ";
+      tooltip-format-wifi = "{essid}";
       format-icons = [
         "󰤯"
         "󰤟"
@@ -40,6 +43,36 @@
         "󰤥"
         "󰤨"
       ];
+    };
+    "backlight" = {
+      device = "intel_backlight";
+      format = "{icon} {percent}%";
+      format-icons = [
+        "󰃞"
+        "󰃟"
+        "󰃠"
+      ];
+      states = {
+        high = 90;
+      };
+      tooltip = false;
+    };
+    "pulseaudio" = {
+      format = "{icon} {volume}%";
+      format-muted = " {volume}%";
+      format-icons = {
+        headphone = "󰋋";
+        default = [
+          ""
+          ""
+          ""
+        ];
+      };
+      states = {
+        normal = 1;
+        no-sound = 0;
+      };
+      tooltip = false;
     };
   };
 }
