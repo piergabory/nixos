@@ -8,7 +8,7 @@
     ./btop.nix
     ./git.nix
     ./helix.nix
-    ./kitty.nix
+    ./terminal.nix
     ./fuzzel.nix
   ];
 }

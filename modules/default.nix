@@ -6,7 +6,7 @@
     ./localisation.nix
     ./networking.nix
     ./niri.nix
-    ./ohmyzsh.nix
+    ./shell.nix
     ./stylix.nix
     ./users.nix
   ];
