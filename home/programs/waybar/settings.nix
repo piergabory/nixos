@@ -8,6 +8,7 @@
     modules-center = [];
     modules-right = [
       "network"
+      "bluetooth"
       "pulseaudio"
       "backlight"
       "battery"
@@ -81,6 +82,9 @@
     };
     "clock" = {
       format = "{:%x %H:%M}";
+    };
+    "bluetooth" = {
+      format = " {status}";
     };
   };
 }
