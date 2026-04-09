@@ -11,7 +11,8 @@
     _1password-gui # 1Password
     webcord # Discord
     parabolic # Youtube downloader
-    transmission_4-gtk # Torrent client
+    transmission_4-qt6 # Torrent client
+    rustmission
     baobab # Disk usage utility like grand perspective
     xfce.thunar # file manager
     github-copilot-cli # github copilot

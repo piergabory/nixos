@@ -1,9 +1,11 @@
-{ ... }:
+{ pkgs, ... }:
 
 {
-  programs.thunar.enable = true;
-
+  home.packages = with pkgs; [
+    xfce.thunar
+  ];
+  
   programs.niri.settings.binds = {
-    "Mod+Space".action.spawn = [ "fuzzel" ];
+    "Mod+M".action.spawn = [ "thunar" ];
   };
 }
