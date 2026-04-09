@@ -7,7 +7,7 @@
   };
   
   console = {
-    font = "ter=v32b";
+    font = "Lat2-Terminus16";
     packages = [ pkgs.terminus_font ];
     earlySetup = true;
   };
