@@ -12,4 +12,8 @@
       border.radius = 0;
     };
   };
+
+  programs.niri.settings.binds = {
+    "Mod+Space".action.spawn = [ "fuzzel" ];
+  };
 }

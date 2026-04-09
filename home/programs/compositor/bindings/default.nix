@@ -5,7 +5,6 @@
     ./audio.nix
     ./playback.nix
     ./windows.nix
-    ./programs.nix
   ];
 
   programs.niri.settings.binds = {

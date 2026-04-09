@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    settings.theme = lib.mkForce "ayu_dark";
+    settings.theme = lib.mkForce "base16_transparent";
   };
 
   home.packages = with pkgs; [

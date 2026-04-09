@@ -2,13 +2,14 @@
 
 {
   imports = [
-    ./niri
     ./browser
+    ./compositor
     ./waybar
     ./btop.nix
+    ./editor.nix
+    ./filemanager.nix
     ./git.nix
-    ./helix.nix
+    ./launcher.nix
     ./terminal.nix
-    ./fuzzel.nix
   ];
 }
