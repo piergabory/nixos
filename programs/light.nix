@@ -1,14 +1,14 @@
 { ... }:
 
 {
-  programs.light = {
-    enable = true;
-    brightnessKeys = {
-      enable = true;
-      minBrightness = 0;
-      step = 10;
-    };
-  };
+  # programs.light = {
+  #   enable = true;
+  #   brightnessKeys = {
+  #     enable = true;
+  #     minBrightness = 0;
+  #     step = 10;
+  #   };
+  # };
 
   services.actkbd = {
     enable = true;

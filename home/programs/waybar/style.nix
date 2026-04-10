@@ -22,6 +22,10 @@
     window#waybar {
       background: transparent;
     }
+
+    window#waybar > box {
+      padding: 0 10px;
+    }
  
     #workspaces button {
         padding: 0 6px;
