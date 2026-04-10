@@ -219,5 +219,12 @@ in
         workspace = spaceId;
         container = containerId;
       };
+      "Discord" = rec {
+        url = "https://discord.com/channels/@me"; 
+        id = url;
+        isEssential = true;
+        workspace = spaceId;
+        container = containerId;
+      };
     };
 }
