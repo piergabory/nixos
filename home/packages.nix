@@ -14,7 +14,6 @@
     transmission_4-qt6 # Torrent client
     rustmission
     baobab # Disk usage utility like grand perspective
-    xfce.thunar # file manager
     github-copilot-cli # github copilot
     bitwarden-desktop
     rbw # Better bitwarden client that holds key in memory

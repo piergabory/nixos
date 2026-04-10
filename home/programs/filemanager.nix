@@ -2,7 +2,7 @@
 
 {
   home.packages = with pkgs; [
-    xfce.thunar
+    thunar
   ];
   
   programs.niri.settings.binds = {

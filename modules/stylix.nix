@@ -12,7 +12,7 @@
       enable = true;
       light = "xfce4-icon-theme";
       dark = "xfce4-icon-theme";
-      package = pkgs.xfce.xfce4-icon-theme;
+      package = pkgs.xfce4-icon-theme;
     };
 
     fonts = {
@@ -44,6 +44,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    xfce.xfce4-icon-theme
+    xfce4-icon-theme
   ];
 }
