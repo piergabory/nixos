@@ -14,18 +14,23 @@
     settings = {
       gui.user = "piergabory";
       folders = {
+        "Desktop" = {
+          path = "/home/piergabory/Desktop";
+          devices = [ "home-server" "workstation" ];
+        };
         "Documents" = {
           path = "/home/piergabory/Documents";
-          devices = [ "home-server" ];
+          devices = [ "home-server" "workstation" ];
         };
         "Music" = {
           path = "/home/piergabory/Music";
-          devices = [ "home-server" ];
+          devices = [ "home-server" "workstation" ];
           type = "receiveonly";
         };
       };
       devices = {
         "home-server".id = "XDBFUR4-FFBPR4G-JVVWYXJ-W2CFGNR-HF66NN7-U75MNVQ-U2WRMEP-R73RPQD";
+        "workstation".id = "JUSBZZQ-6LIX2EW-EIYJSGL-XU55D26-ZAHSVEN-BP7JVWX-DP4DTZI-QQP3WQI";
       };
     };
   };
