@@ -18,9 +18,6 @@
     border = {
       enable = true;
       width = 1;
-      active.color = "#5A6378";
-      inactive.color = "#1B1F29";
-      urgent.color = "#D95757";
     };
 
     preset-column-widths = [
@@ -29,8 +26,5 @@
       { proportion = 2.0 / 3.0; }
       { fixed = 1920; }
     ];
-
-    insert-hint.display.color = "#fabd2f66";
-    background-color = "#0D1017";
   };
 }
