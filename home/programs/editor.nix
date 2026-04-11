@@ -14,6 +14,7 @@
     zsh
     nil
     nixd
+    nixfmt
   ];
 
   programs.zsh.sessionVariables = {

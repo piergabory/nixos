@@ -20,5 +20,6 @@
     beeper # Chat aggregator
     libreoffice
     opencode
+    clock-rs
   ];
 }
