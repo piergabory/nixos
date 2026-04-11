@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./bindings
-
+    ./bindings.nix
     ./inputs.nix
     ./layout.nix
     ./outputs.nix

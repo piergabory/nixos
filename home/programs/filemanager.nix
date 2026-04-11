@@ -6,6 +6,6 @@
   ];
   
   programs.niri.settings.binds = {
-    "Mod+M".action.spawn = [ "thunar" ];
+    "Mod+Shift+T".action.spawn = [ "thunar" ];
   };
 }
