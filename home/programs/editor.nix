@@ -8,7 +8,11 @@
 
   home.packages = with pkgs; [
     gcc
-    rustup
+    rustc
+    rustfmt
+    rust-analyzer
+    cargo
+    clippy
     pkg-config
     openssl
     zsh
