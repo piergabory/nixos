@@ -211,6 +211,14 @@ in
         workspace = spaceId;
         container = containerId;
       };
+      "Budget" = rec {
+        url = "https://budget.piergabory.net";
+        id = url;
+        folderParentId = finance.id;
+        position = 504;
+        workspace = spaceId;
+        container = containerId;
+      };
       "YNAB" = rec {
         url = "https://app.ynab.com/9691040c-4160-4ae0-895d-a229a741be87/budget";
         id = url;

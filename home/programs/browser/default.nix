@@ -7,4 +7,6 @@
     ./settings.nix
     ./extensions.nix
   ];
+
+  programs.chromium.enable = true;
 }
