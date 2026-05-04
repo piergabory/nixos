@@ -26,6 +26,5 @@
 
   environment.systemPackages = with pkgs; [
     powertop
-    acpi
   ];
 }
