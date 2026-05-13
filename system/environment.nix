@@ -14,6 +14,7 @@
       helix # command is hx
       mdadm
       ragenix
+      xwayland-satellite
     ];
   };
 }
