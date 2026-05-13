@@ -21,5 +21,6 @@
     libreoffice
     opencode
     clock-rs
+    prismlauncher
   ];
 }

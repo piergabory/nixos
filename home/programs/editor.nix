@@ -3,7 +3,7 @@
 {
   programs.helix = {
     enable = true;
-    settings.theme = lib.mkForce "base16_transparent";
+    settings.theme = lib.mkForce "gruvbox_dark_hard";
   };
 
   home.packages = with pkgs; [
