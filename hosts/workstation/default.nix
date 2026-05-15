@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ../common
+    ../../common
     ./hardware-configuration.nix
-    ../../modules/workstation
-    ../../services/workstation
+    ./modules
+    ./services
   ];
 
   # This value determines the NixOS release from which the default

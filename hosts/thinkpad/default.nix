@@ -2,10 +2,10 @@
 
 {
   imports = [
-    ../common
+    ../../common
     ./hardware-configuration.nix
-    ../../modules/thinkpad
-    ../../services/thinkpad
+    ./modules
+    ./services
   ];
 
   # This value determines the NixOS release from which the default
