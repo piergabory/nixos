@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, secretFiles, ... }:
 
 let
   inherit (lib) mkOption types;
@@ -41,7 +41,7 @@ in
 
   config = {
     age.secrets.restic-password = {
-      file = ../../../secrets/restic-password.age;
+      file = secretFiles.restic-password;
       mode = "0600";
     };
 

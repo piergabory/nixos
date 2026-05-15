@@ -1,8 +1,8 @@
-{ config, ... }:
+{ config, secretFiles, ... }:
 
 {
   age.secrets.syncthing = {
-    file = ../../../secrets/syncthing-gui.age;
+    file = secretFiles.syncthing-gui;
     mode = "0644";
   };
 

@@ -55,6 +55,8 @@
       ...
     }:
     let
+      ageSecrets = import ./secrets;
+
       commonModules = [
         ./common/home
         niri.nixosModules.niri
@@ -68,7 +70,7 @@
         system = "x86_64-linux";
         modules = commonModules ++ [ ./hosts/workstation ];
         specialArgs = {
-          inherit inputs;
+          inherit inputs ageSecrets;
           hostHomeModules = [ ./hosts/workstation/home ];
         };
       };
@@ -80,7 +82,7 @@
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
         ];
         specialArgs = {
-          inherit inputs;
+          inherit inputs ageSecrets;
           hostHomeModules = [ ./hosts/thinkpad/home ];
         };
       };

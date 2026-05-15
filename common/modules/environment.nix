@@ -4,7 +4,6 @@
     git
     vim
     helix # Helix text editor
-    mdadm # Software RAID for /storage
     kitty # support for kitty ssh client
   ];
     

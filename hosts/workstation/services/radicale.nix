@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, secretFiles, ... }:
 
 {
   age.secrets.radicale = {
-    file = ../../../secrets/radicale.age;
+    file = secretFiles.radicale;
     mode = "0644";
   };
 

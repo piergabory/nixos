@@ -75,26 +75,6 @@
       allow-when-locked = true;
     };
 
-    "XF86MonBrightnessUp" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "brightnessctl"
-        "--class=backlight"
-        "set"
-        "+10%"
-      ];
-    };
-
-    "XF86MonBrightnessDown" = {
-      allow-when-locked = true;
-      action.spawn = [
-        "brightnessctl"
-        "--class=backlight"
-        "set"
-        "10%-"
-      ];
-    };
-
     "Mod+O" = {
       repeat = false;
       action.toggle-overview = [ ];

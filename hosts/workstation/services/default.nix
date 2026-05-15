@@ -2,10 +2,10 @@
 
 {
   imports = [
+    ./glance
     ./logind.nix
     ./backup.nix
     ./budget.nix
-    ./glance.nix
     ./home-assistant.nix
     ./immich.nix
     ./jellyfin.nix

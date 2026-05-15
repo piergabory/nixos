@@ -11,6 +11,4 @@
     packages = [ pkgs.terminus_font ];
     earlySetup = true;
   };
-
-  security.pam.services.ly.fprintAuth = true;
 }

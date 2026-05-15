@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, pkgs, secretFiles, ... }:
 
 {
   age.secrets.samba = {
-    file = ../../../secrets/samba-homeserver.age;
+    file = secretFiles.samba-homeserver;
     mode = "0644";
   };
 

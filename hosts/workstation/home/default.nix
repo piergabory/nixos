@@ -1,6 +1,8 @@
-{ ... }:
+{ pkgs, lib, ... }:
 
 {
+  programs.btop.package = lib.mkForce pkgs.btop-cuda;
+
   programs.niri.settings = {
     input.keyboard.xkb.variant = "mac";
 
