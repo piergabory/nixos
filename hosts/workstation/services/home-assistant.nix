@@ -1,41 +1,29 @@
-{ ageSecrets, config, ... }:
+{
+  ageSecrets,
+  config,
+  ...
+}:
 
 {
   age.secrets.home-assistant-token = ageSecrets.home-assistant-token;
 
-  services.home-assistant = {
-    enable = true;
-    extraComponents = [
-      "analytics"
-      "google_translate"
-      "met"
-      "radio_browser"
-      "shopping_list"
-      "isal"
-      "matter"
-      "netatmo"
-      "homekit"
-      "homekit_controller"
-      "overkiz"
-      "xiaomi_miio"
-      "androidtv_remote"
-      "zha"
-    ];
-    config = {
-      default_config = {
+  virtualisation = {
+    containers.enable = true;
+    oci-containers = {
+      backend = "podman";
+      containers.homeassistant = {
+        image = "ghcr.io/home-assistant/home-assistant:stable";
+        environment.TZ = "Europe/Paris";
+        autoStart = true;
+        privileged = true;
+        extraOptions = [
+          "--network=host"
+        ];
+        volumes = [
+          "/var/lib/homeassistant:/config"
+          "/run/dbus:/run/dbus:ro"
+        ];
       };
-      http = {
-        server_host = "127.0.0.1";
-        trusted_proxies = [ "127.0.0.1" ];
-        use_x_forwarded_for = true;
-      };
-      homeassistant = {
-        internal_url = "http://192.168.1.4:8123";
-        external_url = "https://home.piergabory.net";
-      };
-      "automation ui" = "!include automations.yaml";
-      "scene ui" = "!include scenes.yaml";
-      "script ui" = "!include scripts.yaml";
     };
   };
 
@@ -53,12 +41,6 @@
     enable = true;
     openFirewall = true;
   };
-
-  # services.openthread-border-router = {
-  #   enable = true;
-  #   openFirewall = true;
-  #   radio.device = "/dev/something";
-  # };
 
   networking.firewall.allowedTCPPorts = [
     8123
