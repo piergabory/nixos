@@ -14,6 +14,10 @@
         force = true;
         settings = [ ];
       };
+      settings = {
+        "browser.startup.homepage" = "https://dash.piergabory.net";
+        "browser.startup.page" = 1;
+      };
       pinsForce = true;
 
       containersForce = true;
