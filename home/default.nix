@@ -1,30 +1,35 @@
-{ inputs, ... }:
+{
+  inputs,
+  ...
+}:
 
 {
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = {
+      inherit inputs;
+    };
     users."piergabory" = {
       home = {
         username = "piergabory";
         homeDirectory = "/home/piergabory";
       };
       imports = [
-        ./configuration.nix
         inputs.zen-browser.homeModules.beta
         inputs.agenix.homeManagerModules.default
+        ./configuration.nix
       ];
     };
-    users.root = {
+    users."root" = {
       home = {
         username = "root";
         homeDirectory = "/root";
       };
       imports = [
-        ./configuration.nix
         inputs.zen-browser.homeModules.beta
         inputs.agenix.homeManagerModules.default
+        ./configuration.nix
       ];
     };
   };

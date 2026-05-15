@@ -8,6 +8,7 @@
     description = "Pierre Gabory";
     extraGroups = [
       "networkmanager"
+      "libvirtd"
       "wheel"
       "scanner"
       "lp"

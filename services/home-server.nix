@@ -1,6 +1,6 @@
 { config, pkgs, ... }:
 
-{  
+{
   age.secrets.samba = {
     file = ../secrets/samba-homeserver.age;
     mode = "0644";
@@ -58,7 +58,7 @@
     ];
   };
 
-  # ENable GNOME Virtual File system
+  # Enable GNOME Virtual File system
   # Used for file system virtualisation required in SMB
   # https://wiki.nixos.org/wiki/Samba#Browsing_samba_shares_with_GVFS
   services.gvfs.enable = true;

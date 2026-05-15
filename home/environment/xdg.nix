@@ -3,6 +3,8 @@
 
 {
   xdg.mimeApps.defaultApplications = {
+    "inode/directory" = "Thunar.desktop";
+    "application/x-gnome-saved-search" = "Thunar.desktop";
     # Image formats, use IMV
     "image/png" = "imv.desktop";
     "image/jpg" = "imv.desktop";

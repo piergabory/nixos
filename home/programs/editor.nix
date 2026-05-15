@@ -7,18 +7,25 @@
   };
 
   home.packages = with pkgs; [
-    gcc
-    rustc
-    rustfmt
-    rust-analyzer
+    zellij # Terminal workspace (like tmux)
+    
     cargo
     clippy
+    rustc
+    rust-analyzer
+    rustfmt
+
     pkg-config
+
     openssl
-    zsh
+
     nil
     nixd
     nixfmt
+
+    libclang
+    gcc
+    lldb
   ];
 
   programs.zsh.sessionVariables = {

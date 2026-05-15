@@ -5,7 +5,7 @@
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark.yaml";
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     # image = ./wallpaper.jpg;
 
     icons = {
@@ -17,8 +17,8 @@
 
     fonts = {
       sizes = {
-        applications = 9;
-        desktop = 9;
+        applications = 10;
+        desktop = 10;
       };
 
       serif = {

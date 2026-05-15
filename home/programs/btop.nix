@@ -3,7 +3,7 @@
 {
   programs.btop = {
     enable = true;
-    package = pkgs.btop-rocm;
+    package = pkgs.btop;
     settings = {
       color_theme = lib.mkForce "gruvbox_dark";
       theme_background = lib.mkForce false;  

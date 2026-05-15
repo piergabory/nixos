@@ -124,7 +124,7 @@ in
         container = containerId;
       };
       "Home Assistant" = rec {
-        url = "https://hass.piergabory.net/dashboard-areas/home";
+        url = "https://home.piergabory.net/home/overview";
         id = url;
         folderParentId = hosted.id;
         position = 301;
@@ -163,10 +163,18 @@ in
         workspace = spaceId;
         container = containerId;
       };
+      "Actual" = rec {
+        url = "https://budget.piergabory.net/budget";
+        id = url;
+        folderParentId = hosted.id;
+        position = 306;
+        workspace = spaceId;
+        container = containerId;
+      };
       "Nix Packages" = {
         id = "f8dd784e-11d7-430a-8f57-7b05ecdb4c77";
         folderParentId = nixDev.id;
-        url = "https://search.nixos.org/packages";
+        url = "https://search.nixos.org/packages?channel=unstable";
         position = 401;
         workspace = spaceId;
         container = containerId;
@@ -195,6 +203,14 @@ in
         workspace = spaceId;
         container = containerId;
       };
+      "Nix Wiki" = {
+        id = "f8dd784e-11d7-430a-8f57-7b05ecdb4c78";
+        folderParentId = nixDev.id;
+        url = "https://wiki.nixos.org";
+        position = 405;
+        workspace = spaceId;
+        container = containerId;
+      };
       "BoursoBank" = rec {
         url = "https://clients.boursobank.com/";
         id = url;
@@ -208,22 +224,6 @@ in
         id = url;
         folderParentId = finance.id;
         position = 502;
-        workspace = spaceId;
-        container = containerId;
-      };
-      "Budget" = rec {
-        url = "https://budget.piergabory.net";
-        id = url;
-        folderParentId = finance.id;
-        position = 504;
-        workspace = spaceId;
-        container = containerId;
-      };
-      "YNAB" = rec {
-        url = "https://app.ynab.com/9691040c-4160-4ae0-895d-a229a741be87/budget";
-        id = url;
-        folderParentId = finance.id;
-        position = 503;
         workspace = spaceId;
         container = containerId;
       };

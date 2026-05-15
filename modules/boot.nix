@@ -12,7 +12,8 @@
     };
 
     kernelModules = [
-      "thinkpad_acpi" "intel_backlight"
+      "thinkpad_acpi"
+      "intel_backlight"
     ];
   };
 }

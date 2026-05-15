@@ -25,6 +25,7 @@
   powerManagement.powertop.enable = true;
 
   environment.systemPackages = with pkgs; [
+    brightnessctl
     powertop
   ];
 }

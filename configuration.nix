@@ -5,8 +5,6 @@
     ./hardware-configuration.nix
     ./modules
     ./services
-    ./programs
-    ./system
   ];
 
   nix.settings.experimental-features = [
@@ -19,14 +17,17 @@
     allowUnsupportedSystem = true;
   };
 
-  nix.settings.trusted-users = [ "root" "piergabory" ];
+  nix.settings.trusted-users = [
+    "root"
+    "piergabory"
+  ];
 
   system.autoUpgrade = {
     enable = true;
     allowReboot = true;
     channel = "https://channels.nixos.org/nixos-unstable";
   };
-  
+
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
   # on your system were taken. It‘s perfectly fine and recommended to leave

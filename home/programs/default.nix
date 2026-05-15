@@ -10,6 +10,7 @@
     ./filemanager.nix
     ./git.nix
     ./launcher.nix
+    ./minecraft.nix
     ./terminal.nix
   ];
 }

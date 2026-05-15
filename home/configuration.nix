@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ./config
+    ./rmpc
     ./environment
     ./programs
     ./services
