@@ -8,6 +8,10 @@
 
     debug.render-drm-device = "/dev/dri/by-path/pci-0000:01:00.0-render";
 
+    spawn-at-startup = lib.mkAfter [
+      { sh = "swaybg --image /etc/nixos/assets/house.jpg"; }
+    ];
+
     outputs = {
       "DP-3" = {
         mode = {

@@ -6,7 +6,6 @@
     autoEnable = true;
     polarity = "dark";
     base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
-    # image = ./wallpaper.jpg;
 
     icons = {
       enable = true;

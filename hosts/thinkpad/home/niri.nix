@@ -3,6 +3,7 @@
 {
   programs.niri.settings = {
     spawn-at-startup = lib.mkAfter [
+      { sh = "swaybg --image /etc/nixos/assets/house.jpg"; }
       { argv = [ "blueman-applet" ]; }
     ];
 
