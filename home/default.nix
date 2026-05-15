@@ -1,5 +1,6 @@
 {
   inputs,
+  hostHomeModules ? [ ],
   ...
 }:
 
@@ -19,7 +20,8 @@
         inputs.zen-browser.homeModules.beta
         inputs.agenix.homeManagerModules.default
         ./configuration.nix
-      ];
+      ]
+      ++ hostHomeModules;
     };
     users."root" = {
       home = {
@@ -30,7 +32,8 @@
         inputs.zen-browser.homeModules.beta
         inputs.agenix.homeManagerModules.default
         ./configuration.nix
-      ];
+      ]
+      ++ hostHomeModules;
     };
   };
 }

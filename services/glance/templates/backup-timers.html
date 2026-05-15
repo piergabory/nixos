@@ -1,0 +1,36 @@
+{{ $timers := .JSON.Array "timers" }}
+{{ $failed := 0 }}
+{{ range $timers }}
+  {{ if and (ne (.String "serviceResult") "success") (ne (.String "serviceResult") "") }}{{ $failed = add $failed 1 }}{{ end }}
+{{ end }}
+<div class="flex justify-between text-center margin-bottom-10">
+  <div>
+    <div class="color-highlight size-h3">{{ len $timers }}</div>
+    <div class="size-h6">JOBS</div>
+  </div>
+  <div>
+    <div class="{{ if gt $failed 0 }}color-negative{{ else }}color-positive{{ end }} size-h3">{{ $failed }}</div>
+    <div class="size-h6">FAILED</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3"><span {{ .JSON.String "generatedAt" | parseTime "rfc3339" | toRelativeTime }}></span></div>
+    <div class="size-h6">UPDATED</div>
+  </div>
+</div>
+<ul class="list list-gap-10 collapsible-container" data-collapse-after="6">
+  {{ range $timers }}
+    <li>
+      <div class="flex justify-between">
+        <span class="text-truncate">{{ .String "id" | trimPrefix "restic-backups-" | trimPrefix "backup-" | trimSuffix ".timer" }}</span>
+        {{ if eq (.String "serviceResult") "success" }}
+          <span class="color-positive">ok</span>
+        {{ else if eq (.String "serviceResult") "" }}
+          <span class="color-subdue">pending</span>
+        {{ else }}
+          <span class="color-negative">{{ .String "serviceResult" }}</span>
+        {{ end }}
+      </div>
+      <div class="size-h6 color-subdue text-truncate">next {{ .String "nextElapse" }}</div>
+    </li>
+  {{ end }}
+</ul>

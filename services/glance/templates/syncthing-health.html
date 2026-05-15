@@ -1,0 +1,75 @@
+{{ $desktop := .Subrequest "desktop" }}
+{{ $documents := .Subrequest "documents" }}
+{{ $music := .Subrequest "music" }}
+
+<div class="flex justify-between text-center margin-bottom-10">
+  <div>
+    <div class="color-highlight size-h3">{{ div (.JSON.Int "uptime") 3600 }}h</div>
+    <div class="size-h6">UPTIME</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Int "numConnections" }}</div>
+    <div class="size-h6">CONNECTIONS</div>
+  </div>
+</div>
+<ul class="list list-gap-10">
+  {{ $needBytes := $desktop.JSON.Int "needBytes" }}
+  {{ $error := $desktop.JSON.String "error" }}
+  <li>
+    <div class="flex justify-between">
+      <span>Desktop</span>
+      {{ if ne $error "" }}
+        <span class="color-negative">error</span>
+      {{ else if gt $needBytes 0 }}
+        <span class="color-negative">behind</span>
+      {{ else }}
+        <span class="color-positive">{{ $desktop.JSON.String "state" }}</span>
+      {{ end }}
+    </div>
+    <ul class="list-horizontal-text size-h6 color-subdue">
+      <li>{{ $desktop.JSON.Int "inSyncFiles" | formatNumber }}/{{ $desktop.JSON.Int "globalFiles" | formatNumber }} files</li>
+      <li>{{ div ($desktop.JSON.Int "needBytes" | toFloat) 1073741824 | printf "%.1f" }}GB needed</li>
+    </ul>
+    {{ if ne $error "" }}<div class="size-h6 color-negative text-truncate">{{ $error }}</div>{{ end }}
+  </li>
+
+  {{ $needBytes := $documents.JSON.Int "needBytes" }}
+  {{ $error := $documents.JSON.String "error" }}
+  <li>
+    <div class="flex justify-between">
+      <span>Documents</span>
+      {{ if ne $error "" }}
+        <span class="color-negative">error</span>
+      {{ else if gt $needBytes 0 }}
+        <span class="color-negative">behind</span>
+      {{ else }}
+        <span class="color-positive">{{ $documents.JSON.String "state" }}</span>
+      {{ end }}
+    </div>
+    <ul class="list-horizontal-text size-h6 color-subdue">
+      <li>{{ $documents.JSON.Int "inSyncFiles" | formatNumber }}/{{ $documents.JSON.Int "globalFiles" | formatNumber }} files</li>
+      <li>{{ div ($documents.JSON.Int "needBytes" | toFloat) 1073741824 | printf "%.1f" }}GB needed</li>
+    </ul>
+    {{ if ne $error "" }}<div class="size-h6 color-negative text-truncate">{{ $error }}</div>{{ end }}
+  </li>
+
+  {{ $needBytes := $music.JSON.Int "needBytes" }}
+  {{ $error := $music.JSON.String "error" }}
+  <li>
+    <div class="flex justify-between">
+      <span>Music</span>
+      {{ if ne $error "" }}
+        <span class="color-negative">error</span>
+      {{ else if gt $needBytes 0 }}
+        <span class="color-negative">behind</span>
+      {{ else }}
+        <span class="color-positive">{{ $music.JSON.String "state" }}</span>
+      {{ end }}
+    </div>
+    <ul class="list-horizontal-text size-h6 color-subdue">
+      <li>{{ $music.JSON.Int "inSyncFiles" | formatNumber }}/{{ $music.JSON.Int "globalFiles" | formatNumber }} files</li>
+      <li>{{ div ($music.JSON.Int "needBytes" | toFloat) 1073741824 | printf "%.1f" }}GB needed</li>
+    </ul>
+    {{ if ne $error "" }}<div class="size-h6 color-negative text-truncate">{{ $error }}</div>{{ end }}
+  </li>
+</ul>

@@ -45,20 +45,34 @@
       zen-browser,
       ...
     }:
+    let
+      commonModules = [
+        ./home
+        niri.nixosModules.niri
+        stylix.nixosModules.stylix
+        agenix.nixosModules.default
+        home-manager.nixosModules.home-manager
+      ];
+    in
     {
+      nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = commonModules ++ [ ./hosts/workstation ];
+        specialArgs = {
+          inherit inputs;
+          hostHomeModules = [ ./home/workstation ];
+        };
+      };
+
       nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = [
-          ./configuration.nix
-          ./home
-          niri.nixosModules.niri
-          stylix.nixosModules.stylix
-          agenix.nixosModules.default
+        modules = commonModules ++ [
+          ./hosts/thinkpad
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
-          home-manager.nixosModules.home-manager
         ];
         specialArgs = {
           inherit inputs;
+          hostHomeModules = [ ./home/thinkpad ];
         };
       };
     };

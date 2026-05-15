@@ -1,11 +1,11 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
   stylix = {
     enable = true;
     autoEnable = true;
     polarity = "dark";
-    base16Scheme = "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
+    base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
     # image = ./wallpaper.jpg;
 
     icons = {
@@ -17,8 +17,8 @@
 
     fonts = {
       sizes = {
-        applications = 10;
-        desktop = 10;
+        applications = lib.mkDefault 10;
+        desktop = lib.mkDefault 10;
       };
 
       serif = {

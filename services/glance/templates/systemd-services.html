@@ -1,0 +1,35 @@
+{{ $services := .JSON.Array "services" }}
+{{ $active := 0 }}
+{{ $failed := 0 }}
+{{ range $services }}
+  {{ if eq (.String "activeState") "active" }}{{ $active = add $active 1 }}{{ end }}
+  {{ if eq (.String "activeState") "failed" }}{{ $failed = add $failed 1 }}{{ end }}
+{{ end }}
+<div class="flex justify-between text-center margin-bottom-10">
+  <div>
+    <div class="color-highlight size-h3">{{ $active }}/{{ len $services }}</div>
+    <div class="size-h6">ACTIVE</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ $failed }}</div>
+    <div class="size-h6">FAILED</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3"><span {{ .JSON.String "generatedAt" | parseTime "rfc3339" | toRelativeTime }}></span></div>
+    <div class="size-h6">UPDATED</div>
+  </div>
+</div>
+<ul class="list list-gap-10 collapsible-container" data-collapse-after="10">
+  {{ range $services }}
+    <li class="flex justify-between">
+      <span class="text-truncate">{{ .String "id" | trimSuffix ".service" }}</span>
+      {{ if eq (.String "activeState") "active" }}
+        <span class="color-positive">{{ .String "subState" }}</span>
+      {{ else if eq (.String "activeState") "failed" }}
+        <span class="color-negative">failed</span>
+      {{ else }}
+        <span class="color-subdue">{{ .String "activeState" }}</span>
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

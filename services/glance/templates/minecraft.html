@@ -1,0 +1,15 @@
+<div class="flex justify-between text-center margin-bottom-10">
+  <div>
+    <div class="color-highlight size-h3">{{ if .JSON.Bool "online" }}UP{{ else }}DOWN{{ end }}</div>
+    <div class="size-h6">STATUS</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Int "players.online" }}/{{ .JSON.Int "players.max" }}</div>
+    <div class="size-h6">PLAYERS</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.String "version" }}</div>
+    <div class="size-h6">VERSION</div>
+  </div>
+</div>
+<div class="color-subdue text-truncate">{{ .JSON.String "motd.clean.0" }}</div>

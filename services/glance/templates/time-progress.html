@@ -1,0 +1,26 @@
+{{ $now := now }}
+{{ $secondsToday := add (mul $now.Hour 3600) (mul $now.Minute 60) | add $now.Second }}
+{{ $dayProgress := div (mul $secondsToday 100.0) 86400 }}
+{{ $yearSeconds := add (mul (sub $now.YearDay 1) 86400) $secondsToday }}
+{{ $yearProgress := div (mul $yearSeconds 100.0) 31536000 }}
+
+<div class="list list-gap-14">
+  <div>
+    <div class="flex justify-between margin-bottom-3">
+      <span>Day</span>
+      <span class="color-highlight">{{ printf "%.1f" $dayProgress }}%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-value" style="width: {{ $dayProgress }}%;"></div>
+    </div>
+  </div>
+  <div>
+    <div class="flex justify-between margin-bottom-3">
+      <span>Year</span>
+      <span class="color-highlight">{{ printf "%.1f" $yearProgress }}%</span>
+    </div>
+    <div class="progress-bar">
+      <div class="progress-value" style="width: {{ $yearProgress }}%;"></div>
+    </div>
+  </div>
+</div>

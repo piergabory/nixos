@@ -2,31 +2,11 @@
 
 {
   imports = [
+    ../common
     ./hardware-configuration.nix
-    ./modules
-    ./services
+    ../../modules/thinkpad
+    ../../services/thinkpad
   ];
-
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  nixpkgs.config = {
-    allowUnfree = true;
-    allowUnsupportedSystem = true;
-  };
-
-  nix.settings.trusted-users = [
-    "root"
-    "piergabory"
-  ];
-
-  system.autoUpgrade = {
-    enable = true;
-    allowReboot = true;
-    channel = "https://channels.nixos.org/nixos-unstable";
-  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

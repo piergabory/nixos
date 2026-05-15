@@ -1,0 +1,22 @@
+<div class="flex justify-between text-center margin-bottom-10">
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Int "queries.total" | formatNumber }}</div>
+    <div class="size-h6">QUERIES</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Int "queries.blocked" | formatNumber }}</div>
+    <div class="size-h6">BLOCKED</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Float "queries.percent_blocked" | printf "%.1f" }}%</div>
+    <div class="size-h6">RATE</div>
+  </div>
+  <div>
+    <div class="color-highlight size-h3">{{ .JSON.Int "clients.active" }}/{{ .JSON.Int "clients.total" }}</div>
+    <div class="size-h6">CLIENTS</div>
+  </div>
+</div>
+<div class="flex justify-between">
+  <span class="color-subdue">Blocked domains</span>
+  <span>{{ .JSON.Int "gravity.domains_being_blocked" | formatNumber }}</span>
+</div>
