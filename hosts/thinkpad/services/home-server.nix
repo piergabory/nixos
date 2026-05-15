@@ -1,10 +1,7 @@
-{ config, pkgs, secretFiles, ... }:
+{ ageSecrets, config, pkgs, ... }:
 
 {
-  age.secrets.samba = {
-    file = secretFiles.samba-homeserver;
-    mode = "0644";
-  };
+  age.secrets.samba = ageSecrets.samba-homeserver;
 
   environment.systemPackages = with pkgs; [
     cifs-utils

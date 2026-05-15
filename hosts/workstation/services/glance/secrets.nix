@@ -1,14 +1,10 @@
-{ config, secretFiles, ... }:
+{ ageSecrets, ... }:
 
 {
   age.secrets = {
-    dash = {
-      file = secretFiles.dash;
-      group = config.services.nginx.group;
-      mode = "0440";
-    };
-    immich-api.file = secretFiles.immich;
-    jellyfin-api.file = secretFiles.jellyfin;
-    syncthing-api.file = secretFiles.syncthing;
+    dash = ageSecrets.dash;
+    immich-api = ageSecrets.immich-api;
+    jellyfin-api = ageSecrets.jellyfin-api;
+    syncthing-api = ageSecrets.syncthing-api;
   };
 }

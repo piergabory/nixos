@@ -15,14 +15,16 @@ let
 in
 {
   "samba-homeserver.age".publicKeys = thinkpadKeys;
-  "syncthing-gui.age".publicKeys = thinkpadKeys ++ workstationKeys;
+  "syncthing-thinkpad.age".publicKeys = thinkpadKeys;
 
   "radicale.age".publicKeys = workstationKeys;
   "home-assistant-token.age".publicKeys = workstationKeys;
   "restic-password.age".publicKeys = workstationKeys;
   "samba.age".publicKeys = workstationKeys;
   "immich.age".publicKeys = workstationKeys;
-  "syncthing.age".publicKeys = workstationKeys;
   "jellyfin.age".publicKeys = workstationKeys;
   "dash.age".publicKeys = workstationKeys;
+  "syncthing-workstation.age".publicKeys = workstationKeys;
+
+  "syncthing-api.age".publicKeys = workstationKeys ++ thinkpadKeys;
 }

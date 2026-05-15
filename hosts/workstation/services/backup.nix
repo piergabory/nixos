@@ -1,4 +1,4 @@
-{ config, lib, secretFiles, ... }:
+{ ageSecrets, config, lib, ... }:
 
 let
   inherit (lib) mkOption types;
@@ -40,10 +40,7 @@ in
   };
 
   config = {
-    age.secrets.restic-password = {
-      file = secretFiles.restic-password;
-      mode = "0600";
-    };
+    age.secrets.restic-password = ageSecrets.restic-password;
 
     systemd.tmpfiles.rules = [
       "d /storage/backups 0700 root root -"

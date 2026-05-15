@@ -1,10 +1,7 @@
-{ config, secretFiles, ... }:
+{ ageSecrets, config, ... }:
 
 {
-  age.secrets.home-assistant-token = {
-    file = secretFiles.home-assistant-token;
-    mode = "0644";
-  };
+  age.secrets.home-assistant-token = ageSecrets.home-assistant-token;
 
   services.home-assistant = {
     enable = true;

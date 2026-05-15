@@ -1,23 +1,29 @@
 let
-  secret = file: {
-    inherit file;
-    mode = "0644";
+  secret = file: owner: {
+    inherit file owner;
+    mode = "0400";
   };
+
+  rootSecret = file: secret file "root";
 in
 {
-  dash = {
-    file = ./dash.age;
-    mode = "0440";
-  };
-  home-assistant-token = secret ./home-assistant-token.age;
+  dash = secret ./dash.age "nginx";
+
+  home-assistant-token = rootSecret ./home-assistant-token.age;
+
+  radicale = secret ./radicale.age "radicale";
+
+  restic-password = rootSecret ./restic-password.age;
+
+  samba-homeserver = rootSecret ./samba-homeserver.age;
+
   immich-api.file = ./immich.age;
+
   jellyfin-api.file = ./jellyfin.age;
-  radicale = secret ./radicale.age;
-  restic-password = {
-    file = ./restic-password.age;
-    mode = "0600";
-  };
-  samba-homeserver = secret ./samba-homeserver.age;
-  syncthing = secret ./syncthing-gui.age;
-  syncthing-api.file = ./syncthing.age;
+
+  syncthing-api.file = ./syncthing-api.age;
+
+  syncthing-workstation = secret ./syncthing-workstation.age "piergabory";
+
+  syncthing-thinkpad = secret ./syncthing-thinkpad.age "piergabory";
 }

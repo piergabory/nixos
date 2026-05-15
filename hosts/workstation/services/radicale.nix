@@ -1,10 +1,7 @@
-{ config, pkgs, secretFiles, ... }:
+{ ageSecrets, config, pkgs, ... }:
 
 {
-  age.secrets.radicale = {
-    file = secretFiles.radicale;
-    mode = "0644";
-  };
+  age.secrets.radicale = ageSecrets.radicale;
 
   services.radicale = {
     enable = true;

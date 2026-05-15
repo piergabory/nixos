@@ -1,10 +1,7 @@
-{ config, secretFiles, ... }:
+{ ageSecrets, config, ... }:
 
 {
-  age.secrets.syncthing = {
-    file = secretFiles.syncthing-gui;
-    mode = "0644";
-  };
+  age.secrets.syncthing = ageSecrets.syncthing-thinkpad;
 
   services.syncthing = {
     enable = true;
