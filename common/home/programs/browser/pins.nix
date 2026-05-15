@@ -171,6 +171,15 @@ in
         workspace = spaceId;
         container = containerId;
       };
+      "Glance" = rec {
+        url = "https://dash.piergabory.net/";
+        id = url;
+        # folderParentId = hosted.id;
+        position = 299;
+        workspace = spaceId;
+        container = containerId;
+        isEssential = true;
+      };
       "Nix Packages" = {
         id = "f8dd784e-11d7-430a-8f57-7b05ecdb4c77";
         folderParentId = nixDev.id;
