@@ -11,6 +11,7 @@
   networking = {
     hostName = "workstation";
     networkmanager.enable = true;
+    networkmanager.dns = "none";
 
     firewall = {
       allowedTCPPorts = [

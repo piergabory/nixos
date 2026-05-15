@@ -9,6 +9,10 @@
     enable = true;
     settings = {
       dns = {
+        rateLimit = {
+          count = 5000;
+          interval = 0;
+        };
         upstreams = [
           "1.1.1.1"
           "9.9.9.9"
