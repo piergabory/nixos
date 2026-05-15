@@ -16,21 +16,21 @@
       folders = {
         "Desktop" = {
           path = "/home/piergabory/Desktop";
-          devices = [ "home-server" "workstation" ];
+          devices = [ "workstation" "macbook" ];
         };
         "Documents" = {
           path = "/home/piergabory/Documents";
-          devices = [ "home-server" "workstation" ];
+          devices = [ "workstation" "macbook" ];
         };
         "Music" = {
           path = "/home/piergabory/Music";
-          devices = [ "home-server" "workstation" ];
+          devices = [ "workstation" "macbook" ];
           type = "receiveonly";
         };
       };
       devices = {
-        "home-server".id = "XDBFUR4-FFBPR4G-JVVWYXJ-W2CFGNR-HF66NN7-U75MNVQ-U2WRMEP-R73RPQD";
-        "workstation".id = "JUSBZZQ-6LIX2EW-EIYJSGL-XU55D26-ZAHSVEN-BP7JVWX-DP4DTZI-QQP3WQI";
+        "workstation".id = "TVVBJOJ-6NN65F3-5AGEOPF-KNQ2ZCT-ILZ3SPV-OMTCEEQ-7HVTHVO-N5NLHAN";
+        "macbook".id = "WIYD2PX-AJFKTJA-OBPG5SU-PFCHEXS-H6ZAQYB-UHFEFCX-SMTHIGJ-LQID3QY";
       };
     };
   };
