@@ -26,4 +26,6 @@ in
   syncthing-workstation = secret ./syncthing-workstation.age "piergabory";
 
   syncthing-thinkpad = secret ./syncthing-thinkpad.age "piergabory";
+
+  pixelfed-api = secret ./pixelfed-api.age "pixelfed";
 }

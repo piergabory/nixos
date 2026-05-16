@@ -148,10 +148,18 @@ in
         container = containerId;
       };
       "Photos" = rec {
-        url = "https://photo.piergabory.net/photos";
+        url = "https://photo.piergabory.net";
         id = url;
         folderParentId = hosted.id;
         position = 304;
+        workspace = spaceId;
+        container = containerId;
+      };
+      "Immich" = rec {
+        url = "https://immich.piergabory.net";
+        id = url;
+        folderParentId = hosted.id;
+        position = 310;
         workspace = spaceId;
         container = containerId;
       };

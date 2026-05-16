@@ -10,8 +10,8 @@
     settings = {
       dns = {
         rateLimit = {
-          count = 5000;
-          interval = 0;
+          count = 1000000;
+          interval = 10;
         };
         upstreams = [
           "1.1.1.1"

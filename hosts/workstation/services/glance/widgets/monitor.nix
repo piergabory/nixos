@@ -7,7 +7,7 @@
   sites = [
     {
       title = "Immich";
-      url = "https://photo.piergabory.net";
+      url = "https://immich.piergabory.net";
       check-url = "http://${config.services.immich.host}:${toString config.services.immich.port}";
       icon = "si:immich";
     }
@@ -34,6 +34,12 @@
       url = "https://masto.piergabory.net";
       check-url = "https://masto.piergabory.net/api/v2/instance";
       icon = "si:mastodon";
+    }
+    {
+      title = "Pixelfed";
+      url = "https://photo.piergabory.net";
+      check-url = "https://photo.piergabory.net/api";
+      icon = "si:pixelfed";
     }
     {
       title = "piergabory.net";

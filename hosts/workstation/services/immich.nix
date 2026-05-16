@@ -1,5 +1,3 @@
-# Photo gallery service
-
 { pkgs, ... }:
 
 {
@@ -9,7 +7,7 @@
     host = "127.0.0.1";
     mediaLocation = "/storage/immich";
     environment = {
-      IMMICH_URL = "https://photo.piergabory.net";
+      IMMICH_URL = "https://immich.piergabory.net";
       # Force Immich to use integrated GPU (GPU 1) instead of discrete GPU (GPU 0)
       # HIP_VISIBLE_DEVICES accepts device index (0, 1, 2, etc) or "all"
       HIP_VISIBLE_DEVICES = "1";
@@ -34,8 +32,7 @@
     immich-cli    
   ];
 
-  services.nginx.virtualHosts."photo.piergabory.net" = {
-    serverAliases = [ "photos.piergabory.net" "photography.piergabory.net" ];
+  services.nginx.virtualHosts."immich.piergabory.net" = {
     forceSSL = true;
     enableACME = true;
     locations."/" = {

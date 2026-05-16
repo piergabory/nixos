@@ -25,7 +25,7 @@ in
   (split [
     (customApi {
       title = "Immich Stats";
-      title-url = "https://photo.piergabory.net";
+      title-url = "https://immich.piergabory.net";
       cache = "1d";
       url = "http://127.0.0.1:${toString config.services.immich.port}/api/server/statistics";
       headers = {

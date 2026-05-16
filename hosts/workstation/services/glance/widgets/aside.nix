@@ -42,7 +42,7 @@
         links = [
           {
             title = "Immich";
-            url = "https://photo.piergabory.net";
+            url = "https://immich.piergabory.net";
             icon = "si:immich";
           }
           {
@@ -64,6 +64,11 @@
             title = "Mastodon";
             url = "https://masto.piergabory.net";
             icon = "si:mastodon";
+          }
+          {
+            title = "Pixelfed";
+            url = "https://photo.piergabory.net";
+            icon = "si:pixelfed";
           }
           {
             title = "piergabory.net";

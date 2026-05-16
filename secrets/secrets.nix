@@ -25,6 +25,7 @@ in
   "jellyfin.age".publicKeys = workstationKeys;
   "dash.age".publicKeys = workstationKeys;
   "syncthing-workstation.age".publicKeys = workstationKeys;
+  "pixelfed-api.age".publicKeys = workstationKeys;
 
   "syncthing-api.age".publicKeys = workstationKeys ++ thinkpadKeys;
 }
