@@ -27,6 +27,5 @@ in
   "syncthing-workstation.age".publicKeys = workstationKeys;
   "pixelfed-api.age".publicKeys = workstationKeys;
   "rutracker.age".publicKeys = workstationKeys;
-
-  "syncthing-api.age".publicKeys = workstationKeys ++ thinkpadKeys;
+  "syncthing-api.age".publicKeys = workstationKeys;
 }
