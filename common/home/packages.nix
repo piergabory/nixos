@@ -70,5 +70,6 @@
     ethtool
     pciutils
     usbutils
+    codex
   ];
 }

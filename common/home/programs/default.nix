@@ -12,5 +12,6 @@
     ./launcher.nix
     ./minecraft.nix
     ./terminal.nix
+    ./tokscale.nix
   ];
 }
