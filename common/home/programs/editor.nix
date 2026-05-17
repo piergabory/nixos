@@ -26,6 +26,12 @@
     libclang
     gcc
     lldb
+
+    htmlhint
+    superhtml
+    vscode-css-languageserver
+    javascript-typescript-langserver
+    coc-css
   ];
 
   programs.zsh.sessionVariables = {
