@@ -26,6 +26,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nixarr = {
+      url = "github:nix-media-server/nixarr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -49,6 +54,7 @@
       home-manager,
       niri,
       nixpkgs,
+      nixarr,
       nixos-hardware,
       stylix,
       ...
@@ -67,7 +73,10 @@
     {
       nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        modules = commonModules ++ [ ./hosts/workstation ];
+        modules = commonModules ++ [
+          nixarr.nixosModules.default
+          ./hosts/workstation
+        ];
         specialArgs = {
           inherit inputs ageSecrets;
           hostHomeModules = [ ./hosts/workstation/home ];

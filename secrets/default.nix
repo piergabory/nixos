@@ -28,4 +28,6 @@ in
   syncthing-thinkpad = secret ./syncthing-thinkpad.age "piergabory";
 
   pixelfed-api = secret ./pixelfed-api.age "pixelfed";
+
+  rutracker = secret ./rutracker.age;
 }

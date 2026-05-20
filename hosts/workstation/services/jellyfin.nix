@@ -1,7 +1,7 @@
-{ ... }:
+{ lib, ... }:
 
 {
-  services.jellyfin = {
+  services.jellyfin = lib.mkForce {
     enable = true;
     openFirewall = true;
 
