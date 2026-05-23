@@ -3,10 +3,10 @@
 {
   imports = [
     ./rmpc
-    ./environment
     ./programs
     ./services
     ./home.nix
+    ./xdg.nix
     ./packages.nix
   ];
 }

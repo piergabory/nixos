@@ -3,7 +3,7 @@
 {
   programs.waybar.style = lib.mkAfter ''    
     * {
-        font-family: "JetBrains Mono Nerd Font", "Font Awesome 6 Free";
+        font-family: monospace;
         background: none;
         border: none;
         outline: none;
