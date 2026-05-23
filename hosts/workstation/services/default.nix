@@ -21,7 +21,6 @@
     ./samba.nix
     ./syncthing.nix
     ./vaultwarden.nix
-    ./pixelfed.nix
     ./media-server.nix
   ];
 }
