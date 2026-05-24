@@ -71,6 +71,5 @@
     pciutils
     usbutils
     codex
-    logseq
   ];
 }
