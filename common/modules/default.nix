@@ -11,5 +11,6 @@
     ./displaymanager.nix
     ./scanner.nix
     ./steam.nix
+    ./nixvim.nix
   ];
 }

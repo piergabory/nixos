@@ -6,6 +6,8 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nixvim.url = "github:nix-community/nixvim";
+
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -56,6 +58,7 @@
       nixpkgs,
       nixarr,
       nixos-hardware,
+      nixvim,
       stylix,
       ...
     }:
@@ -67,6 +70,10 @@
         niri.nixosModules.niri
         stylix.nixosModules.stylix
         agenix.nixosModules.default
+        nixvim.nixosModules.nixvim
+        ({ inputs, ... }: {
+          lib.nixvim = inputs.nixvim.lib.nixvim;
+        })
         home-manager.nixosModules.home-manager
       ];
     in

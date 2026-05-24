@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  minecraftServer_26_1_2 = pkgs.minecraft-server.override {
+  minecraftServer_26_1_2 = pkgs.callPackage "${pkgs.path}/pkgs/by-name/mi/minecraft-server/derivation.nix" {
     jre_headless = pkgs.jdk25_headless;
     version = "26.1.2";
     url = "https://piston-data.mojang.com/v1/objects/97ccd4c0ed3f81bbb7bfacddd1090b0c56f9bc51/server.jar";
