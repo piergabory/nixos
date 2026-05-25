@@ -21,7 +21,7 @@
     beeper # Chat aggregator
     libreoffice
     beets
-    nix-index    
+    nix-index
     nix-doc
     nix-btm
     nix-top
@@ -71,5 +71,6 @@
     pciutils
     usbutils
     codex
+    alpine # mail client
   ];
 }
