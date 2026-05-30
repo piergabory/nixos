@@ -34,7 +34,6 @@
     unzip
     parted
     ragenix
-    firefox
     nautilus
     ripgrep
     jq
