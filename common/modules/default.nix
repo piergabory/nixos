@@ -3,6 +3,7 @@
 {
   imports = [
     ./environment.nix
+    ./bluetooth.nix
     ./niri.nix
     ./shell.nix
     ./stylix.nix
