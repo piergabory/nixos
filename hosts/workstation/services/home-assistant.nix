@@ -47,6 +47,7 @@
     21064 # Homekit bridge
     21065 # Homekit TV bridge
     21066 # Homekit TV bridge
+    21067 # HomeKit Lights
   ];
 
   hardware.bluetooth.enable = true;
