@@ -72,5 +72,6 @@
     usbutils
     codex
     alpine # mail client
+    kdePackages.skanlite # SANE scanner frontend with preview/crop controls
   ];
 }
