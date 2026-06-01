@@ -4,7 +4,7 @@
   networking.nameservers = [
     "127.0.0.1"
   ];
-  
+
   services.pihole-ftl = {
     enable = true;
     settings = {
@@ -34,7 +34,7 @@
         url = "https://media.githubusercontent.com/media/zachlagden/Pi-hole-Optimized-Blocklists/main/lists/all_domains.txt";
         type = "block";
         enabled = true;
-        description ="zachlagden blocklist";
+        description = "zachlagden blocklist";
       }
     ];
     queryLogDeleter.enable = true;
@@ -54,12 +54,13 @@
     allowedUDPPorts = [ 53 ];
   };
 
-  services.nginx.virtualHosts."pihole.piergabory.net" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:8080";
-      proxyWebsockets = true;
-    };
-  };
+  # DANGER! This exposes pihole to the public!!
+  # services.nginx.virtualHosts."pihole.piergabory.net" = {
+  #   forceSSL = true;
+  #   enableACME = true;
+  #   locations."/" = {
+  #     proxyPass = "http://127.0.0.1:8080";
+  #     proxyWebsockets = true;
+  #   };
+  # };
 }
