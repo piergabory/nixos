@@ -16,7 +16,6 @@
     rustmission
     baobab # Disk usage utility like grand perspective
     github-copilot-cli # github copilot
-    bitwarden-desktop
     rbw # Better bitwarden client that holds key in memory
     beeper # Chat aggregator
     libreoffice
@@ -74,5 +73,7 @@
     kdePackages.skanlite # SANE scanner frontend with preview/crop controls
     mistral-vibe # Mistral CLI
     signal-desktop
+    evolution
+    slack
   ];
 }
