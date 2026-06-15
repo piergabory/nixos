@@ -12,7 +12,7 @@
       { sh = "swaybg --image /etc/nixos/assets/house.jpg"; }
     ];
 
-    outputs = {
+    outputs = rec {
       "DP-3" = {
         mode = {
           width = 3840;
@@ -39,6 +39,9 @@
           y = -1440;
         };
       };
+
+      "DP-6" = DP-3;
+      "DP-5" = DP-2;
     };
   };
 }
