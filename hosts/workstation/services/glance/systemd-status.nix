@@ -6,36 +6,6 @@
 }:
 
 let
-  systemdStatusUnits = [
-    "actual.service"
-    "avahi-daemon.service"
-    "glance.service"
-    "home-assistant-matter-hub.service"
-    "home-assistant.service"
-    "immich-machine-learning.service"
-    "immich-server.service"
-    "jellyfin.service"
-    "mastodon-sidekiq-all.service"
-    "mastodon-streaming-1.service"
-    "mastodon-web.service"
-    "matter-server.service"
-    "mdmonitor.service"
-    "minecraft-server.service"
-    "nginx.service"
-    "pihole-ftl.service"
-    "postfix.service"
-    "postgresql.service"
-    "radicale.service"
-    "redis-immich.service"
-    "redis-mastodon.service"
-    "samba-nmbd.service"
-    "samba-smbd.service"
-    "samba-wsdd.service"
-    "sshd.service"
-    "syncthing.service"
-    "vaultwarden.service"
-  ];
-
   backupTimers = [
     "backup-vaultwarden.timer"
     "restic-backups-actual.timer"
@@ -71,33 +41,23 @@ in
 
       mkdir -p /run/glance-assets
 
-      printf '{"generatedAt":%s,"services":[' "$(date --utc --iso-8601=seconds | jq --raw-input --slurp 'rtrimstr("\n")')" > "$tmp"
-      first=1
-      for unit in ${builtins.concatStringsSep " " systemdStatusUnits}; do
-        if [ "$first" -eq 0 ]; then
-          printf ',' >> "$tmp"
-        fi
-        first=0
+      generated_at=$(date --utc --iso-8601=seconds)
 
-        systemctl show "$unit" \
-          --property=Id \
-          --property=Description \
-          --property=LoadState \
-          --property=ActiveState \
-          --property=SubState \
-          --value \
-          | jq --raw-input --slurp --arg unit "$unit" '
-              split("\n") as $lines |
-              {
-                id: ($lines[0] // $unit),
-                description: ($lines[1] // ""),
-                loadState: ($lines[2] // "unknown"),
-                activeState: ($lines[3] // "unknown"),
-                subState: ($lines[4] // "unknown")
+      systemctl list-units --type=service --all --no-legend --plain \
+        | jq --raw-input --slurp --arg generatedAt "$generated_at" '
+            split("\n")
+            | map(
+                select(length > 0)
+                | capture("^(?<id>\\S+)\\s+(?<loadState>\\S+)\\s+(?<activeState>\\S+)\\s+(?<subState>\\S+)\\s+(?<description>.*)$")
+              )
+            | map(select(.loadState != "not-found" and (.activeState == "active" or .activeState == "failed")))
+            | sort_by(if .activeState == "failed" then 0 else 1 end, .id)
+            | {
+                generatedAt: $generatedAt,
+                services: .
               }
-            ' >> "$tmp"
-      done
-      printf ']}' >> "$tmp"
+          ' > "$tmp"
+
       mv "$tmp" "$output"
       chmod 0644 "$output"
     '';

@@ -66,11 +66,6 @@
             icon = "si:mastodon";
           }
           {
-            title = "Pixelfed";
-            url = "https://photo.piergabory.net";
-            icon = "si:pixelfed";
-          }
-          {
             title = "piergabory.net";
             url = "https://piergabory.net";
             icon = "si:nginx";

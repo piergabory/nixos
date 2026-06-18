@@ -36,12 +36,6 @@
       icon = "si:mastodon";
     }
     {
-      title = "Pixelfed";
-      url = "https://photo.piergabory.net";
-      check-url = "https://photo.piergabory.net/api";
-      icon = "si:pixelfed";
-    }
-    {
       title = "piergabory.net";
       url = "https://piergabory.net";
       icon = "si:nginx";
