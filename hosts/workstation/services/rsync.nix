@@ -4,7 +4,6 @@
   services.rsync = {
     enable = true;
 
-    
     jobs.documents = {
       sources = [ "/home/piergabory/Documents/" ];
       destination = "/storage/documents/";
@@ -18,6 +17,26 @@
 
       user = "piergabory";
       group = "users";
+
+      timerConfig = {
+        OnCalendar = "*:0/5";
+        Persistent = true;
+      };
+    };
+
+    jobs.notes = {
+      sources = [ "/home/piergabory/Notes/" ];
+      destination = "/storage/backups/notes";
+
+      settings = {
+        archive = true;
+        delete = false;
+        human-readable = true;
+        mkpath = true;
+      };
+
+      user = "root";
+      group = "root";
 
       timerConfig = {
         OnCalendar = "*:0/5";

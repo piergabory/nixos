@@ -12,11 +12,20 @@
     settings = {
       gui.user = "piergabory";
       folders = {
+        "Notes" = {
+          path = "/home/piergabory/Notes";
+          devices = [
+            "thinkpad"
+            "macbook"
+            "iPhone"
+          ];
+        };
         "Desktop" = {
           path = "/home/piergabory/Desktop";
           devices = [
             "thinkpad"
             "macbook"
+            "iPhone"
           ];
         };
         "Documents" = {
@@ -24,6 +33,7 @@
           devices = [
             "thinkpad"
             "macbook"
+            "iPhone"
           ];
         };
         "Music" = {
@@ -31,6 +41,7 @@
           devices = [
             "thinkpad"
             "macbook"
+            "iPhone"
           ];
           type = "sendonly";
         };
@@ -38,6 +49,7 @@
       devices = {
         "thinkpad".id = "WBF7H4U-NJ6Z664-IH36QLD-W2ANRBR-VYUBBA7-SSUFAGZ-S6GVBZM-E2K3JA5";
         "macbook".id = "WIYD2PX-AJFKTJA-OBPG5SU-PFCHEXS-H6ZAQYB-UHFEFCX-SMTHIGJ-LQID3QY";
+        "iPhone".id = "XBGPWGT-WFFRMBI-COTQCT6-RWEZYEY-LRMWLWK-IXMAJRV-DY5FBXK-UPSS7QN";
       };
     };
   };
