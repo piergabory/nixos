@@ -11,6 +11,14 @@
     settings = {
       gui.user = "piergabory";
       folders = {
+        "Notes" = {
+          path = "/home/piergabory/Notes";
+          devices = [
+            "workstation"
+            "macbook"
+            "iPhone"
+          ];
+        };
         "Desktop" = {
           path = "/home/piergabory/Desktop";
           devices = [
