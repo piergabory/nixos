@@ -2,7 +2,7 @@
 
 {
   services.displayManager = {
-    ly.enable = true;
     defaultSession = "niri";
+    gdm.enable = true;
   };
 }

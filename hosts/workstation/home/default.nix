@@ -13,7 +13,7 @@
     ];
 
     outputs = rec {
-      "DP-3" = {
+      "DP-2" = {
         mode = {
           width = 3840;
           height = 2160;
@@ -26,7 +26,7 @@
         };
       };
 
-      "DP-2" = {
+      "DP-3" = {
         mode = {
           width = 3840;
           height = 2160;
