@@ -4,6 +4,7 @@
   imports = [
     ./glance
     ./logind.nix
+    ./geotracking.nix
     ./backup.nix
     ./budget.nix
     ./home-assistant.nix
