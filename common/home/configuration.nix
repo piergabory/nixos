@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ./accounts
     ./rmpc
     ./programs
     ./services

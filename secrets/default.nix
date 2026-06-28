@@ -30,4 +30,10 @@ in
   pixelfed-api = secret ./pixelfed-api.age "pixelfed";
 
   rutracker = secret ./rutracker.age;
+
+  icloud-mail = secret ./icloud-mail.age "piergabory";
+
+  icloud-dav = secret ./icloud-dav.age "piergabory";
+
+  radicale-dav = secret ./radicale-dav.age "piergabory";
 }

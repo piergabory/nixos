@@ -1,10 +1,17 @@
 {
+  ageSecrets,
   inputs,
   hostHomeModules ? [ ],
   ...
 }:
 
 {
+  age.secrets = {
+    icloud-mail = ageSecrets.icloud-mail;
+    icloud-dav = ageSecrets.icloud-dav;
+    radicale-dav = ageSecrets.radicale-dav;
+  };
+
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
