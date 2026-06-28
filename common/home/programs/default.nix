@@ -5,6 +5,7 @@
     ./browser
     ./compositor
     ./waybar
+    ./beets.nix
     ./btop.nix
     ./editor.nix
     ./filemanager.nix

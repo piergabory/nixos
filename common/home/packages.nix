@@ -19,7 +19,6 @@
     rbw # Better bitwarden client that holds key in memory
     beeper # Chat aggregator
     libreoffice
-    beets
     nix-index
     nix-doc
     nix-btm
