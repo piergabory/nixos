@@ -74,5 +74,6 @@
     signal-desktop
     evolution
     slack
+    obsidian
   ];
 }
