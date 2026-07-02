@@ -75,5 +75,6 @@
     evolution
     slack
     telegram-desktop
+    obsidian
   ];
 }
