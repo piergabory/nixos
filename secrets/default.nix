@@ -15,6 +15,8 @@ in
 
   restic-password = rootSecret ./restic-password.age;
 
+  airtrail-env = rootSecret ./airtrail-env.age;
+
   samba-homeserver = rootSecret ./samba-homeserver.age;
 
   immich-api.file = ./immich.age;

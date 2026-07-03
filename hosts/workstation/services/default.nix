@@ -24,5 +24,6 @@
     ./vaultwarden.nix
     ./media-server.nix
     ./notes.nix
+    ./flights.nix
   ];
 }

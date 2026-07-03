@@ -28,6 +28,7 @@ in
   "pixelfed-api.age".publicKeys = workstationKeys;
   "rutracker.age".publicKeys = workstationKeys;
   "syncthing-api.age".publicKeys = workstationKeys;
+  "airtrail-env.age".publicKeys = workstationKeys;
 
   "icloud-mail.age".publicKeys = workstationKeys ++ thinkpadKeys;
   "icloud-dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
