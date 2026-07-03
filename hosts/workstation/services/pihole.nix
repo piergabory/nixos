@@ -26,6 +26,7 @@
           "8.8.4.4"
         ];
       };
+      misc.dnsmasq_lines = [ "address=/piergabory.net/192.168.1.4" ];
     };
 
     openFirewallDNS = true;
