@@ -16,14 +16,13 @@
         airtrail = {
           image = "johly/airtrail:latest";
           autoStart = true;
-          environmentFiles = [ config.age.secrets.airtrail-env.path ];
-          ports = [ "127.0.0.1:3000:3000" ];
+          environmentFiles = [ "/run/airtrail/app.env" ];
           volumes = [
             "/var/lib/airtrail/uploads:/app/uploads"
           ];
           dependsOn = [ "airtrail-db" ];
           extraOptions = [
-            "--network=airtrail"
+            "--pod=airtrail"
           ];
         };
 
@@ -35,7 +34,7 @@
             "/var/lib/airtrail/postgres:/var/lib/postgresql/data"
           ];
           extraOptions = [
-            "--network=airtrail"
+            "--pod=airtrail"
           ];
         };
       };
@@ -44,29 +43,46 @@
 
   systemd = {
     services = {
-      podman-network-airtrail = {
-        description = "Podman network for AirTrail";
+      podman-pod-airtrail = {
+        description = "Podman pod for AirTrail";
         wantedBy = [ "multi-user.target" ];
         serviceConfig = {
           Type = "oneshot";
           RemainAfterExit = true;
-          ExecStart = pkgs.writeShellScript "podman-network-airtrail-start" ''
-            ${pkgs.podman}/bin/podman network exists airtrail || ${pkgs.podman}/bin/podman network create airtrail
-          '';
-          ExecStop = pkgs.writeShellScript "podman-network-airtrail-stop" ''
-            ${pkgs.podman}/bin/podman network rm airtrail || true
+          ExecStart = pkgs.writeShellScript "podman-pod-airtrail-start" ''
+            ${pkgs.podman}/bin/podman pod exists airtrail || ${pkgs.podman}/bin/podman pod create --name airtrail --publish 127.0.0.1:3001:3000
           '';
         };
       };
 
       podman-airtrail = {
-        after = [ "podman-network-airtrail.service" ];
-        requires = [ "podman-network-airtrail.service" ];
+        after = [ "podman-pod-airtrail.service" ];
+        requires = [ "podman-pod-airtrail.service" ];
+        preStart = ''
+          set -eu
+          set -a
+          . ${config.age.secrets.airtrail-env.path}
+          set +a
+
+          DB_DATABASE_NAME="''${DB_DATABASE_NAME:-airtrail}"
+          DB_USERNAME="''${DB_USERNAME:-airtrail}"
+          UPLOAD_LOCATION="''${UPLOAD_LOCATION:-/app/uploads}"
+
+          test -n "''${ORIGIN:-}"
+          test -n "''${DB_PASSWORD:-}"
+          ${pkgs.coreutils}/bin/mkdir -p /run/airtrail
+          umask 077
+          ${pkgs.gnused}/bin/sed '/^DB_URL=/d' ${config.age.secrets.airtrail-env.path} > /run/airtrail/app.env
+          {
+            printf 'DB_URL=postgres://%s:%s@127.0.0.1:5432/%s\n' "$DB_USERNAME" "$DB_PASSWORD" "$DB_DATABASE_NAME"
+            printf 'UPLOAD_LOCATION=%s\n' "$UPLOAD_LOCATION"
+          } >> /run/airtrail/app.env
+        '';
       };
 
       podman-airtrail-db = {
-        after = [ "podman-network-airtrail.service" ];
-        requires = [ "podman-network-airtrail.service" ];
+        after = [ "podman-pod-airtrail.service" ];
+        requires = [ "podman-pod-airtrail.service" ];
         preStart = ''
           set -eu
           set -a
@@ -98,7 +114,7 @@
     forceSSL = true;
     enableACME = true;
     locations."/" = {
-      proxyPass = "http://127.0.0.1:3000";
+      proxyPass = "http://127.0.0.1:3001";
       proxyWebsockets = true;
       extraConfig = ''
         proxy_set_header X-Forwarded-Proto $scheme;

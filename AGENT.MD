@@ -78,6 +78,7 @@ The workstation currently includes services for:
 - DNS/adblocking through Pi-hole.
 - Smart home through Home Assistant, Matter server, and Home Assistant Matter Hub.
 - Geolocation tracking through Dawarich.
+- Flight tracking through AirTrail.
 - Single-user social hosting through Mastodon.
 - Minecraft server hosting.
 - Backups through restic and rsync jobs.
@@ -85,6 +86,31 @@ The workstation currently includes services for:
 - Local mail support through Postfix.
 
 Most externally reachable web services are exposed through nginx virtual hosts under `piergabory.net` subdomains.
+
+## Workstation Service Ports
+
+Local reverse-proxy ports used by `hosts/workstation/services`:
+
+| Service | Public host | Local target |
+| --- | --- | --- |
+| Actual Budget | `budget.piergabory.net` | `127.0.0.1:3000` |
+| AirTrail | `flights.piergabory.net` | `127.0.0.1:3001` |
+| Glance | `dash.piergabory.net` | `127.0.0.1:5678` |
+| Immich | `immich.piergabory.net` | `127.0.0.1:2283` |
+| Jellyfin | `jelly.piergabory.net` | `127.0.0.1:8096` |
+| Home Assistant | `home.piergabory.net` | `127.0.0.1:8123` |
+| Radicale | `dav.piergabory.net` | `127.0.0.1:5232` |
+| Vaultwarden | `vault.piergabory.net` | `127.0.0.1:8222` |
+| Dawarich | `geo.piergabory.net` | `127.0.0.1:64645` |
+
+## AirTrail
+
+- Defined in `hosts/workstation/services/flights.nix`.
+- Runs as two Podman containers: `airtrail` and `airtrail-db`.
+- Host port mapping is `127.0.0.1:3001:3000`; keep host port `3000` for Actual Budget.
+- Persistent data lives under `/var/lib/airtrail/postgres` and `/var/lib/airtrail/uploads`.
+- Env file comes from agenix secret `airtrail-env`, backed by `secrets/airtrail-env.age`.
+- The AirTrail env should use `ORIGIN=https://flights.piergabory.net` and a `DB_URL` host of `airtrail-db`.
 
 ## ThinkPad Role
 
