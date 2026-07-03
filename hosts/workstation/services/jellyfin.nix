@@ -20,14 +20,13 @@
     HIP_VISIBLE_DEVICES = "1";
   };
 
-  services.nginx.virtualHosts = {
-    "jelly.piergabory.net" = {
-      forceSSL = true;
-      enableACME = true;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:8096";
-        proxyWebsockets = true;
-      };
+  services.nginx.virtualHosts."jelly.pierr.re" = {
+    serverAliases = [ "jelly.piergabory.net" ];
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8096";
+      proxyWebsockets = true;
     };
   };
 }

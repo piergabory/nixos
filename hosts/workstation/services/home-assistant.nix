@@ -52,7 +52,8 @@
 
   hardware.bluetooth.enable = true;
 
-  services.nginx.virtualHosts."home.piergabory.net" = {
+  services.nginx.virtualHosts."hass.pierr.re" = {
+    serverAliases = [ "home.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {

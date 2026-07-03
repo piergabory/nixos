@@ -7,7 +7,7 @@
     host = "127.0.0.1";
     mediaLocation = "/storage/immich";
     environment = {
-      IMMICH_URL = "https://immich.piergabory.net";
+      IMMICH_URL = "https://photos.pierr.re";
       # Force Immich to use integrated GPU (GPU 1) instead of discrete GPU (GPU 0)
       # HIP_VISIBLE_DEVICES accepts device index (0, 1, 2, etc) or "all"
       HIP_VISIBLE_DEVICES = "1";
@@ -27,12 +27,13 @@
       "d /storage/immich 0750 immich immich -"
     ];
   };
-  
+
   environment.systemPackages = with pkgs; [
-    immich-cli    
+    immich-cli
   ];
 
-  services.nginx.virtualHosts."immich.piergabory.net" = {
+  services.nginx.virtualHosts."photos.pierr.re" = {
+    serverAliases = [ "immich.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {
