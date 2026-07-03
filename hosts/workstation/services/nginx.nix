@@ -17,10 +17,14 @@
     recommendedOptimisation = true;
     recommendedGzipSettings = true;
 
-    virtualHosts."piergabory.net" = {
+    virtualHosts."pierr.re" = {
       root = "/var/http/html";
       default = true;
-      serverAliases = [ "www.piergabory.net" ];
+      serverAliases = [
+        "www.pierr.re"
+        "piergabory.net"
+        "www.piergabory.net"
+      ];
       forceSSL = true;
       enableACME = true;
     };
