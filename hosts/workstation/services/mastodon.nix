@@ -3,9 +3,9 @@
 {
   services.mastodon = {
     enable = true;
-    localDomain = "masto.piergabory.net";
+    localDomain = "mas.pierr.re";
     configureNginx = true;
-    smtp.fromAddress = "noreply@piergabory.net";
+    smtp.fromAddress = "noreply@pierr.re";
     streamingProcesses = 1;
     extraConfig.SINGLE_USER_MODE = "true";
   };
