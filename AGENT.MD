@@ -107,10 +107,10 @@ Local reverse-proxy ports used by `hosts/workstation/services`:
 
 - Defined in `hosts/workstation/services/flights.nix`.
 - Runs as two Podman containers: `airtrail` and `airtrail-db`.
-- Host port mapping is `127.0.0.1:3001:3000`; keep host port `3000` for Actual Budget.
+- AirTrail runs in a Podman pod that publishes `127.0.0.1:3001:3000`; keep host port `3000` for Actual Budget.
 - Persistent data lives under `/var/lib/airtrail/postgres` and `/var/lib/airtrail/uploads`.
 - Env file comes from agenix secret `airtrail-env`, backed by `secrets/airtrail-env.age`.
-- The AirTrail env should use `ORIGIN=https://flights.piergabory.net` and a `DB_URL` host of `airtrail-db`.
+- The AirTrail env should use `ORIGIN=https://flights.piergabory.net`; `DB_URL` is generated at runtime to use `127.0.0.1` inside the pod.
 
 ## ThinkPad Role
 
