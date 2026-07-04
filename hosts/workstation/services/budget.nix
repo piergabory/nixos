@@ -40,7 +40,8 @@
   };
 
   services.nginx.virtualHosts = {
-    "budget.piergabory.net" = {
+    "budget.pierr.re" = {
+      serverAliases = [ "budget.piergabory.net" ];
       forceSSL = true;
       enableACME = true;
       locations."/" = {
