@@ -5,6 +5,7 @@
     ./glance
     ./logind.nix
     ./geotracking.nix
+    ./authelia.nix
     ./backup.nix
     ./budget.nix
     ./home-assistant.nix

@@ -32,8 +32,8 @@
       ];
     };
 
-    openFirewallDNS = true;
-    openFirewallWebserver = true;
+    openFirewallDNS = false;
+    openFirewallWebserver = false;
     lists = [
       {
         url = "https://raw.githubusercontent.com/hagezi/dns-blocklists/main/adblock/pro.txt";
@@ -57,7 +57,7 @@
     hostName = "pihole.piergabory.net";
   };
 
-  networking.firewall = {
+  networking.firewall.interfaces.eth0 = {
     allowedTCPPorts = [
       53
       8080

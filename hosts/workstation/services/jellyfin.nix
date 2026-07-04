@@ -3,8 +3,6 @@
 {
   services.jellyfin = lib.mkForce {
     enable = true;
-    openFirewall = true;
-
     user = "piergabory";
     group = "users";
 

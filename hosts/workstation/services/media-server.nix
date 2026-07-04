@@ -21,29 +21,6 @@
       enable = true;
       settings-sync = {
         transmission.enable = true;
-
-        # tags = [
-        #   "usenet"
-        #   "torrent"
-        #   "private"
-        # ];
-
-        # indexers = [
-        #   {
-        #     name = "RuTracker.org";
-        #     sort_name = "rutracker org";
-        #     fields = {
-        #       baseUrl = "***REMOVED***";
-        #       username = "***REMOVED***";
-        #       password = "***REMOVED***";
-        #     };
-        #   }
-        #   # {
-        #   #   name = "1337x.to";
-        #   #   sort_name = "1337x";
-        #   #   fields.baseUrl = "***REMOVED***";
-        #   # }
-        # ];
       };
     };
 
@@ -51,29 +28,6 @@
       enable = true;
       settings-sync = {
         transmission.enable = true;
-
-        # tags = [
-        #   "usenet"
-        #   "torrent"
-        #   "private"
-        # ];
-
-        # indexers = [
-        #   {
-        #     name = "RuTracker.org";
-        #     sort_name = "rutracker org";
-        #     fields = {
-        #       baseUrl = "***REMOVED***";
-        #       username = "***REMOVED***";
-        #       password = "***REMOVED***";
-        #     };
-        #   }
-        #   # {
-        #   #   name = "1337x.to";
-        #   #   sort_name = "1337x";
-        #   #   fields.baseUrl = "***REMOVED***";
-        #   # }
-        # ];
       };
     };
 

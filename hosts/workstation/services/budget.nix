@@ -3,11 +3,10 @@
 {
   services.actual = {
     enable = true;
-    openFirewall = true;
-    # settings = {
-    #   port = 3000;
-    #   hostname = "::";
-    # };
+    settings = {
+      port = 3000;
+      hostname = "127.0.0.1";
+    };
   };
 
   services.restic.backups.actual = {

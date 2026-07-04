@@ -43,7 +43,6 @@
   };
 
   networking.firewall.allowedTCPPorts = [
-    8123
     21064 # Homekit bridge
     21065 # Homekit TV bridge
     21066 # Homekit TV bridge

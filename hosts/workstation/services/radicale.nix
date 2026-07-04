@@ -9,7 +9,7 @@
       auth = {
         type = "htpasswd";
         htpasswd_filename = config.age.secrets.radicale.path;
-        htpasswd_encryption = "plain";
+        htpasswd_encryption = "bcrypt";
       };
       server.hosts = [ "127.0.0.1:5232" ];
     };
