@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./glance
     ./logind.nix
     ./geotracking.nix
     ./authelia.nix
