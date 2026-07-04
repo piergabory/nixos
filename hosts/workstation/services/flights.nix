@@ -110,8 +110,8 @@
     ];
   };
 
+  # The domain name must be consistent with the environment declared in the ragenix secret.
   services.nginx.virtualHosts."flights.pierr.re" = {
-    serverAliases = [ "flights.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {
