@@ -1,4 +1,9 @@
-{ ageSecrets, config, pkgs, ... }:
+{
+  ageSecrets,
+  config,
+  pkgs,
+  ...
+}:
 
 {
   age.secrets.radicale = ageSecrets.radicale;
@@ -30,7 +35,8 @@
     ];
   };
 
-  services.nginx.virtualHosts."dav.piergabory.net" = {
+  services.nginx.virtualHosts."dav.pierr.re" = {
+    serverAliases = [ "dav.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {

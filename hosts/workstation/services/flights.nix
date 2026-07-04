@@ -110,7 +110,8 @@
     ];
   };
 
-  services.nginx.virtualHosts."flights.piergabory.net" = {
+  services.nginx.virtualHosts."flights.pierr.re" = {
+    serverAliases = [ "flights.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {

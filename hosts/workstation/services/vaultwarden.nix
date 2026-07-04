@@ -7,7 +7,7 @@
     environmentFile = "/var/lib/vaultwarden/vaultwarden.env";
 
     config = {
-      DOMAIN = "https://vault.piergabory.net";
+      DOMAIN = "https://vault.pierr.re";
 
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8222;
@@ -38,7 +38,8 @@
     ];
   };
 
-  services.nginx.virtualHosts."vault.piergabory.net" = {
+  services.nginx.virtualHosts."vault.pierr.re" = {
+    serverAliases = [ "vault.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {

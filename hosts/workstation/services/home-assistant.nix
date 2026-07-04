@@ -32,7 +32,7 @@
     accessTokenFile = config.age.secrets.home-assistant-token.path;
     openFirewall = true;
     settings = {
-      homeAssistantUrl = "https://home.piergabory.net";
+      homeAssistantUrl = "https://hass.pierr.re";
       httpPort = 8482;
     };
   };

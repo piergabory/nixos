@@ -3,11 +3,12 @@
 {
   services.dawarich = {
     enable = true;
-    localDomain = "geo.piergabory.net";
+    localDomain = "geo.pierr.re";
     webPort = 64645;
   };
 
-  services.nginx.virtualHosts."geo.piergabory.net" = {
+  services.nginx.virtualHosts."geo.pierr.re" = {
+    serverAliases = [ "geo.piergabory.net" ];
     forceSSL = true;
     enableACME = true;
     locations."/" = {

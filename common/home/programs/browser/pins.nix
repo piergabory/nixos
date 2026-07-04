@@ -124,7 +124,7 @@ in
         container = containerId;
       };
       "Home Assistant" = rec {
-        url = "https://home.piergabory.net/home/overview";
+        url = "https://hass.pierr.re/home/overview";
         id = url;
         folderParentId = hosted.id;
         position = 301;
@@ -132,7 +132,7 @@ in
         container = containerId;
       };
       "Jellyfin" = rec {
-        url = "https://jelly.piergabory.net/web/#/home";
+        url = "https://jelly.pierr.re/web/#/home";
         id = url;
         folderParentId = hosted.id;
         position = 302;
@@ -140,23 +140,15 @@ in
         container = containerId;
       };
       "Vault" = rec {
-        url = "https://vault.piergabory.net/#/vault";
+        url = "https://vault.pierr.re/#/vault";
         id = url;
         folderParentId = hosted.id;
         position = 303;
         workspace = spaceId;
         container = containerId;
       };
-      "Photos" = rec {
-        url = "https://photo.piergabory.net";
-        id = url;
-        folderParentId = hosted.id;
-        position = 304;
-        workspace = spaceId;
-        container = containerId;
-      };
       "Immich" = rec {
-        url = "https://immich.piergabory.net";
+        url = "https://photos.pierr.re";
         id = url;
         folderParentId = hosted.id;
         position = 310;
@@ -164,7 +156,7 @@ in
         container = containerId;
       };
       "Syncthing" = rec {
-        url = "https://sync.piergabory.net";
+        url = "https://sync.pierr.re";
         id = url;
         folderParentId = hosted.id;
         position = 305;
@@ -172,7 +164,7 @@ in
         container = containerId;
       };
       "Actual" = rec {
-        url = "https://budget.piergabory.net/budget";
+        url = "https://budget.pierr.re/budget";
         id = url;
         folderParentId = hosted.id;
         position = 306;
@@ -180,7 +172,7 @@ in
         container = containerId;
       };
       "Glance" = rec {
-        url = "https://dash.piergabory.net/";
+        url = "https://dash.pierr.re/";
         id = url;
         # folderParentId = hosted.id;
         position = 299;
@@ -245,7 +237,7 @@ in
         container = containerId;
       };
       "Discord" = rec {
-        url = "https://discord.com/channels/@me"; 
+        url = "https://discord.com/channels/@me";
         id = url;
         isEssential = true;
         workspace = spaceId;
