@@ -29,6 +29,16 @@ in
   "rutracker.age".publicKeys = workstationKeys;
   "syncthing-api.age".publicKeys = workstationKeys;
   "airtrail-env.age".publicKeys = workstationKeys;
+  "mastodon-oidc-env.age".publicKeys = workstationKeys;
+  "actual-oidc-env.age".publicKeys = workstationKeys;
+
+  "authelia-jwt.age".publicKeys = workstationKeys;
+  "authelia-session.age".publicKeys = workstationKeys;
+  "authelia-storage-key.age".publicKeys = workstationKeys;
+  "authelia-oidc-hmac.age".publicKeys = workstationKeys;
+  "authelia-oidc-jwks.age".publicKeys = workstationKeys;
+  "authelia-users.age".publicKeys = workstationKeys;
+  "authelia-oidc-clients.age".publicKeys = workstationKeys;
 
   "icloud-mail.age".publicKeys = workstationKeys ++ thinkpadKeys;
   "icloud-dav.age".publicKeys = workstationKeys ++ thinkpadKeys;

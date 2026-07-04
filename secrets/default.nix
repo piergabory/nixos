@@ -38,4 +38,22 @@ in
   icloud-dav = secret ./icloud-dav.age "piergabory";
 
   radicale-dav = secret ./radicale-dav.age "piergabory";
+
+  mastodon-oidc-env = secret ./mastodon-oidc-env.age "mastodon";
+
+  actual-oidc-env = secret ./actual-oidc-env.age "actual";
+
+  authelia-jwt = secret ./authelia-jwt.age "authelia-main";
+
+  authelia-session = secret ./authelia-session.age "authelia-main";
+
+  authelia-storage-key = secret ./authelia-storage-key.age "authelia-main";
+
+  authelia-oidc-hmac = secret ./authelia-oidc-hmac.age "authelia-main";
+
+  authelia-oidc-jwks = secret ./authelia-oidc-jwks.age "authelia-main";
+
+  authelia-users = secret ./authelia-users.age "authelia-main";
+
+  authelia-oidc-clients = secret ./authelia-oidc-clients.age "authelia-main";
 }
