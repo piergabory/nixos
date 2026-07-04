@@ -77,5 +77,6 @@
     telegram-desktop
     whatsapp-electron
     obsidian
+    authelia
   ];
 }

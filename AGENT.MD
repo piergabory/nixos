@@ -132,7 +132,7 @@ Local reverse-proxy ports used by `hosts/workstation/services`. Public hosts mar
 | --- | --- | --- | --- |
 | Authelia | `auth.pierr.re` | `127.0.0.1:9092` | portal |
 | Actual Budget | `budget.piergabory.net` | `127.0.0.1:3000` | OIDC (planned) |
-| AirTrail | `flights.piergabory.net` | `127.0.0.1:3001` | app |
+| AirTrail | `flights.pierr.re` | `127.0.0.1:3001` | app / OIDC |
 | Glance | `dash.pierr.re` | `127.0.0.1:5678` | SSO (forward-auth) |
 | Immich | `photos.pierr.re` | `127.0.0.1:2283` | OIDC (planned) |
 | Jellyfin | `jelly.pierr.re` / `jelly.piergabory.net` | `127.0.0.1:8096` | app / OIDC |
@@ -156,7 +156,9 @@ Local reverse-proxy ports used by `hosts/workstation/services`. Public hosts mar
 - AirTrail runs in a Podman pod that publishes `127.0.0.1:3001:3000`; keep host port `3000` for Actual Budget.
 - Persistent data lives under `/var/lib/airtrail/postgres` and `/var/lib/airtrail/uploads`.
 - Env file comes from agenix secret `airtrail-env`, backed by `secrets/airtrail-env.age`.
-- The AirTrail env should use `ORIGIN=https://flights.piergabory.net`; `DB_URL` is generated at runtime to use `127.0.0.1` inside the pod.
+- The AirTrail env should use `ORIGIN=https://flights.pierr.re`; `DB_URL` is generated at runtime to use `127.0.0.1` inside the pod.
+- When configuring OAuth/OIDC for AirTrail, register the redirect/callback URI as `https://flights.pierr.re/api/oauth/callback`.
+- AirTrail's OAuth `tokenEndpointAuthMethod` must be `client_secret_basic`, matching the Authelia `airtrail` client registration.
 
 ## ThinkPad Role
 
