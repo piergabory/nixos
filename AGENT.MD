@@ -74,7 +74,7 @@ Authelia consumes several agenix secrets (see `secrets/default.nix`), all owned 
 Distinguish two kinds of secret when deciding where a value belongs:
 
 - Human credentials (values Pierre types into a login prompt): Authelia login password, Radicale/DAV passwords, Samba/Syncthing GUI passwords, iCloud app-specific passwords, site logins. These are appropriate to store in Vaultwarden for personal recall. Storing the Authelia password in Vaultwarden is safe specifically because Vaultwarden is intentionally excluded from Authelia SSO; keep it that way to avoid a circular unlock dependency.
-- Machine secrets (values one service presents to another): API keys, access tokens (e.g. `home-assistant-token`), signing keys (`authelia-oidc-jwks`), random Authelia internals, and all password/verifier hashes (`authelia-users`, `authelia-oidc-clients`). agenix is the single source of truth for these; do not duplicate them into Vaultwarden.
+- Machine secrets (values one service presents to another): API keys, access tokens (e.g. `home-assistant-token`), signing keys (`authelia-oidc-jwks`), the iCloud SMTP relay credential (`icloud-smtp-relay`), random Authelia internals, and all password/verifier hashes (`authelia-users`, `authelia-oidc-clients`). agenix is the single source of truth for these; do not duplicate them into Vaultwarden.
 - `restic-password` is a machine secret but should also be kept in a second location independent of the workstation, or the backups are unrecoverable if the machine is lost. This relates to the open item that backups are currently on-host only.
 
 ## Workstation Role
@@ -101,13 +101,22 @@ The workstation currently includes services for:
 - Minecraft server hosting.
 - Backups through restic and rsync jobs.
 - RAID support through mdadm.
-- Local mail support through Postfix.
+- Outbound email through Postfix relaying to an authenticated iCloud smarthost.
 
 Most externally reachable web services are exposed through nginx virtual hosts. Only ports 80, 443, and 22 are forwarded from the router; there is no VPN overlay, so nginx + Authelia is the primary protection for web services.
 
 ## Domains
 
-Two domains are live and both resolve to the workstation: the legacy `piergabory.net` and the newer `pierr.re`. They coexist and both continue to work. Prefer `pierr.re` for any new or migrated resources. When a service is placed behind Authelia SSO it must be served under the same parent domain as the Authelia session cookie (`pierr.re`), so SSO-protected vhosts use `*.pierr.re` (existing `piergabory.net` vhosts may remain as unprotected aliases). Email identities (ACME, git, Postfix, mdadm `MAILADDR`, Mastodon `fromAddress`) still use `mail@piergabory.net` and were intentionally not migrated.
+Two domains are live and both resolve to the workstation: the legacy `piergabory.net` and the newer `pierr.re`. They coexist and both continue to work. Prefer `pierr.re` for any new or migrated resources. When a service is placed behind Authelia SSO it must be served under the same parent domain as the Authelia session cookie (`pierr.re`), so SSO-protected vhosts use `*.pierr.re` (existing `piergabory.net` vhosts may remain as unprotected aliases). Email identities have been migrated to `pierr.re`: ACME (`home_lab@pierr.re`), mdadm `MAILADDR` (`home_lab@pierr.re`), Vaultwarden `SMTP_FROM` (`home_lab@pierr.re`), and Mastodon `fromAddress` (`no_reply@pierr.re`). Git still uses `mail@piergabory.net`.
+
+## Mail
+
+Outbound email is handled by a single Postfix instance defined in `hosts/workstation/services/postfix.nix`, configured as an authenticated null-client relay. Direct-to-MX delivery is not possible: only ports 80/443/22 are forwarded and port 25 egress is blocked on this residential connection. All mail is therefore relayed through the iCloud submission service (`smtp.mail.me.com:587`, TLS required, SASL LOGIN/PLAIN).
+
+- Postfix binds loopback only (`inet_interfaces = loopback-only`); local services submit to `127.0.0.1:25` and nothing accepts mail from the network. Port 25 stays closed on the firewall.
+- Authentication uses the `icloud-smtp-relay` agenix secret (root-owned). Its plaintext is a single Postfix SASL map line: `smtp.mail.me.com:587 piergabory@icloud.com:<app-specific-password>`. The map is built and `postmap`ped into `/var/lib/postfix/conf/sasl_passwd` at runtime by an appended `postfix-setup.service` step so the app-specific password never enters the Nix store.
+- The SMTP login is the primary Apple ID (`piergabory@icloud.com`). Sender/From addresses use iCloud Custom Email Domain aliases on `pierr.re` (`home_lab@`, `no_reply@`); each must exist as a send-enabled alias in iCloud or Apple rejects the message. iCloud allows 3 aliases per domain (`main@` already taken). Apple publishes SPF/DKIM/DMARC for the custom domain, so no local sender rewriting is needed.
+- `root`/`postmaster` mail (systemd unit-failure notifications, cron, mdadm RAID alerts via `MAILADDR`) is aliased to `home_lab@pierr.re`. Vaultwarden sends account-validation mail from `home_lab@pierr.re`; Mastodon from `no_reply@pierr.re`. Mastodon and Vaultwarden both submit through the local Postfix, which performs the authenticated upstream relay.
 
 ## Authentication and SSO (Authelia)
 

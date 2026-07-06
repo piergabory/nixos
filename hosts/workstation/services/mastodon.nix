@@ -5,7 +5,7 @@
     enable = true;
     localDomain = "mas.pierr.re";
     configureNginx = true;
-    smtp.fromAddress = "noreply@pierr.re";
+    smtp.fromAddress = "no_reply@pierr.re";
     streamingProcesses = 1;
     extraConfig.SINGLE_USER_MODE = "true";
   };

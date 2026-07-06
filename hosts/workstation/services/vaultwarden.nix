@@ -15,8 +15,8 @@
       SMTP_HOST = "127.0.0.1";
       SMTP_PORT = 25;
       SMTP_SSL = false;
-      SMTP_FROM = "vault@piergabory.net";
-      SMTP_FROM_NAME = "piergabory.net vaultwarden server";
+      SMTP_FROM = "home_lab@pierr.re";
+      SMTP_FROM_NAME = "pierr.re vaultwarden server";
     };
   };
 

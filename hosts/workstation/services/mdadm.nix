@@ -31,7 +31,7 @@
       enable = true;
       mdadmConf = ''
         ARRAY /dev/md/mac-pro-workstation:0 metadata=1.2 UUID=43cd6b10:25cf7256:b8ebe932:0e639d62
-        MAILADDR mail@piergabory.net
+        MAILADDR home_lab@pierr.re
       '';
     };
   };

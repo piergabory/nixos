@@ -5,7 +5,7 @@
   # ACME (Let's Encrypt) configuration
   security.acme = {
     acceptTerms = true;
-    defaults.email = "mail@piergabory.net";
+    defaults.email = "home_lab@pierr.re";
   };
 
   services.nginx = {
