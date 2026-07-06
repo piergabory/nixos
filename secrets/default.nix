@@ -13,6 +13,8 @@ in
 
   radicale = secret ./radicale.age "radicale";
 
+  icloud-smtp-relay = rootSecret ./icloud-smtp-relay.age;
+
   restic-password = rootSecret ./restic-password.age;
 
   airtrail-env = rootSecret ./airtrail-env.age;

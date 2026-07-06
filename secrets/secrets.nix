@@ -18,6 +18,7 @@ in
   "syncthing-thinkpad.age".publicKeys = thinkpadKeys;
 
   "radicale.age".publicKeys = workstationKeys;
+  "icloud-smtp-relay.age".publicKeys = workstationKeys;
   "home-assistant-token.age".publicKeys = workstationKeys;
   "restic-password.age".publicKeys = workstationKeys;
   "samba.age".publicKeys = workstationKeys;
