@@ -78,5 +78,6 @@
     whatsapp-electron
     obsidian
     authelia
+    gimp-with-plugins
   ];
 }
