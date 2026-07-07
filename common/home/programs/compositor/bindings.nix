@@ -12,7 +12,7 @@
         "wpctl"
         "set-volume"
         "@DEFAULT_AUDIO_SINK@"
-        "0.1+"
+        "0.01+"
         "-l"
         "1.0"
       ];
@@ -23,7 +23,7 @@
         "wpctl"
         "set-volume"
         "@DEFAULT_AUDIO_SINK@"
-        "0.1-"
+        "0.01-"
       ];
       allow-when-locked = true;
     };
