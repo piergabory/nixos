@@ -105,7 +105,7 @@
     };
 
     tmpfiles.rules = [
-      "d /var/lib/airtrail/postgres 0700 root root -"
+      "d /var/lib/airtrail/postgres 0700 70 root -"
       "d /var/lib/airtrail/uploads 0755 1000 1000 -"
     ];
   };
