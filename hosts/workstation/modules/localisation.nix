@@ -21,11 +21,16 @@
   };
 
   # Keyboard layout
-
   services.xserver.xkb = {
-    layout = "fr";
-    variant = "mac";
+    layout = "us";
   };
 
-  console.keyMap = "mac-fr";
+  console.keyMap = "us";
+
+  # services.xserver.xkb = {
+  #   layout = "fr";
+  #   variant = "mac";
+  # };
+
+  # console.keyMap = "mac-fr";
 }
