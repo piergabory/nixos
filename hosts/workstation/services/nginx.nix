@@ -27,6 +27,9 @@
       ];
       forceSSL = true;
       enableACME = true;
+      locations."/" = {
+        tryFiles = "$uri $uri/ $uri.html =404";
+      };
     };
   };
 
