@@ -2,6 +2,8 @@
 
 {
   programs.niri.settings = {
+    input.keyboard.xkb.layout = "fr";
+
     spawn-at-startup = lib.mkAfter [
       { sh = "swaybg --image /etc/nixos/assets/house.jpg"; }
       { argv = [ "blueman-applet" ]; }
