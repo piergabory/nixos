@@ -1,10 +1,28 @@
-{ ... }:
+{ config, ... }:
 
 {
   services.dawarich = {
     enable = true;
     localDomain = "geo.pierr.re";
     webPort = 64645;
+  };
+
+  services.restic.backups.dawarich = {
+    inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+    initialize = true;
+    timerConfig = config.piergabory.backups.timerConfig // {
+      OnCalendar = "04:10";
+    };
+    paths = [ "/var/backup/restic/dawarich" ];
+    backupPrepareCommand = ''
+      rm -rf /var/backup/restic/dawarich
+      mkdir -p /var/backup/restic/dawarich
+      ${config.services.postgresql.package}/bin/pg_dump dawarich > /var/backup/restic/dawarich/dawarich.sql
+    '';
+    extraBackupArgs = [
+      "--tag dawarich"
+      "--one-file-system"
+    ];
   };
 
   services.nginx.virtualHosts."geo.pierr.re" = {

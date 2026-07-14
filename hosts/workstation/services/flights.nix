@@ -110,6 +110,30 @@
     ];
   };
 
+  services.restic.backups.airtrail = {
+    inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+    initialize = true;
+    timerConfig = config.piergabory.backups.timerConfig // {
+      OnCalendar = "04:20";
+    };
+    paths = [
+      "/var/backup/restic/airtrail"
+      "/var/lib/airtrail/uploads"
+    ];
+    backupPrepareCommand = ''
+      rm -rf /var/backup/restic/airtrail
+      mkdir -p /var/backup/restic/airtrail
+      set -a
+      . ${config.age.secrets.airtrail-env.path}
+      set +a
+      ${pkgs.podman}/bin/podman exec airtrail-db pg_dump -U "''${DB_USERNAME:-airtrail}" "''${DB_DATABASE_NAME:-airtrail}" > /var/backup/restic/airtrail/airtrail.sql
+    '';
+    extraBackupArgs = [
+      "--tag airtrail"
+      "--one-file-system"
+    ];
+  };
+
   # The domain name must be consistent with the environment declared in the ragenix secret.
   services.nginx.virtualHosts."flights.pierr.re" = {
     forceSSL = true;

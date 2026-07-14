@@ -16,6 +16,7 @@
   ageSecrets,
   config,
   lib,
+  pkgs,
   ...
 }:
 
@@ -208,6 +209,24 @@ in
         # secret (loaded via settingsFiles).
         identity_providers.oidc.enable_client_debug_messages = false;
       };
+    };
+
+    services.restic.backups.authelia = {
+      inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+      initialize = true;
+      timerConfig = config.piergabory.backups.timerConfig // {
+        OnCalendar = "03:10";
+      };
+      paths = [ "/var/backup/restic/authelia" ];
+      backupPrepareCommand = ''
+        rm -rf /var/backup/restic/authelia
+        mkdir -p /var/backup/restic/authelia
+        ${pkgs.sqlite}/bin/sqlite3 /var/lib/authelia-main/db.sqlite3 ".backup '/var/backup/restic/authelia/db.sqlite3'"
+      '';
+      extraBackupArgs = [
+        "--tag authelia"
+        "--one-file-system"
+      ];
     };
 
     services.nginx.virtualHosts."${authHost}" = {
