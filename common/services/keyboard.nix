@@ -20,8 +20,8 @@ in
         extraConfig = frLayout;
       };
 
-      # Kinesis Adv360 -> US-International-style dead keys. Compose must be
-      # enabled in the compositor for these mappings to produce accents.
+      # Kinesis Adv360 -> US-International-style French input. Compose must
+      # be enabled in the compositor for these mappings to produce accents.
       kinesis = {
         ids = [ "k:29ea:0360" ];
         settings = {
@@ -32,6 +32,14 @@ in
           shift = {
             apostrophe = "macro(compose S-apostrophe)";
             grave = "macro(compose S-grave)";
+            "6" = "macro(compose S-6)";
+          };
+          altgr = {
+            # US-International maps AltGr+, to c-cedilla.
+            comma = "macro(compose comma c)";
+          };
+          "altgr+shift" = {
+            comma = "macro(compose comma S-c)";
           };
         };
       };
