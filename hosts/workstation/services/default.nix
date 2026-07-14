@@ -22,7 +22,6 @@
     ./samba.nix
     ./syncthing.nix
     ./vaultwarden.nix
-    ./media-server.nix
     ./notes.nix
     ./flights.nix
   ];
