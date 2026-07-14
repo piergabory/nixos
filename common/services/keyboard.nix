@@ -20,11 +20,20 @@ in
         extraConfig = frLayout;
       };
 
-      # Kinesis Adv360 -> plain US. The system XKB layout is already `us`,
-      # so this device needs no remapping; keyd passes it through unchanged.
+      # Kinesis Adv360 -> US-International-style dead keys. Compose must be
+      # enabled in the compositor for these mappings to produce accents.
       kinesis = {
         ids = [ "k:29ea:0360" ];
-        settings.main = { };
+        settings = {
+          main = {
+            apostrophe = "macro(compose apostrophe)";
+            grave = "macro(compose grave)";
+          };
+          shift = {
+            apostrophe = "macro(compose S-apostrophe)";
+            grave = "macro(compose S-grave)";
+          };
+        };
       };
     };
   };
