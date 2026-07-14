@@ -12,7 +12,7 @@
     _1password-gui # 1Password
     webcord # Discord
     parabolic # Youtube downloader
-    transmission_4-qt6 # Torrent client
+    transmission_4-qt # Torrent client
     rustmission
     baobab # Disk usage utility like grand perspective
     github-copilot-cli # github copilot

@@ -33,7 +33,6 @@
           installRustc = true;
           installRustfmt = true;
         };
-        sourcekit.enable = true;
         taplo.enable = true;
         terraformls.enable = true;
         ts_ls.enable = true;

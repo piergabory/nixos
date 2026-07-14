@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
   programs.nixvim = {
     enable = true;
+    nixpkgs.source = inputs.nixpkgs;
     defaultEditor = true;
     viAlias = true;
     vimAlias = true;
@@ -36,7 +37,6 @@
       rust-analyzer
       shellcheck
       shfmt
-      sourcekit-lsp
       stylua
       taplo
       terraform-ls
