@@ -13,7 +13,7 @@
         primaryCollection = "home";
         remote = {
           type = "caldav";
-          url = "https://dav.piergabory.net/radicale/";
+          url = "https://dav.pierr.re";
           userName = "piergabory";
           passwordCommand = [
             "cat"

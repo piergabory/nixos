@@ -1,4 +1,9 @@
-{ config, lib, osConfig, ... }:
+{
+  config,
+  lib,
+  osConfig,
+  ...
+}:
 
 {
   config = lib.mkIf (config.home.username == "piergabory") {
@@ -6,9 +11,12 @@
       radicale = {
         remote = {
           type = "carddav";
-          url = "https://dav.piergabory.net/radicale/";
+          url = "https://dav.pierr.re";
           userName = "piergabory";
-          passwordCommand = [ "cat" osConfig.age.secrets.radicale-dav.path ];
+          passwordCommand = [
+            "cat"
+            osConfig.age.secrets.radicale-dav.path
+          ];
         };
         vdirsyncer = {
           enable = true;
@@ -27,7 +35,10 @@
           type = "carddav";
           url = "https://contacts.icloud.com/";
           userName = "piergabory@icloud.com";
-          passwordCommand = [ "cat" osConfig.age.secrets.icloud-dav.path ];
+          passwordCommand = [
+            "cat"
+            osConfig.age.secrets.icloud-dav.path
+          ];
         };
         vdirsyncer = {
           enable = true;
