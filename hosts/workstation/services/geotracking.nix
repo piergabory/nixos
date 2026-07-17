@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 {
   services.dawarich = {
@@ -17,7 +17,7 @@
     backupPrepareCommand = ''
       rm -rf /var/backup/restic/dawarich
       mkdir -p /var/backup/restic/dawarich
-      ${config.services.postgresql.package}/bin/pg_dump dawarich > /var/backup/restic/dawarich/dawarich.sql
+      ${pkgs.util-linux}/bin/runuser -u postgres -- ${config.services.postgresql.package}/bin/pg_dump dawarich > /var/backup/restic/dawarich/dawarich.sql
     '';
     extraBackupArgs = [
       "--tag dawarich"
