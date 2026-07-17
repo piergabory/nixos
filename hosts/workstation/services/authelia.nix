@@ -176,12 +176,17 @@ in
 
         storage.local.path = "/var/lib/authelia-main/db.sqlite3";
 
-        # Start with the filesystem notifier so account/reset notifications don't
-        # depend on mail delivery. Switch to the local Postfix SMTP notifier later
-        # if desired.
+        # Postfix accepts unauthenticated SMTP only over loopback, then relays it
+        # through iCloud over TLS. TLS is therefore unnecessary on this local hop.
         notifier = {
           disable_startup_check = false;
-          filesystem.filename = "/var/lib/authelia-main/notification.txt";
+          smtp = {
+            address = "smtp://127.0.0.1:25";
+            sender = "Authelia <home_lab@pierr.re>";
+            startup_check_address = "home_lab@pierr.re";
+            disable_require_tls = true;
+            disable_starttls = true;
+          };
         };
 
         # Default-deny. Only the subdomains actually protected by nginx
