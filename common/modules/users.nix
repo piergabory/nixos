@@ -15,4 +15,9 @@
     ];
     shell = pkgs.zsh;
   };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/AccountsService/icons 0755 root root -"
+    "L+ /var/lib/AccountsService/icons/piergabory - - - - ${./../../assets/pierre.jpg}"
+  ];
 }
