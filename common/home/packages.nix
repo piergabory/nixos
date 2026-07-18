@@ -79,5 +79,6 @@
     obsidian
     authelia
     gimp-with-plugins
+    darktable
   ];
 }
