@@ -14,5 +14,6 @@
     ./minecraft.nix
     ./terminal.nix
     ./tokscale.nix
+    ./zed-editor.nix
   ];
 }
