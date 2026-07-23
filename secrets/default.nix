@@ -1,61 +1,36 @@
-let
-  secret = file: owner: {
-    inherit file owner;
-    mode = "0400";
-  };
+{ inputs, ... }:
 
-  rootSecret = file: secret file "root";
-in
 {
-  dash = secret ./dash.age "nginx";
+  imports = [
+    inputs.agenix.nixosModules.default
+  ];
 
-  home-assistant-token = rootSecret ./home-assistant-token.age;
+  config.age.secrets = {
+    radicale-admin.file = ./admin.age;
+    radicale-dav.file = ./dav.age;
 
-  radicale = secret ./radicale.age "radicale";
+    icloud-dav.file = ./icloud/dav.age;
+    icloud-mail.file = ./icloud/mail.age;
+    icloud-smtp-relay.file = ./icloud/smtp-relay.age;
 
-  icloud-smtp-relay = rootSecret ./icloud-smtp-relay.age;
+    syncthing-api.file = ./syncthing/api.age;
+    syncthing-gui.file = ./syncthing/workstation.age;
 
-  restic-password = rootSecret ./restic-password.age;
-
-  airtrail-env = rootSecret ./airtrail-env.age;
-
-  samba-homeserver = rootSecret ./samba-homeserver.age;
-
-  immich-api.file = ./immich.age;
-
-  jellyfin-api.file = ./jellyfin.age;
-
-  syncthing-api.file = ./syncthing-api.age;
-
-  syncthing-workstation = secret ./syncthing-workstation.age "piergabory";
-
-  syncthing-thinkpad = secret ./syncthing-thinkpad.age "piergabory";
-
-  pixelfed-api = secret ./pixelfed-api.age "pixelfed";
-
-  rutracker = secret ./rutracker.age;
-
-  icloud-mail = secret ./icloud-mail.age "piergabory";
-
-  icloud-dav = secret ./icloud-dav.age "piergabory";
-
-  radicale-dav = secret ./radicale-dav.age "piergabory";
-
-  mastodon-oidc-env = secret ./mastodon-oidc-env.age "mastodon";
-
-  actual-oidc-env = secret ./actual-oidc-env.age "actual";
-
-  authelia-jwt = secret ./authelia-jwt.age "authelia-main";
-
-  authelia-session = secret ./authelia-session.age "authelia-main";
-
-  authelia-storage-key = secret ./authelia-storage-key.age "authelia-main";
-
-  authelia-oidc-hmac = secret ./authelia-oidc-hmac.age "authelia-main";
-
-  authelia-oidc-jwks = secret ./authelia-oidc-jwks.age "authelia-main";
-
-  authelia-users = secret ./authelia-users.age "authelia-main";
-
-  authelia-oidc-clients = secret ./authelia-oidc-clients.age "authelia-main";
+    home-assistant-token.file = ./home-assistant-token.age;
+    restic-password.file = ./restic-password.age;
+    airtrail-env.file = ./airtrail-env.age;
+    samba-homeserver.file = ./samba-homeserver.age;
+    immich-api.file = ./immich.age;
+    jellyfin-api.file = ./jellyfin.age;
+  } // (let
+    s = file: { inherit file; owner = "authelia-main"; };
+  in {
+    authelia-oidc-clients = s ./authelia/oidc/clients.age;
+    authelia-oidc-hmac = s ./authelia/oidc/hmac.age;
+    authelia-oidc-jwks = s ./authelia/oidc/jwks.age;
+    authelia-jwt = s ./authelia/jwt.age;
+    authelia-session = s ./authelia/session.age;
+    authelia-storage-key = s ./authelia/storage-key.age;
+    authelia-users = s ./authelia/users.age;
+  });
 }
