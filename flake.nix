@@ -31,11 +31,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixarr = {
-      url = "github:nix-media-server/nixarr";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     agenix = {
       url = "github:ryantm/agenix";
       inputs = {
@@ -53,56 +48,38 @@
     };
   };
 
-  outputs =
-    inputs@{
-      agenix,
-      home-manager,
-      niri,
-      nixpkgs,
-      nixarr,
-      nixos-hardware,
-      nixvim,
-      stylix,
-      ...
-    }:
-    let
-      ageSecrets = import ./secrets;
-
-      commonModules = [
-        ./common/home
-        niri.nixosModules.niri
-        stylix.nixosModules.stylix
-        agenix.nixosModules.default
-        nixvim.nixosModules.nixvim
-        ({ inputs, ... }: {
-          lib.nixvim = inputs.nixvim.lib.nixvim;
-        })
-        home-manager.nixosModules.home-manager
+  outputs = inputs@{ nixpkgs, ... }: {
+    nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/workstation
+        ./configuration.nix
       ];
-    in
-    {
-      nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = commonModules ++ [
-          nixarr.nixosModules.default
-          ./hosts/workstation
-        ];
-        specialArgs = {
-          inherit inputs ageSecrets;
-          hostHomeModules = [ ./hosts/workstation/home ];
-        };
-      };
-
-      nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = commonModules ++ [
-          ./hosts/thinkpad
-          nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
-        ];
-        specialArgs = {
-          inherit inputs ageSecrets;
-          hostHomeModules = [ ./hosts/thinkpad/home ];
-        };
+      specialArgs = {
+        inherit inputs;
       };
     };
+
+    nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        ./hosts/thinkpad
+        ./configuration.nix
+      ];
+      specialArgs = {
+        inherit inputs;
+      };
+    };
+
+    # nixosConfigurations."offsite" = nixpkgs.lib.nixosSystem {
+    #   system = "x86_64-linux";
+    #   modules = [
+    #     ./hosts/offsite
+    #     ./configuration.nix
+    #   ];
+    #   specialArgs = {
+    #     inherit inputs;
+    #   };
+    # };
+  };
 }

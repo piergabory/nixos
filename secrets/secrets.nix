@@ -16,32 +16,30 @@ in
 {
   "samba-homeserver.age".publicKeys = thinkpadKeys;
   "syncthing-thinkpad.age".publicKeys = thinkpadKeys;
-
-  "radicale.age".publicKeys = workstationKeys;
-  "icloud-smtp-relay.age".publicKeys = workstationKeys;
   "home-assistant-token.age".publicKeys = workstationKeys;
   "restic-password.age".publicKeys = workstationKeys;
   "samba.age".publicKeys = workstationKeys;
   "immich.age".publicKeys = workstationKeys;
   "jellyfin.age".publicKeys = workstationKeys;
-  "dash.age".publicKeys = workstationKeys;
-  "syncthing-workstation.age".publicKeys = workstationKeys;
-  "pixelfed-api.age".publicKeys = workstationKeys;
-  "rutracker.age".publicKeys = workstationKeys;
-  "syncthing-api.age".publicKeys = workstationKeys;
   "airtrail-env.age".publicKeys = workstationKeys;
-  "mastodon-oidc-env.age".publicKeys = workstationKeys;
-  "actual-oidc-env.age".publicKeys = workstationKeys;
 
-  "authelia-jwt.age".publicKeys = workstationKeys;
-  "authelia-session.age".publicKeys = workstationKeys;
-  "authelia-storage-key.age".publicKeys = workstationKeys;
-  "authelia-oidc-hmac.age".publicKeys = workstationKeys;
-  "authelia-oidc-jwks.age".publicKeys = workstationKeys;
-  "authelia-users.age".publicKeys = workstationKeys;
-  "authelia-oidc-clients.age".publicKeys = workstationKeys;
+  "syncthing/workstation.age".publicKeys = workstationKeys;
+  "syncthing/api.age".publicKeys = workstationKeys;
 
-  "icloud-mail.age".publicKeys = workstationKeys ++ thinkpadKeys;
-  "icloud-dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
-  "radicale-dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
+  "authelia/jwt.age".publicKeys = workstationKeys;
+  "authelia/session.age".publicKeys = workstationKeys;
+  "authelia/storage-key.age".publicKeys = workstationKeys;
+  "authelia/users.age".publicKeys = workstationKeys;
+  "authelia/oidc/hmac.age".publicKeys = workstationKeys;
+  "authelia/oidc/jwks.age".publicKeys = workstationKeys;
+  "authelia/oidc/clients.age".publicKeys = workstationKeys;
+  "authelia/oidc/env/mastodon.age".publicKeys = workstationKeys;
+  "authelia/oidc/env/actual.age".publicKeys = workstationKeys;
+
+  "icloud/mail.age".publicKeys = workstationKeys ++ thinkpadKeys;
+  "icloud/dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
+  "icloud/smtp-relay.age".publicKeys = workstationKeys;
+
+  "radicale/admin.age".publicKeys = workstationKeys;
+  "radicale/dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
 }
