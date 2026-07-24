@@ -3,7 +3,6 @@
 {
   imports = [
     inputs.nixvim.homeModules.nixvim
-    ./extraConfigLua.nix
     ./keymaps.nix
     ./options.nix
     ./plugins.nix
@@ -17,7 +16,11 @@
       viAlias = true;
       vimAlias = true;
       clipboard.register = "unnamedplus";
-      colorscheme = "retrobox";
+
+      colorschemes.base16 = {
+        enable = true;
+        colorscheme = "gruvbox-dark-hard";
+      };
 
       globals = {
         mapleader = " ";
@@ -30,7 +33,5 @@
         })
       '';
     };
-
-    stylix.targets.nixvim.enable = false;
   };
 }
