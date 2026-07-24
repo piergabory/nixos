@@ -33,7 +33,7 @@
     users.pgabory = {
       imports = [
         inputs.agenix.homeManagerModules.default
-        # ./accounts TODO FIXME
+        ../../modules/home-manager/accounts
         ../../modules/home-manager/programs
         ../../modules/home-manager/developer
       ];

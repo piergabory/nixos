@@ -1,4 +1,9 @@
-{ inputs, lib, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 {
   imports = [
@@ -16,7 +21,7 @@ with lib;
 
     home-manager.users."piergabory" = {
       programs = {
-        waybar =  {
+        waybar = {
           enableStatusWidgets = true;
           showBattery = true;
           settings.primary.height = lib.mkForce 20;
