@@ -6,6 +6,8 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
+    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,37 +51,50 @@
   };
 
   outputs = inputs@{ nixpkgs, ... }: {
-    nixosConfigurations."workstation" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+    nixosConfigurations = {
+      workstation = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/workstation
+          ./configuration.nix
+        ];
+        specialArgs = {
+          inherit inputs;
+        };
+      };
+
+      thinkpad = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hosts/thinkpad
+          ./configuration.nix
+        ];
+        specialArgs = {
+          inherit inputs;
+        };
+      };
+
+      # offsite = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   modules = [
+      #     ./hosts/offsite
+      #     ./configuration.nix
+      #   ];
+      #   specialArgs = {
+      #     inherit inputs;
+      #   };
+      # };
+    };
+
+    darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
+      system = "aarch64-darwin";
       modules = [
-        ./hosts/workstation
-        ./configuration.nix
+        ./hosts/macbook
       ];
       specialArgs = {
         inherit inputs;
+        useDarwinModule = true;
       };
     };
-
-    nixosConfigurations."thinkpad" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hosts/thinkpad
-        ./configuration.nix
-      ];
-      specialArgs = {
-        inherit inputs;
-      };
-    };
-
-    # nixosConfigurations."offsite" = nixpkgs.lib.nixosSystem {
-    #   system = "x86_64-linux";
-    #   modules = [
-    #     ./hosts/offsite
-    #     ./configuration.nix
-    #   ];
-    #   specialArgs = {
-    #     inherit inputs;
-    #   };
-    # };
   };
 }

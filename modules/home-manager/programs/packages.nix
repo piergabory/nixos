@@ -1,8 +1,8 @@
-{ pkgs, ... }:
-
+{ lib, pkgs, ... }:
+with lib; with pkgs;
 {
   config = {
-    home.packages = with pkgs; [
+    home.packages = mkIf stdenv.isLinux [
       fastfetch
       imv # image viewer for tiling managers
       mpv # video player

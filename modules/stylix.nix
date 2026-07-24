@@ -1,8 +1,12 @@
-{ inputs, lib, pkgs, ... }:
+{ inputs, lib, pkgs, useDarwinModule ? false, ... }:
 
 {
-  imports = [
-    inputs.stylix.nixosModules.stylix
+  imports = with inputs.stylix; [
+    (
+      if useDarwinModule
+      then darwinModules.stylix
+      else nixosModules.stylix
+    )
   ];
 
   config = {

@@ -8,9 +8,8 @@
     ];
 
     config = {
-      programs.opencode.enable = true;
+      # programs.opencode.enable = true;
       programs.github-copilot-cli.enable = true;
-      programs.mistral-vibe.enable = true;
       programs.helix.enable = true;
       programs.tokscale.enable = true;
     };

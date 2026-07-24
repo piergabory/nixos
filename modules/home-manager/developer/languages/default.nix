@@ -3,7 +3,7 @@
     ./rust.nix
     ./web.nix
     ./nix.nix
-    ./c.nix
+    # ./c.nix
     ./markdown.nix
     ./script.nix
   ];
