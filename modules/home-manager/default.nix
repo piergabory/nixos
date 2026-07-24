@@ -14,6 +14,10 @@
       users."piergabory".imports = [
         ./piergabory.nix
       ];
+
+      users."root".imports = [
+        ./root.nix
+      ];
     };
   };
 }
