@@ -3,7 +3,7 @@
 {
   imports = [
     inputs.agenix.homeManagerModules.default
-    # ./accounts TODO FIXME
+    ./accounts
     ./programs
     ./developer
     ./xdg.nix
