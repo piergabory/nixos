@@ -60,6 +60,7 @@
         ];
         specialArgs = {
           inherit inputs;
+          useDarwinModule = false;
         };
       };
 
@@ -71,6 +72,7 @@
         ];
         specialArgs = {
           inherit inputs;
+          useDarwinModule = false;
         };
       };
 
