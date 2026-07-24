@@ -29,6 +29,7 @@ in {
   config = mkIf cfg.enable {
     services = {
       actual.enable = true;
+      airtrail.enable = true;
       dawarich.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
@@ -39,6 +40,11 @@ in {
       nginx.enable = true;
       postfix.enable = true;
       minecraft-server.enable = true;
+
+      authentication = {
+        enable = true;
+        domain = "pierr.re";
+      };
 
       hass-container = {
         enable = true;

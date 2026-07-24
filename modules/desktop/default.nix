@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }:
+{ inputs, config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -29,7 +29,7 @@ in {
       services.mako.enable = true;
     };
 
-    environment.systemPackages.packages = with pkgs; [
+    environment.systemPackages = with pkgs; [
       swaybg
     ];
   };

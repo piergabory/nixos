@@ -20,7 +20,7 @@ in {
       forceSSL = true;
       enableACME = true;
       locations."/" = {
-        proxyPass = "http://${config.aitrail.host}:${config.aitrail.port}";
+        proxyPass = "http://${cfg.host}:${toString cfg.port}";
         proxyWebsockets = true;
         extraConfig = ''
           proxy_set_header X-Forwarded-Proto $scheme;

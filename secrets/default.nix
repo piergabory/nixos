@@ -6,15 +6,33 @@
   ];
 
   config.age.secrets = {
-    radicale-admin.file = ./admin.age;
-    radicale-dav.file = ./dav.age;
+    radicale-admin = {
+      file = ./radicale/admin.age;
+      owner = "radicale";
+    };
+    radicale-dav = {
+      file = ./radicale/dav.age;
+      owner = "piergabory";
+    };
 
-    icloud-dav.file = ./icloud/dav.age;
-    icloud-mail.file = ./icloud/mail.age;
+    icloud-dav = {
+      file = ./icloud/dav.age;
+      owner = "piergabory";
+    };
+    icloud-mail = {
+      file = ./icloud/mail.age;
+      owner = "piergabory";
+    };
     icloud-smtp-relay.file = ./icloud/smtp-relay.age;
 
-    syncthing-api.file = ./syncthing/api.age;
-    syncthing-gui.file = ./syncthing/workstation.age;
+    syncthing-api = {
+      file = ./syncthing/api.age;
+      owner = "piergabory";
+    };
+    syncthing-gui = {
+      file = ./syncthing/admin.age;
+      owner = "piergabory";
+    };
 
     home-assistant-token.file = ./home-assistant-token.age;
     restic-password.file = ./restic-password.age;
