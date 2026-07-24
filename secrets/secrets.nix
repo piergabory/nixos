@@ -34,8 +34,6 @@ in
   "authelia/oidc/env/mastodon.age".publicKeys = workstationKeys;
   "authelia/oidc/env/actual.age".publicKeys = workstationKeys;
 
-  "icloud/mail.age".publicKeys = workstationKeys ++ thinkpadKeys;
-  "icloud/dav.age".publicKeys = workstationKeys ++ thinkpadKeys;
   "icloud/smtp-relay.age".publicKeys = workstationKeys;
 
   "radicale/admin.age".publicKeys = workstationKeys;
