@@ -35,10 +35,6 @@ in
         enable = true;
         type = "discover";
       };
-      thunderbird = {
-        enable = true;
-        profiles = [ "default" ];
-      };
     };
 
     contact.accounts.${label} = {
@@ -48,10 +44,6 @@ in
       };
       vdirsyncer = vdirsyncerConfig;
       khard.enable = true;
-      thunderbird = {
-        enable = true;
-        profiles = [ "default" ];
-      };
     };
   };
 }
