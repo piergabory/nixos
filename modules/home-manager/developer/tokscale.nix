@@ -12,7 +12,7 @@ in {
     home.packages = with pkgs; [
       bun
       (writeShellScriptBin "tokscale" ''
-        exec ${pkgs.steam-run}/bin/steam-run ${pkgs.bun}/bin/bunx tokscale@latest "$@"
+        exec ${optionalString pkgs.stdenv.isLinux "${pkgs.steam-run}/bin/steam-run"} ${pkgs.bun}/bin/bunx tokscale@latest "$@"
       '')
     ];
   };

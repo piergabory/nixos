@@ -1,4 +1,5 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
+with lib;
 
 {
   home.packages = with pkgs; [
@@ -29,7 +30,20 @@
     };
   };
 
-  programs.zed-editor.extensions = [
-    "nix"
-  ];
+  programs.zed-editor = {
+    userSettings = {
+      languages = {
+        "Nix" = {
+          language_servers = [ "nil" "nixd" ];
+        };
+      };
+      lsp = {
+        nil.binary.path = getExe pkgs.nil;
+        nixd.binary.path = getExe pkgs.nixd;
+      };
+    };
+    extensions = [
+      "nix"
+    ];
+  };
 }

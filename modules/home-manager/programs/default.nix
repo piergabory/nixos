@@ -1,5 +1,5 @@
-{ ... }:
-
+{ lib, pkgs, ... }:
+with lib;
 {
   imports = [
     ./beets.nix
@@ -18,13 +18,13 @@
         languagePacks = [ "en-US" "en-UK" "fr" ];
       };
 
-      foot = {
+      foot = mkIf pkgs.stdenv.isLinux {
         enable = true;
         server.enable = true;
         settings.main.pad = "8x8";
       };
 
-      vicinae = {
+      vicinae = mkIf pkgs.stdenv.isLinux {
         enable = true;
         systemd.enable = true;
       };
