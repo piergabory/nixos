@@ -5,6 +5,7 @@ let
   cfg = config.services.minecraft-server;
 in {
   imports = [
+    ./backup.nix
     ./whitelist.nix
     ./properties.nix
   ];
@@ -12,7 +13,7 @@ in {
   config = let
     minecraftServerPackage = with pkgs; callPackage "${path}/pkgs/by-name/mi/minecraft-server/derivation.nix" {
       jre_headless = jdk25_headless;
-      version = "26.2.1";
+      version = "26.1.2";
       url = "https://piston-data.mojang.com/v1/objects/97ccd4c0ed3f81bbb7bfacddd1090b0c56f9bc51/server.jar";
       sha1 = "97ccd4c0ed3f81bbb7bfacddd1090b0c56f9bc51";
     };

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 let
   password_path = "/var/lib/postfix/conf/sasl_passwd";

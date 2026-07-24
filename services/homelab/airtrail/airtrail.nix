@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -65,7 +65,7 @@ in {
               ${pkgs.podman}/bin/podman pod exists airtrail ||\
               ${pkgs.podman}/bin/podman pod create \
                 --name airtrail \
-                --publish ${cfg.host}:${cfg.port}:3000
+                --publish ${cfg.host}:${toString cfg.port}:3000
             '';
           };
         };

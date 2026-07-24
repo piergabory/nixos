@@ -83,11 +83,11 @@ in
       enable = true;
 
       secrets = {
-        jwtSecretFile = config.age.secrets.authelia.jwt.path;
-        sessionSecretFile = config.age.secrets.authelia.session.path;
-        storageEncryptionKeyFile = config.age.secrets.authelia.storage-key.path;
-        oidcHmacSecretFile = config.age.secrets.authelia.oidc.hmac.path;
-        oidcIssuerPrivateKeyFile = config.age.secrets.authelia.oidc.jwks.path;
+        jwtSecretFile = config.age.secrets.authelia-jwt.path;
+        sessionSecretFile = config.age.secrets.authelia-session.path;
+        storageEncryptionKeyFile = config.age.secrets.authelia-storage-key.path;
+        oidcHmacSecretFile = config.age.secrets.authelia-oidc-hmac.path;
+        oidcIssuerPrivateKeyFile = config.age.secrets.authelia-oidc-jwks.path;
       };
 
       # Extra config fragments merged on top of `settings`. The OIDC client
@@ -97,7 +97,7 @@ in
       #
       # NOTE: this file must contain at least one client with a valid pbkdf2
       # hash or Authelia will refuse to start.
-      settingsFiles = [ config.age.secrets.authelia.oidc.clients.path ];
+      settingsFiles = [ config.age.secrets.authelia-oidc-clients.path ];
 
       settings = {
         theme = "auto";
@@ -117,7 +117,7 @@ in
         authentication_backend = {
           password_reset.disable = true;
           file = {
-            path = config.age.secrets.authelia.users.path;
+            path = config.age.secrets.authelia-users.path;
             watch = false;
             password.algorithm = "argon2";
           };
@@ -137,9 +137,9 @@ in
           remember_me = "1M";
           cookies = [
             {
-              domain = domain;
-              authelia_url = "https://${authHost}";
-              default_redirection_url = "https://${domain}";
+              domain = cfg.domain;
+              authelia_url = "https://${cfg.host}";
+              default_redirection_url = "https://${cfg.domain}";
             }
           ];
         };
@@ -167,7 +167,7 @@ in
           default_policy = "deny";
           rules = [
             {
-              domain = authHost;
+              domain = cfg.host;
               policy = "bypass";
             }
           ];
