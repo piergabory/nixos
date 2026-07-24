@@ -60,9 +60,6 @@
     # Fuzzy finder for files, text, buffers, and help; use <leader>ff or :Telescope.
     telescope.enable = true;
 
-    # File explorer tree; use <leader>e or :Neotree toggle.
-    neo-tree.enable = true;
-
     # Inline image rendering support; use image-capable buffers/markdown previews.
     image.enable = true;
 
@@ -71,9 +68,6 @@
 
     # Full-screen Git UI inside Neovim; use <leader>gg or :Neogit.
     neogit.enable = true;
-
-    # Terminal UI for lazygit; use <leader>gl or :LazyGit.
-    lazygit.enable = true;
 
     # Popup guide for keybindings; press <leader> and wait or use :WhichKey.
     which-key.enable = true;
