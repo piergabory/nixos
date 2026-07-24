@@ -37,7 +37,6 @@
     home-assistant-token.file = ./home-assistant-token.age;
     restic-password.file = ./restic-password.age;
     airtrail-env.file = ./airtrail-env.age;
-    samba-homeserver.file = ./samba-homeserver.age;
     immich-api.file = ./immich.age;
     jellyfin-api.file = ./jellyfin.age;
   } // (let

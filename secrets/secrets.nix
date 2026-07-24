@@ -14,11 +14,9 @@ let
   ];
 in
 {
-  "samba-homeserver.age".publicKeys = thinkpadKeys;
   "syncthing-thinkpad.age".publicKeys = thinkpadKeys;
   "home-assistant-token.age".publicKeys = workstationKeys;
   "restic-password.age".publicKeys = workstationKeys;
-  "samba.age".publicKeys = workstationKeys;
   "immich.age".publicKeys = workstationKeys;
   "jellyfin.age".publicKeys = workstationKeys;
   "airtrail-env.age".publicKeys = workstationKeys;
