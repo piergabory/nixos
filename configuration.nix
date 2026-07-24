@@ -25,7 +25,7 @@
     };
 
     networking.networkmanager.enable = true;
-    nixpkgs.config.allowUnfreeallowUnfree = true;
+    nixpkgs.config.allowUnfree = true;
 
     nix.settings = {
       trusted-users = [
