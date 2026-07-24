@@ -9,6 +9,7 @@
     home-manager = {
       useGlobalPkgs = true;
       useUserPackages = true;
+      backupFileExtension = "home-manager-backup";
       extraSpecialArgs = { inherit inputs; };
 
       users."piergabory".imports = [

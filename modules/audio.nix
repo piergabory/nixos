@@ -26,6 +26,7 @@ in {
 
     services.mpd = mkIf cfg.enableMusic {
       enable = true;
+      user = "piergabory";
       settings = {
         music_directory = "/home/piergabory/Music";
         audio_output = [
