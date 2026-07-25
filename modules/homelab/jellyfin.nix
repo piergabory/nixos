@@ -2,6 +2,7 @@
 with lib;
 
 let
+  domain = config.modules.homelab.domain;
   cfg = config.services.jellyfin;
 in {
   config = mkIf cfg.enable {
@@ -22,8 +23,7 @@ in {
       HIP_VISIBLE_DEVICES = "1";
     };
 
-    services.nginx.virtualHosts."jelly.pierr.re" = {
-      serverAliases = [ "jelly.piergabory.net" ];
+    services.nginx.virtualHosts."jelly.${domain}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

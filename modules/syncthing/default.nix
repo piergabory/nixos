@@ -11,7 +11,6 @@ in {
 
   config = {
     services.syncthing = {
-      enable = true;
       openDefaultPorts = true;
       user = "piergabory";
       guiAddress = "127.0.0.1:8384";

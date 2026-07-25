@@ -6,7 +6,7 @@
 }:
 with lib;
 {
-  config = mkIf pkgs.stdenv.isLinux {
+  config = mkIf (pkgs.stdenv.isLinux && (config.home.username != "root")) {
     xdg.mimeApps.defaultApplications = {
       # Make a imv module
       "image/png" = "imv.desktop";

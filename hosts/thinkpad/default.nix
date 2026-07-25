@@ -106,6 +106,7 @@ with lib;
       fprintd.enable = true;
       xserver.xkb.layout = "fr";
       openssh.enable = true;
+      syncthing.enable = true;
     };
 
     powerManagement.powertop.enable = true;
