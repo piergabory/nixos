@@ -5,6 +5,7 @@ let
   cfg = config.services.syncthing;
 in {
   imports= [
+    ./secrets
     ./nginx.nix
   ];
 

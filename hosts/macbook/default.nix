@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs, ... }:
 
 {
   imports = [
@@ -24,25 +24,5 @@
     home = "/Users/pgabory";
   };
 
-  home-manager = {
-    useUserPackages = true;
-    extraSpecialArgs = {
-      inherit inputs;
-      inherit pkgs;
-    };
-    users.pgabory = {
-      imports = [
-        inputs.agenix.homeManagerModules.default
-        ../../modules/home-manager/accounts
-        ../../modules/home-manager/programs
-        ../../modules/home-manager/developer
-      ];
-
-      home = {
-        username = "pgabory";
-        homeDirectory = "/Users/pgabory";
-        stateVersion = "26.05"; # Please read the comment before changing.
-      };
-    };
-  };
+  home-manager.managed-users = [ "pgabory" ];
 }

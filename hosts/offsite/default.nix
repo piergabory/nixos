@@ -1,6 +1,8 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules
+    ../../configuration.nix
   ];
 
   config = {
@@ -9,5 +11,6 @@
     };
 
     services.openssh.enable = true;
+    home-manager.managed-users = [ "piergabory" "root" ];
   };
 }
