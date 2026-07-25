@@ -2,17 +2,18 @@
 with lib;
 let
   password_path = "/var/lib/postfix/conf/sasl_passwd";
+  domain = config.modules.homelab.domain;
   cfg = config.services.postfix;
 in {
   config = mkIf cfg.enable {
     services.postfix = {
-      rootAlias = "home_lab@pierr.re";
-      postmasterAlias = "home_lab@pierr.re";
+      rootAlias = "home_lab@${domain}";
+      postmasterAlias = "home_lab@${domain}";
 
       settings.main = {
-        hostname = "mail.pierr.re";
-        domain = "pierr.re";
-        myorigin = "pierr.re";
+        inherit domain;
+        hostname = "mail.${domain}";
+        myorigin = domain;
 
         relayhost = [ "[smtp.mail.me.com]:587" ];
         inet_interfaces = "loopback-only";

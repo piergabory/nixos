@@ -2,6 +2,7 @@
 with lib;
 
 let
+  domain = config.modules.homelab.domain;
   cfg = config.services.airtrail;
 in {
   imports = [
@@ -17,7 +18,7 @@ in {
     };
 
     # The domain name must be consistent with the environment declared in the ragenix secret.
-    services.nginx.virtualHosts."flights.pierr.re" = {
+    services.nginx.virtualHosts."flights.${domain}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

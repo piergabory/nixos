@@ -2,6 +2,7 @@
 with lib;
 
 let
+  domain = config.modules.homelab.domain;
   cfg = config.services.radicale;
 in {
   imports  = [
@@ -21,8 +22,7 @@ in {
       };
     };
 
-    services.nginx.virtualHosts."dav.pierr.re" = {
-      serverAliases = [ "dav.piergabory.net" ];
+    services.nginx.virtualHosts."dav.${domain}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

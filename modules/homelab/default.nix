@@ -2,7 +2,7 @@
 with lib;
 
 let
-  cfg = config.services.homelab;
+  cfg = config.modules.homelab;
 in {
   imports = [
     ./airtrail
@@ -23,8 +23,11 @@ in {
     ./postfix.nix
   ];
 
-  options.services.homelab = {
+  options.modules.homelab = {
     enable = mkEnableOption "Deploy the home-lab stack on this machine";
+    domain = mkOption {
+      type = types.str;
+    };
   };
 
   config = mkIf cfg.enable {
@@ -44,12 +47,12 @@ in {
 
       authentication = {
         enable = true;
-        domain = "pierr.re";
+        domain = cfg.domain;
       };
 
       hass-container = {
         enable = true;
-        domain = "hass.pierr.re";
+        domain = "hass.${cfg.domain}";
         homeKitBridgesTCPPorts = [
           21064 # Homekit bridge
           21065 # Homekit TV bridge

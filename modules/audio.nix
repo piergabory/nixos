@@ -13,35 +13,37 @@ in {
   };
 
   config = mkIf cfg.enable {
-    services.pulseaudio.enable = false;
-
-    services.pipewire = {
-      enable = true;
-      audio.enable = true;
-      wireplumber.enable = true;
-      pulse.enable = true;
-    };
-
     security.rtkit.enable = true;
 
-    services.mpd = mkIf cfg.enableMusic {
-      enable = true;
-      user = "piergabory";
-      settings = {
-        music_directory = "/home/piergabory/Music";
-        audio_output = [
-          {
-            type = "pipewire";
-            name = "Pipewire audio sound output";
-          }
-          {
-            # For CAVA visualiser
-            type = "fifo";
-            name = "my_fifo";
-            path = "/tmp/mpd.fifo";
-            format = "44100:16:2";
-          }
-        ];
+    services = {
+      pulseaudio.enable = false;
+
+      pipewire = {
+        enable = true;
+        audio.enable = true;
+        wireplumber.enable = true;
+        pulse.enable = true;
+      };
+
+      mpd = mkIf cfg.enableMusic {
+        enable = true;
+        user = "piergabory";
+        settings = {
+          music_directory = "/home/piergabory/Music";
+          audio_output = [
+            {
+              type = "pipewire";
+              name = "Pipewire audio sound output";
+            }
+            {
+              # For CAVA visualiser
+              type = "fifo";
+              name = "my_fifo";
+              path = "/tmp/mpd.fifo";
+              format = "44100:16:2";
+            }
+          ];
+        };
       };
     };
 

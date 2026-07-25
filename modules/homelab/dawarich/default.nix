@@ -1,20 +1,24 @@
-{
+{ config, lib, ... }:
+with lib;
+let
+  domain = config.modules.homelab.domain;
+  cfg = config.services.dawarich;
+in {
   imports = [
     ./backup.nix
   ];
 
-  config = rec {
+  config = mkIf cfg.enable {
     services.dawarich = {
-      localDomain = "geo.pierr.re";
+      localDomain = "geo.${domain}";
       webPort = 64645;
     };
 
-    services.nginx.virtualHosts."geo.pierr.re" = {
-      serverAliases = [ "geo.piergabory.net" ];
+    services.nginx.virtualHosts."geo.${domain}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString services.dawarich.webPort}";
+        proxyPass = "http://127.0.0.1:${toString cfg.webPort}";
         proxyWebsockets = true;
         extraConfig = ''
           client_max_body_size 2048M;

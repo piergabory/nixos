@@ -22,7 +22,6 @@ in {
     services.pihole-web = {
       enable = true;
       ports = [ 8080 ];
-      hostName = "pihole.piergabory.net";
     };
 
     networking.firewall.interfaces.eth0 = {

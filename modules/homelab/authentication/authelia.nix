@@ -152,8 +152,8 @@ in
           disable_startup_check = false;
           smtp = {
             address = "smtp://127.0.0.1:25";
-            sender = "Authelia <home_lab@pierr.re>";
-            startup_check_address = "home_lab@pierr.re";
+            sender = "Authelia <home_lab@${cfg.domain}>";
+            startup_check_address = "home_lab@${cfg.domain}";
             disable_require_tls = true;
             disable_starttls = true;
           };

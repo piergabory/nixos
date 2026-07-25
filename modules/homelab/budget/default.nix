@@ -2,6 +2,7 @@
 with lib;
 
 let
+  domain = config.modules.homelab.domain;
   cfg = config.services.actual;
 in {
   imports = [
@@ -9,19 +10,19 @@ in {
   ];
 
   config = mkIf cfg.enable {
-    services.actual = {
-      settings = {
-        port = 3000;
-        hostname = "127.0.0.1";
+    services = {
+      actual = {
+        settings = {
+          port = 3000;
+          hostname = "127.0.0.1";
+        };
       };
-    };
 
-    services.nginx.virtualHosts = {
-      "budget.pierr.re" = {
+      nginx.virtualHosts."budget.${domain}" = {
         forceSSL = true;
         enableACME = true;
         locations."/" = {
-          proxyPass = "http://127.0.0.1:3000";
+          proxyPass = "http://${cfg.settings.hostname}:${toString cfg.settings.port}";
           proxyWebsockets = true;
         };
       };

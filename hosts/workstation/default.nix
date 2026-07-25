@@ -21,6 +21,10 @@
       graphicalDesktop.enable = true;
       audio.enable = true;
       bluetooth.enable = true;
+      homelab = {
+        enable = true;
+        domain = "pierr.re";
+      };
     };
 
     powerManagement = {
@@ -51,8 +55,9 @@
 
     services =  {
       xserver.xkb.layout = "us";
-      homelab.enable = true;
+
       openssh.enable = true;
+      syncthing.enable = true;
       logind.settings.Login = {
         HandlePowerKey = "ignore";
         PowerKeyIgnoreInhibited = false;

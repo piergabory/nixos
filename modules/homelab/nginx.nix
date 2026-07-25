@@ -2,12 +2,13 @@
 with lib;
 
 let
+  domain = config.modules.homelab.domain;
   cfg = config.services.nginx;
 in {
   config = mkIf cfg.enable {
     security.acme = {
       acceptTerms = true;
-      defaults.email = "home_lab@pierr.re";
+      defaults.email = "home_lab@${domain}";
     };
 
     services.nginx = {
@@ -16,11 +17,11 @@ in {
       recommendedOptimisation = true;
       recommendedGzipSettings = true;
 
-      virtualHosts."pierr.re" = {
+      virtualHosts."${domain}" = {
         root = "/var/http/html";
         default = true;
         serverAliases = [
-          "www.pierr.re"
+          "www.${domain}"
           "piergabory.net"
           "www.piergabory.net"
         ];

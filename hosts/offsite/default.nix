@@ -10,7 +10,11 @@
       hostName = "pierre-offsite-backup";
     };
 
-    services.openssh.enable = true;
+    services = {
+      openssh.enable = true;
+      syncthing.enable = true;
+    };
+
     home-manager.managed-users = [ "piergabory" "root" ];
   };
 }
