@@ -55,7 +55,7 @@
       workstation = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/workstation
+          ./configurations/linux/workstation
         ];
         specialArgs = {
           inherit inputs;
@@ -66,7 +66,7 @@
       thinkpad = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hosts/thinkpad
+          ./configurations/linux/thinkpad
         ];
         specialArgs = {
           inherit inputs;
@@ -74,21 +74,22 @@
         };
       };
 
-      # offsite = nixpkgs.lib.nixosSystem {
-      #   system = "x86_64-linux";
-      #   modules = [
-      #     ./hosts/offsite
-      #   ];
-      #   specialArgs = {
-      #     inherit inputs;
-      #   };
-      # };
+      offsite = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./configurations/linux/offline
+        ];
+        specialArgs = {
+          inherit inputs;
+          useDarwinModule = false;
+        };
+      };
     };
 
     darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
       system = "aarch64-darwin";
       modules = [
-        ./hosts/macbook
+        ./configurations/darwin/work-macbook.nix
       ];
       specialArgs = {
         inherit inputs;
