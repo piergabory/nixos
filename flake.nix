@@ -56,7 +56,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/workstation
-          ./configuration.nix
         ];
         specialArgs = {
           inherit inputs;
@@ -68,7 +67,6 @@
         system = "x86_64-linux";
         modules = [
           ./hosts/thinkpad
-          ./configuration.nix
         ];
         specialArgs = {
           inherit inputs;
@@ -80,7 +78,6 @@
       #   system = "x86_64-linux";
       #   modules = [
       #     ./hosts/offsite
-      #     ./configuration.nix
       #   ];
       #   specialArgs = {
       #     inherit inputs;

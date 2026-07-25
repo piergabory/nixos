@@ -9,6 +9,8 @@ with lib;
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
     ./hardware-configuration.nix
+    ../../modules
+    ../../configuration.nix
   ];
 
   config = {
@@ -18,6 +20,8 @@ with lib;
       audio.enable = true;
       bluetooth.enable = true;
     };
+
+    home-manager.managed-users = [ "piergabory" "root" ];
 
     home-manager.users."piergabory" = {
       programs = {

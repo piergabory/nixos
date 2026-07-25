@@ -1,5 +1,6 @@
 {
   imports = [
+    ./secrets
     ./homelab.nix
   ];
 

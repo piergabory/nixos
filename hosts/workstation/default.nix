@@ -1,12 +1,16 @@
 {
   imports = [
+    ../../modules
     ./graphics-card.nix
     ./hardware-configuration.nix
     ./niri.nix
     ./rsync.nix
+    ../../configuration.nix
   ];
 
   config = {
+    home-manager.managed-users = [ "piergabory" "root" ];
+
     networking = {
       hostName = "workstation";
       networkmanager.dns = "none";
