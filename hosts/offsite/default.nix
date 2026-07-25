@@ -15,6 +15,8 @@
       syncthing.enable = true;
     };
 
-    home-manager.managed-users = [ "piergabory" "root" ];
+    pierre.enable = true;
+
+    home-manager.managed-users = [ "root" ];
   };
 }

@@ -21,7 +21,8 @@ with lib;
       bluetooth.enable = true;
     };
 
-    home-manager.managed-users = [ "piergabory" "root" ];
+    home-manager.managed-users = [ "root" ];
+    pierre.enable = true;
 
     home-manager.users."piergabory" = {
       programs = {

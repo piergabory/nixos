@@ -19,10 +19,9 @@
     ];
   };
 
-  users.users.pgabory = {
-    name = "pgabory";
+  pierre = {
+    enable = true;
+    username = "pgabory";
     home = "/Users/pgabory";
   };
-
-  home-manager.managed-users = [ "pgabory" ];
 }

@@ -11,6 +11,6 @@
     ./scanner.nix
     ./shell.nix
     ./stylix.nix
-    ./users.nix
+    ./pierre.nix
   ];
 }
