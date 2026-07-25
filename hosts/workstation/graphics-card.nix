@@ -1,5 +1,4 @@
-{ config, lib, pkgs, ... }:
-
+{ config, ... }:
 {
   services.xserver.videoDrivers = [ "nvidia" ];
 
@@ -13,8 +12,6 @@
       package = config.boot.kernelPackages.nvidiaPackages.legacy_535;
     };
   };
-
-  home-manager.users."piergabory".programs.btop.package = lib.mkForce pkgs.btop-cuda;
 
   environment.etc."nvidia/nvidia-application-profiles-rc.d/50-limit-free-buffer-pool-in-wayland-compositors.json".text =
     ''

@@ -10,14 +10,7 @@ in {
   ];
 
   config = {
-    home = {
-      stateVersion = "26.05";
-      homeDirectory = (
-        if cfg.username == "root"
-        then "/root"
-        else "/home/${cfg.username}"
-      );
-    };
+    home.stateVersion = "26.05";
 
     stylix = {
       enable = true;

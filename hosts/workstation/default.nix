@@ -9,7 +9,8 @@
   ];
 
   config = {
-    home-manager.managed-users = [ "piergabory" "root" ];
+    pierre.enable = true;
+    home-manager.managed-users = [ "root" ];
 
     networking = {
       hostName = "workstation";
@@ -45,11 +46,6 @@
       matchConfig.MACAddress = "34:5a:60:ea:c7:d6";
       linkConfig.Name = "eth0";
     };
-
-    users.users.piergabory.openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5tBVh+IFkng8sPxKroP3EZ9LfIC+Q2A9W8wOnDKJUV piergabory@thinkpad"
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFsc6h97lG4SHJTnmUzbmcbaIXU8O/NstwxP6WkvC+G pgabory@FR318LM015.local"
-    ];
 
     console.keyMap = "us";
 
