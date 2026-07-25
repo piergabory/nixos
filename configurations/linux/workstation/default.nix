@@ -1,17 +1,13 @@
 {
   imports = [
-    ../../modules
+    ../linux.nix
     ./graphics-card.nix
     ./hardware-configuration.nix
     ./niri.nix
     ./rsync.nix
-    ../../configuration.nix
   ];
 
   config = {
-    pierre.enable = true;
-    home-manager.managed-users = [ "root" ];
-
     networking = {
       hostName = "workstation";
       networkmanager.dns = "none";
@@ -33,12 +29,7 @@
       cpuFreqGovernor = "performance";
     };
 
-    swapDevices = [
-      {
-        device = "/var/swapfile";
-        size = 32768; # 32 GB
-      }
-    ];
+
 
     # Pin the ethernet NIC to a stable name by MAC address,
     # immune to PCIe bus renumbering (e.g. adding/removing NVMe drives).
