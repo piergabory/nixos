@@ -1,4 +1,4 @@
-{ inputs, config, lib, pkgs, ... }:
+{ inputs, config, lib, ... }:
 with lib;
 
 let
@@ -28,9 +28,5 @@ in {
       programs.niri.enable = true;
       services.mako.enable = true;
     };
-
-    environment.systemPackages = with pkgs; [
-      swaybg
-    ];
   };
 }
