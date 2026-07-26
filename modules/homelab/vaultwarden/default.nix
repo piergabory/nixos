@@ -2,7 +2,7 @@
 with lib;
 
 let
-  domain = config.modules.homelab.domain;
+  lab = config.modules.homelab;
   cfg = config.services.vaultwarden;
 in {
   imports = [
@@ -15,7 +15,7 @@ in {
       environmentFile = "/var/lib/vaultwarden/vaultwarden.env";
 
       config = {
-        DOMAIN = "https://vault.${domain}";
+        DOMAIN = "https://vault.${lab.domain}";
 
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
@@ -23,12 +23,12 @@ in {
         SMTP_HOST = "127.0.0.1";
         SMTP_PORT = 25;
         SMTP_SSL = false;
-        SMTP_FROM = "home_lab@${domain}";
-        SMTP_FROM_NAME = "pierr.re vaultwarden server";
+        SMTP_FROM = lab.email;
+        SMTP_FROM_NAME = "${lab.domain} vaultwarden server";
       };
     };
 
-    services.nginx.virtualHosts."vault.${domain}" = {
+    services.nginx.virtualHosts."vault.${lab.domain}" = {
       forceSSL = true;
       enableACME = true;
       locations."/" = {

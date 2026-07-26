@@ -36,7 +36,8 @@ in {
       '';
     };
 
-    # TODO: is this necessary? the ports should be opened by the service
-    networking.firewall.allowedTCPPorts = [ 25565 ];
+    networking.firewall.allowedTCPPorts = [
+      cfg.serverProperties.server-port
+    ];
   };
 }
