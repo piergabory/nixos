@@ -18,7 +18,6 @@ with pkgs;
       signal-desktop
       slack
       telegram-desktop
-      whatsapp-electron
       gimp-with-plugins
       darktable
     ];
