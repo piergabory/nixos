@@ -6,7 +6,7 @@
   ];
 
   config.age.secrets.radicale-admin = {
-    file = ./radicale/admin.age;
+    file = ./admin.age;
     owner = "radicale";
   };
 }
