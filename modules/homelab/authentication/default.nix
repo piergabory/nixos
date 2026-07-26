@@ -19,7 +19,7 @@ in {
       type = types.str;
       default = "auth.${cfg.domain}";
     };
-    email = mkOptions {
+    email = mkOption {
       type = types.str;
       default = "auth@${cfg.domain}";
     };
