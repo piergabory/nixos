@@ -7,20 +7,16 @@ let
 in {
   config = mkIf cfg.enable {
     services.jellyfin = {
-      user = "piergabory"; # TODO FIXME use default jellyfin user
-      group = "users";
-
       dataDir = "/storage/jellyfin";
       configDir = "/srv/jellyfin";
       logDir = "/srv/jellyfin/logs";
       cacheDir = "/tmp/jellyfin";
-    };
 
-    # TODO: Is this necessary?
-    # Force Jellyfin to use integrated GPU (GPU 1) instead of discrete GPU (GPU 0)
-    # HIP_VISIBLE_DEVICES accepts device index (0, 1, 2, etc) or "all"
-    systemd.services.jellyfin.environment = {
-      HIP_VISIBLE_DEVICES = "1";
+      hardwareAcceleration = {
+        enable = true;
+        type = "nvenc";
+        device = "/dev/dri/by-path/pci-0000:01:00.0-render";
+      };
     };
 
     services.nginx.virtualHosts."jelly.${domain}" = {

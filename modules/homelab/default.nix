@@ -28,6 +28,10 @@ in {
     domain = mkOption {
       type = types.str;
     };
+    email = mkOption {
+      type = types.str;
+      default = "home_lab@${cfg.domain}";
+    };
   };
 
   config = mkIf cfg.enable {
@@ -48,6 +52,7 @@ in {
       authentication = {
         enable = true;
         domain = cfg.domain;
+        email = cfg.email;
       };
 
       hass-container = {

@@ -19,6 +19,10 @@ in {
       type = types.str;
       default = "auth.${cfg.domain}";
     };
+    email = mkOptions {
+      type = types.str;
+      default = "auth@${cfg.domain}";
+    };
   };
 
   config = mkIf cfg.enable {
