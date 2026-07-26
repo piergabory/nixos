@@ -12,10 +12,15 @@ with lib;
       obsidian.enable = true;
       btop.enable = true;
       rmpc.enable = true;
+      zapzap.enable = true;
 
       thunderbird = {
         enable = true;
-        languagePacks = [ "en-US" "en-UK" "fr" ];
+        languagePacks = [
+          "en-US"
+          "en-UK"
+          "fr"
+        ];
       };
 
       foot = mkIf pkgs.stdenv.isLinux {

@@ -1,5 +1,6 @@
 { lib, pkgs, ... }:
-with lib; with pkgs;
+with lib;
+with pkgs;
 {
   config = {
     home.packages = mkIf stdenv.isLinux [
@@ -18,7 +19,6 @@ with lib; with pkgs;
       slack
       telegram-desktop
       whatsapp-electron
-      authelia
       gimp-with-plugins
       darktable
     ];
