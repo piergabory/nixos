@@ -10,7 +10,17 @@ with lib;
     programs = {
       obsidian.enable = true;
       btop.enable = true;
-      zapzap.enable = true;
+      zapzap = {
+        enable = true;
+        package = pkgs.symlinkJoin {
+          name = "zapzap-wayland";
+          paths = [ pkgs.zapzap ];
+          nativeBuildInputs = [ pkgs.makeWrapper ];
+          postBuild = ''
+            wrapProgram $out/bin/zapzap --set QT_QPA_PLATFORM wayland
+          '';
+        };
+      };
 
       thunderbird = {
         enable = true;
