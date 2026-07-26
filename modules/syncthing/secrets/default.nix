@@ -1,12 +1,23 @@
-{ inputs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  ...
+}:
+with lib;
 
+let
+  cfg = config.services.syncthing;
+in
 {
   imports = [
     inputs.agenix.nixosModules.default
   ];
 
-  config.age.secrets.syncthing-gui = {
+  config = mkIf cfg.enable {
+    age.secrets.syncthing-gui = {
       file = ./gui.age;
       owner = "piergabory";
+    };
   };
 }
