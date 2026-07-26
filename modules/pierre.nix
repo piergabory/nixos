@@ -46,7 +46,9 @@ in
       cfg.username
     ];
 
-    time.timeZone = "Europe/Paris";
+    time.timeZone = mkDefault "Europe/Paris";
+
+    console.keyMap = mkDefault "fr";
 
     i18n = {
       defaultLocale = "en_US.UTF-8";

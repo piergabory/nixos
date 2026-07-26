@@ -11,9 +11,9 @@ in {
       postmasterAlias = lab.email;
 
       settings.main = {
-        inherit domain;
+        domain = lab.domain;
         hostname = "mail.${lab.domain}";
-        myorigin = domain;
+        myorigin = lab.domain;
 
         relayhost = [ "[smtp.mail.me.com]:587" ];
         inet_interfaces = "loopback-only";
