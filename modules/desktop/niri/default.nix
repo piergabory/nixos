@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   imports = [
     ./binds.nix
@@ -14,7 +16,7 @@
       spawn-at-startup = [
         { argv = [ "waybar" ]; }
         { argv = ["foot" "--server"]; }
-        { argv = [ "swaybg" "-i" "/etc/nixos/wallpaper.jpeg" ]; } # TODO use path
+        { argv = [ "swaybg" "-i" "${../../../assets/house.jpg}" ]; }
       ];
 
       window-rules = [
@@ -33,5 +35,9 @@
         };
       };
     };
+
+    home.packages = with pkgs; [
+      swaybg
+    ];
   };
 }
