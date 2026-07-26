@@ -2,7 +2,6 @@
 with lib;
 {
   imports = [
-    ./beets.nix
     ./browser.nix
     ./packages.nix
   ];
@@ -11,7 +10,6 @@ with lib;
     programs = {
       obsidian.enable = true;
       btop.enable = true;
-      rmpc.enable = true;
       zapzap.enable = true;
 
       thunderbird = {
