@@ -1,12 +1,16 @@
-{ inputs, config, lib, ... }:
+{ inputs, config, lib, useDarwinModule, ... }:
 with lib;
 
 let
   cfg = config.home-manager;
 in {
   imports = [
-    inputs.home-manager.nixosModules.home-manager
-  ];
+    (
+	if useDarwinModule
+	then inputs.home-manager.darwinModules.home-manager
+	else inputs.home-manager.nixosModules.home-manager
+)
+];
 
   options.home-manager = with types; {
     managed-users = mkOption {
