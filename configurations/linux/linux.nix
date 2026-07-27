@@ -5,9 +5,15 @@
 
   config = {
     networking.networkmanager.enable = true;
+
     services = {
       openssh.enable = true;
       syncthing.enable = true;
+    };
+
+    boot.loader = {
+      systemd-boot.enable = true;
+      efi.canTouchEfiVariables = true;
     };
 
     # This value determines the NixOS release from which the default
