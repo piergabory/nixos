@@ -24,10 +24,12 @@ let
   };
 in
 {
-  home-manager.users.piergabory.programs.niri.settings.outputs = {
-    DP-3 = top;
-    DP-2 = bottom;
-    DP-6 = top;
-    DP-5 = bottom;
+  mainUser.homeConfiguration = {
+    programs.niri.settings.outputs = {
+      DP-3 = top;
+      DP-2 = bottom;
+      DP-6 = top;
+      DP-5 = bottom;
+    };
   };
 }

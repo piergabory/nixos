@@ -5,9 +5,9 @@ let
   cfg = config.services.minecraft-server;
 in {
    services.restic.backups.minecraft = mkIf cfg.enable {
-     inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+     inherit (config.services.backups) repository passwordFile pruneOpts;
      initialize = true;
-     timerConfig = config.piergabory.backups.timerConfig // {
+     timerConfig = config.services.backups.timerConfig // {
        OnCalendar = "03:00";
      };
      paths = [

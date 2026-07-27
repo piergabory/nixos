@@ -1,4 +1,7 @@
+{ config, ... }:
+
 let
+  homeDir = config.mainUser.homeDirectory;
   syncConfig = {
     settings = {
       archive = true;
@@ -7,7 +10,7 @@ let
       mkpath = true;
     };
 
-    user = "piergabory";
+    user = config.mainUser.username;
     group = "users";
 
     timerConfig = {
@@ -20,17 +23,17 @@ in {
     enable = true;
 
     jobs.documents = {
-      sources = [ "/home/piergabory/Documents/" ];
+      sources = [ "${homeDir}/Documents/" ];
       destination = "/storage/documents/";
     } // syncConfig;
 
     jobs.notes = {
-      sources = [ "/home/piergabory/Notes/" ];
+      sources = [ "${homeDir}/Notes/" ];
       destination = "/storage/backups/notes";
     } // syncConfig;
 
     jobs.music = {
-      sources = [ "/home/piergabory/Music/" ];
+      sources = [ "${homeDir}/Music/" ];
       destination = "/storage/jellyfin/music";
     } // syncConfig;
   };

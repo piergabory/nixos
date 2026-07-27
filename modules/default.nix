@@ -1,16 +1,18 @@
+{ isDarwin, lib, ... }:
+
 {
   imports = [
-    ./keyboards.nix
-    ./openssh.nix
-    ./homelab
+    ./user
+    ./shell.nix
+    ./stylix.nix
+  ] ++ lib.optionals (!isDarwin) [
     ./desktop
+    ./homelab
     ./syncthing
     ./audio.nix
     ./bluetooth.nix
-    ./home-manager.nix
-    ./scanner.nix
-    ./shell.nix
-    ./stylix.nix
-    ./pierre.nix
+    ./keyboards.nix
+    ./openssh.nix
+    ./photography.nix
   ];
 }

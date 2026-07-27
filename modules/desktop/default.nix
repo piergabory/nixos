@@ -8,28 +8,41 @@ in {
     enable = mkEnableOption "Graphical Destop Interface";
   };
 
-  config = mkIf cfg.enable {
-    services.displayManager = {
-      defaultSession = "niri";
-      gdm.enable = true;
-    };
-
-    programs.niri = {
-      enable = true;
-      package = inputs.niri.packages.${pkgs.system}.niri-unstable;
-    };
-    programs.xwayland.enable = true;
-
-    home-manager.users.piergabory = {
-      imports = [
+  config = mkMerge [
+    {
+      mainUser.homeConfiguration.imports = [
         inputs.niri.homeModules.niri
         ./niri
         ./waybar
       ];
+    }
+    (mkIf cfg.enable {
+      services.displayManager = {
+        defaultSession = "niri";
+        gdm.enable = true;
+      };
 
-      programs.waybar.enable = true;
-      programs.niri.enable = true;
-      services.mako.enable = true;
-    };
-  };
+      programs = {
+        niri = {
+          enable = true;
+          package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+        };
+        xwayland.enable = true;
+      };
+
+      mainUser.homeConfiguration = {
+        programs = {
+          niri = {
+            enable = true;
+            settings.input.keyboard.xkb = let xkb = config.services.xserver.xkb; in {
+              layout = xkb.layout;
+              variant = xkb.variant;
+            };
+          };
+          waybar.enable = true;
+        };
+        services.mako.enable = true;
+      };
+    })
+  ];
 }

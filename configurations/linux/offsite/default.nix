@@ -1,22 +1,10 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../modules
-    ../../linux.nix
+    ../linux.nix
   ];
 
   config = {
-    networking = {
-      hostName = "pierre-offsite-backup";
-    };
-
-    services = {
-      openssh.enable = true;
-      syncthing.enable = true;
-    };
-
-    pierre.enable = true;
-
-    home-manager.managed-users = [ "root" ];
+    networking.hostName = "pierre-offsite-backup";
   };
 }

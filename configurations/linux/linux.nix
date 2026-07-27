@@ -1,15 +1,14 @@
 {
   imports = [
-    ../nix.nix
-    ../../modules
+    ../default.nix
   ];
 
   config = {
     networking.networkmanager.enable = true;
-
-    home-manager.managed-users = [ "root" ];
-
-    pierre.enable = true;
+    services = {
+      openssh.enable = true;
+      syncthing.enable = true;
+    };
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
