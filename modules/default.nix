@@ -11,7 +11,6 @@
     ./syncthing
     ./audio.nix
     ./bluetooth.nix
-    ./keyboards.nix
     ./openssh.nix
     ./photography.nix
   ];

@@ -6,5 +6,6 @@
 
   config = {
     networking.hostName = "pierre-offsite-backup";
+    console.keyMap = "mac-fr";
   };
 }
