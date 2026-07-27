@@ -23,7 +23,7 @@ in {
       };
       "The Guardian" = {
         id = "theguardian";
-        url = "https://www.theguardian.com";
+        url = "https://www.theguardian.com/europe";
         position = position + 4;
       };
     };

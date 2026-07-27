@@ -8,17 +8,17 @@ in {
     pins = {
       "Nebula" = {
         id = "nebula";
-        url = "https://www.nebula.tv";
+        url = "https://www.nebula.tv/featured";
         position = position + 1;
       };
       "Youtube" = {
         id = "yt";
-        url = "https://www.youtube.com/subscriptions/";
+        url = "https://www.youtube.com/feed/subscriptions";
         position = position + 2;
       };
       "Instagram" = {
         id = "instagram";
-        url = "https://www.instagram.com";
+        url = "https://www.instagram.com/?variant=following";
         position = position + 3;
       };
     };

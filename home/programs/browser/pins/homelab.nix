@@ -14,32 +14,32 @@ in {
       };
       "Home" = {
         id = "homelab_home_assistant";
-        url = "https://hass.${homelabDomain}";
+        url = "https://hass.${homelabDomain}/home/overview";
         position = position + 2;
       };
       "Photos" = {
         id = "homelab_photo_library";
-        url = "https://photos.${homelabDomain}";
+        url = "https://photos.${homelabDomain}/photos";
         position = position + 3;
       };
       "Jellyfin" = {
         id = "homelab_media_library";
-        url = "https://jelly.${homelabDomain}";
+        url = "https://jelly.${homelabDomain}/web/#/home";
         position = position + 4;
       };
       "Mastodon" = {
         id = "homelab_mastodon_instance";
-        url = "https://mas.${homelabDomain}";
+        url = "https://mas.${homelabDomain}/home";
         position = position + 5;
       };
       "Budget" = {
         id = "homelab_budgeting_tool";
-        url = "https://budget.${homelabDomain}";
+        url = "https://budget.${homelabDomain}/budget";
         position = position + 6;
       };
       "Location History" = {
         id = "homelab_location_history";
-        url = "https://geo.${homelabDomain}";
+        url = "https://geo.${homelabDomain}/map/v2";
         position = position + 7;
       };
       "Flights" = {
@@ -49,12 +49,12 @@ in {
       };
       "Auth" = {
         id = "homelab_oauth";
-        url = "https://auth.${homelabDomain}";
+        url = "https://auth.${homelabDomain}/settings";
         position = position + 9;
       };
       "CardDav/CalDav Server" = {
         id = "homelab_dav";
-        url = "https://dav.${homelabDomain}";
+        url = "https://dav.${homelabDomain}/radicale/.web/";
         position = position + 10;
       };
       "Home Page" = {

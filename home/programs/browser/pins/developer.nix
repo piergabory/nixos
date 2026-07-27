@@ -8,7 +8,7 @@ in {
     pins = {
       "Github" = {
         id = "github";
-        url = "https://www.github.com";
+        url = "https://github.com";
         position = position + 1;
       };
       "Nix Packages" = {
