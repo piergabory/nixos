@@ -1,34 +1,25 @@
-{ inputs, lib, pkgs, ... }:
+{ inputs, config, lib, pkgs, ... }:
 with lib;
 
-{
+let
+  cfg = config.programs.zen-browser;
+in {
   imports = [
     inputs.zen-browser.homeModules.beta
+    ./policies.nix
+    ./pins
   ];
 
-  config = {
+  config = mkIf cfg.enable {
     programs.zen-browser = {
-      enable = true;
       nativeMessagingHosts = mkIf pkgs.stdenv.isLinux [ pkgs.firefoxpwa ];
-
-      policies = {
-        AutofillAddressEnabled = true;
-        AutofillCreditCardEnabled = false;
-        DisableAppUpdate = true;
-        DisableFeedbackCommands = true;
-        DisableFirefoxStudies = true;
-        DisablePocket = true;
-        DisableTelemetry = true;
-        DontCheckDefaultBrowser = true;
-        NoDefaultBookmarks = true;
-        OfferToSaveLogins = false;
-      };
 
       profiles.default = {
         search = {
           force = true;
           default = "ddg"; # duck duck go
         };
+
         settings = {
           "browser.startup.homepage" = "https://hass.pierr.re";
           "browser.startup.page" = 1;

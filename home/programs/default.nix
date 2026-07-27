@@ -2,12 +2,12 @@
 with lib;
 {
   imports = [
-    ./browser.nix
-    ./packages.nix
+    ./browser
   ];
 
   config = {
     programs = {
+      zen-browser.enable = true;
       obsidian.enable = true;
       btop.enable = true;
 
@@ -43,5 +43,29 @@ with lib;
         };
       };
     };
+
+    home.packages = with pkgs; [
+      fastfetch
+      ragenix
+    ] ++ (
+      if stdenv.isLinux
+      then [
+        imv # image viewer for tiling managers
+        mpv # video player
+        parabolic # Youtube downloader
+        transmission_4-qt # Torrent client
+        beeper # Chat aggregator
+        clock-rs
+        unzip
+        parted
+        nautilus
+        signal-desktop
+        slack
+        telegram-desktop
+        gimp-with-plugins
+        darktable
+      ]
+      else [ ]
+    );
   };
 }
