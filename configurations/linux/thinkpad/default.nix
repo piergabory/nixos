@@ -9,7 +9,7 @@ with lib;
   imports = [
     inputs.nixos-hardware.nixosModules.lenovo-thinkpad-x1-7th-gen
     ../linux.nix
-    ./hardware-configuration.nix
+    ./hardware.nix
   ];
 
   config = {
