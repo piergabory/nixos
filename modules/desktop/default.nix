@@ -1,4 +1,4 @@
-{ inputs, config, lib, ... }:
+{ inputs, config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -14,7 +14,10 @@ in {
       gdm.enable = true;
     };
 
-    programs.niri.enable = true;
+    programs.niri = {
+      enable = true;
+      package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+    };
     programs.xwayland.enable = true;
 
     home-manager.users.piergabory = {
