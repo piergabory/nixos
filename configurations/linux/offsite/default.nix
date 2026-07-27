@@ -5,7 +5,8 @@
   ];
 
   config = {
-    networking.hostName = "pierre-offsite-backup";
+    networking.hostName = "offsite";
     console.keyMap = "mac-fr";
+    services.kmscon.enable = true;
   };
 }

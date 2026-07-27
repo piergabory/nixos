@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.openssh;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.openssh.settings = {
       PasswordAuthentication = false;
@@ -17,6 +18,7 @@ in {
     networking.firewall.allowedTCPPorts = [ 22 ];
 
     mainUser.userConfiguration.openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAICeVLwNdm/0gW57vMU2IUdxAyU/u5kDZAhbsUdw8Zzo/ piergabory@offsite"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAS22PG/XhizL2cKiWrofCG0YHltXgjz6gFJTzvyt1xo piergabory@workstation"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIO5tBVh+IFkng8sPxKroP3EZ9LfIC+Q2A9W8wOnDKJUV piergabory@thinkpad"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPFsc6h97lG4SHJTnmUzbmcbaIXU8O/NstwxP6WkvC+G pgabory@FR318LM015.local"
