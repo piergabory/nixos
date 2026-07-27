@@ -59,7 +59,7 @@
         ];
         specialArgs = {
           inherit inputs;
-          useDarwinModule = false;
+          isDarwin = false;
         };
       };
 
@@ -70,20 +70,20 @@
         ];
         specialArgs = {
           inherit inputs;
-          useDarwinModule = false;
+          isDarwin = false;
         };
       };
 
-      offsite = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configurations/linux/offline
-        ];
-        specialArgs = {
-          inherit inputs;
-          useDarwinModule = false;
-        };
-      };
+      # offsite = nixpkgs.lib.nixosSystem {
+      #   system = "x86_64-linux";
+      #   modules = [
+      #     ./configurations/linux/offsite
+      #   ];
+      #   specialArgs = {
+      #     inherit inputs;
+      #     isDarwin = false;
+      #   };
+      # };
     };
 
     darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
@@ -93,7 +93,7 @@
       ];
       specialArgs = {
         inherit inputs;
-        useDarwinModule = true;
+        isDarwin = true;
       };
     };
   };

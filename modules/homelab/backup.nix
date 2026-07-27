@@ -5,7 +5,7 @@ let
 in
 
 {
-  options.piergabory.backups = {
+  options.services.backups = {
     repository = mkOption {
       type = types.str;
       default = "/storage/backups/restic/workstation";

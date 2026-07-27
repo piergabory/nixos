@@ -1,9 +1,9 @@
-{ inputs, lib, pkgs, useDarwinModule ? false, ... }:
+{ inputs, lib, pkgs, isDarwin ? false, ... }:
 
 {
   imports = with inputs.stylix; [
     (
-      if useDarwinModule
+      if isDarwin
       then darwinModules.stylix
       else nixosModules.stylix
     )

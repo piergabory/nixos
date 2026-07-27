@@ -5,10 +5,10 @@ let
   cfg = config.services.actual;
 in {
   services.restic.backups.actual = mkIf cfg.enable {
-    inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+    inherit (config.services.backups) repository passwordFile pruneOpts;
     initialize = true;
 
-    timerConfig = config.piergabory.backups.timerConfig // {
+    timerConfig = config.services.backups.timerConfig // {
       OnCalendar = "03:40";
     };
 

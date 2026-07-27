@@ -1,10 +1,15 @@
-{
+{ config, ... }: {
   imports = [
-    ../nix.nix
-    ../../modules/stylix.nix
-    ../../modules/home-manager.nix
-    ../../modules/pierre.nix
+    ../default.nix
   ];
 
-  system.stateVersion = 7;
+  config = {
+    mainUser.homeDirectory = "/Users/${config.mainUser.username}";
+
+    # This value determines the Nix-Darwin release from which the default
+    # settings for stateful data, like file locations and database versions
+    # on your system were taken. It‘s perfectly fine and recommended to leave
+    # this value at the release version of the first install of this system.
+    system.stateVersion = 7;
+  };
 }

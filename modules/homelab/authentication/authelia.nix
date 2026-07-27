@@ -57,7 +57,7 @@ let
   '';
 in
 {
-  options.piergabory.authelia = {
+  options.modules.oauth = {
     forwardAuthConfig = mkOption {
       type = types.lines;
       readOnly = true;
@@ -65,7 +65,7 @@ in
       description = ''
         nginx `extraConfig` snippet to drop into a protected location to gate it
         behind Authelia forward-auth. The enclosing vhost must also include
-        `config.piergabory.authelia.internalAuthLocation` in its server-level
+        `config.modules.oauth.internalAuthLocation` in its server-level
         `extraConfig`.
       '';
     };

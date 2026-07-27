@@ -3,9 +3,5 @@
     ./darwin.nix
   ];
 
-  pierre = {
-    enable = true;
-    username = "pgabory";
-    home = "/Users/pgabory";
-  };
+  mainUser.username = "pgabory";
 }

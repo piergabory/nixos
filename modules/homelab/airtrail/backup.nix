@@ -6,9 +6,9 @@ let
 in {
   config = mkIf cfg.enable {
     services.restic.backups.airtrail = {
-      inherit (config.piergabory.backups) repository passwordFile pruneOpts;
+      inherit (config.services.backups) repository passwordFile pruneOpts;
       initialize = true;
-      timerConfig = config.piergabory.backups.timerConfig // {
+      timerConfig = config.services.backups.timerConfig // {
         OnCalendar = "04:20";
       };
       paths = [

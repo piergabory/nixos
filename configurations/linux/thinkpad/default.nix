@@ -14,27 +14,32 @@ with lib;
 
   config = {
     modules = {
-      filmScanning.enable = true;
       graphicalDesktop.enable = true;
       audio.enable = true;
       bluetooth.enable = true;
     };
 
-    home-manager.users."piergabory" = {
-      programs = {
-        waybar = {
-          enableStatusWidgets = true;
-          showBattery = true;
-          settings.primary.height = lib.mkForce 20;
-        };
-        niri.settings = {
-          input.keyboard.xkb.layout = "fr";
+    services = {
+      logind.settings.Login = {
+        HandlePowerKey = "poweroff";
+        HandleLidSwitch = "hibernate";
+        HandleLidSwitchExternalPower = "lock";
+        HandleLidSwitchDocked = "ignore";
+      };
 
-          layout = {
-            struts.top = lib.mkForce (-10);
-            gaps = lib.mkForce 10;
-          };
-        };
+      thermald.enable = true;
+      fprintd.enable = true;
+    };
+
+    mainUser.homeConfiguration.programs = {
+      waybar = {
+        enableStatusWidgets = true;
+        showBattery = true;
+        settings.primary.height = lib.mkForce 20;
+      };
+      niri.settings.layout = {
+        struts.top = lib.mkForce (-10);
+        gaps = lib.mkForce 10;
       };
     };
 
@@ -55,21 +60,6 @@ with lib;
     };
 
     networking.hostName = "thinkpad";
-
-    services = {
-      logind.settings.Login = {
-        HandlePowerKey = "poweroff";
-        HandleLidSwitch = "hibernate";
-        HandleLidSwitchExternalPower = "lock";
-        HandleLidSwitchDocked = "ignore";
-      };
-
-      thermald.enable = true;
-      fprintd.enable = true;
-      xserver.xkb.layout = "fr";
-      openssh.enable = true;
-      syncthing.enable = true;
-    };
 
     powerManagement.powertop.enable = true;
 
