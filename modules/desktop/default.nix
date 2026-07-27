@@ -1,48 +1,55 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.modules.graphicalDesktop;
-in {
+in
+{
   options.modules.graphicalDesktop = {
     enable = mkEnableOption "Graphical Destop Interface";
   };
 
-  config = mkMerge [
-    {
-      mainUser.homeConfiguration.imports = [
+  config = mkIf cfg.enable {
+    services.displayManager = {
+      defaultSession = "niri";
+      gdm.enable = true;
+    };
+
+    programs = {
+      niri = {
+        enable = true;
+        package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
+      };
+      xwayland.enable = true;
+    };
+
+    mainUser.homeConfiguration = {
+      imports = [
         inputs.niri.homeModules.niri
         ./niri
         ./waybar
       ];
-    }
-    (mkIf cfg.enable {
-      services.displayManager = {
-        defaultSession = "niri";
-        gdm.enable = true;
-      };
-
       programs = {
         niri = {
           enable = true;
-          package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
-        };
-        xwayland.enable = true;
-      };
-
-      mainUser.homeConfiguration = {
-        programs = {
-          niri = {
-            enable = true;
-            settings.input.keyboard.xkb = let xkb = config.services.xserver.xkb; in {
+          settings.input.keyboard.xkb =
+            let
+              xkb = config.services.xserver.xkb;
+            in
+            {
               layout = xkb.layout;
               variant = xkb.variant;
             };
-          };
-          waybar.enable = true;
         };
-        services.mako.enable = true;
+        waybar.enable = true;
       };
-    })
-  ];
+      services.mako.enable = true;
+    };
+  };
 }

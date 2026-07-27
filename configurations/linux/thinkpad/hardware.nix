@@ -13,15 +13,13 @@
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
 
-  config = {
-    boot = {
-      initrd = {
-        availableKernelModules = [
-          "xhci_pci"
-          "nvme"
-        ];
-        kernelModules = [ ];
-      };
+  boot = {
+    initrd = {
+      availableKernelModules = [
+        "xhci_pci"
+        "nvme"
+      ];
+      kernelModules = [ ];
     };
 
     kernelModules = [ "kvm-intel" ];
