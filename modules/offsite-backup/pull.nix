@@ -51,12 +51,15 @@ let
   # so any `Host *` block in root's dotfiles silently overrides a system-wide
   # setting. home-manager writes exactly such a block. Forcing -F here makes
   # these services depend only on the Nix store.
-  #
-  # Named `ssh` and placed at the front of the unit PATH because restic's sftp
-  # backend shells out to whichever `ssh` it finds there.
   sshWrapper = pkgs.writeShellScriptBin "ssh" ''
     exec ${pkgs.openssh}/bin/ssh -F ${sshConfig} "$@"
   '';
+
+  # restic's sftp backend shells out to `ssh`, but the nixpkgs wrapper prefixes
+  # PATH with its own openssh, so the wrapper above can never win by ordering.
+  # Name the command explicitly instead. Only the source repository uses sftp;
+  # the replica is a local path, so this cannot affect it.
+  sftpCommand = "${sshWrapper}/bin/ssh ${sourceAlias} -s sftp";
 
   sourceRepository = "sftp:${sourceAlias}:${cfg.source.path}";
 
@@ -127,6 +130,7 @@ in
         # retention policy expires them.
         ${restic} -r ${cfg.repository} \
           --password-file ${cfg.passwordFile} \
+          -o sftp.command="${sftpCommand}" \
           copy \
           --from-repo ${sourceRepository} \
           --from-password-file ${cfg.passwordFile}
