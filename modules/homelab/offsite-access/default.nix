@@ -6,6 +6,10 @@ let
   backups = config.services.backups;
 in
 {
+  imports = [
+    ./deadman.nix
+  ];
+
   options.modules.homelab.offsiteAccess = {
     enable = mkEnableOption "Allow an offsite replica to pull the backup repository";
 
@@ -21,6 +25,15 @@ in
       description = "Unprivileged account the offsite host uses to open its reverse SSH tunnel.";
     };
 
+    reportUser = mkOption {
+      type = types.str;
+      default = "offsitereport";
+      description = ''
+        Unprivileged account the offsite host uses to record a successful
+        replication. Its only permitted command records a timestamp.
+      '';
+    };
+
     tunnelPort = mkOption {
       type = types.port;
       default = 2222;
@@ -33,7 +46,7 @@ in
     authorizedKeys = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "Public keys of the offsite host, granted both roles.";
+      description = "Public keys of the offsite host, granted its roles.";
     };
 
     repositoryPath = mkOption {
@@ -65,11 +78,12 @@ in
 
     users.groups.${cfg.tunnelUser} = { };
 
-    # AllowUsers defaults to the main user only, which would reject both of
-    # these accounts before their Match blocks are ever consulted.
+    # AllowUsers defaults to the main user only, which would reject these
+    # accounts before their Match blocks are ever consulted.
     services.openssh.settings.AllowUsers = [
       cfg.replicaUser
       cfg.tunnelUser
+      cfg.reportUser
     ];
 
     services.openssh.extraConfig = ''

@@ -24,6 +24,10 @@ with lib;
       };
 
       dataDisk.device = "/dev/disk/by-uuid/e1059cfd-c775-472d-aa75-b475011fb8df";
+
+      # Temporary, for the shakedown period while the machine is still here.
+      # Restore to the weekly default before it leaves.
+      schedule.onCalendar = "hourly";
     };
   };
 }

@@ -20,7 +20,7 @@ in {
     ./secrets
     ./vaultwarden
     ./backup.nix
-    ./offsite-access.nix
+    ./offsite-access
     ./postfix.nix
   ];
 

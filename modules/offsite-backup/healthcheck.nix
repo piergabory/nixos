@@ -26,25 +26,45 @@ let
   };
 in
 {
-  config = mkIf (cfg.enable && cfg.healthcheck.enable) {
-    # A backup that stops running silently is indistinguishable from one that
-    # works. The monitor alerts on the absence of a ping, which also covers the
-    # cases where this machine is unplugged, offline, or dead.
-    systemd.services.offsite-healthcheck-success = pingUnit "success" "";
-    systemd.services.offsite-healthcheck-failure = pingUnit "failure" cfg.healthcheck.failSuffix;
+  config = mkMerge [
+    # Report success back to the home-lab, which raises the alarm if reports
+    # stop arriving. Unlike a failure notification sent from here, this also
+    # catches the machine being unplugged, offline, or dead.
+    (mkIf (cfg.enable && cfg.report.enable) {
+      systemd.services.offsite-backup-report = {
+        description = "Record a successful replication with the home-lab";
 
-    systemd.services.offsite-backup-pull = {
-      onSuccess = [ "offsite-healthcheck-success.service" ];
-      onFailure = [ "offsite-healthcheck-failure.service" ];
-    };
+        serviceConfig = {
+          Type = "oneshot";
+          # The far end forces its own command, so nothing here is trusted to
+          # choose what runs. Retry briefly: a report lost to a flaky link
+          # would otherwise look like a failure a few days later.
+          ExecStart = "${cfg.sshWrapper}/bin/ssh -o ConnectTimeout=30 ${cfg.report.alias} true";
+          Restart = "on-failure";
+          RestartSec = "5m";
+        };
 
-    systemd.services.offsite-backup-check.onFailure = [ "offsite-healthcheck-failure.service" ];
+        unitConfig.StartLimitBurst = 5;
+      };
 
-    # An ageing spinning disk is the weakest component here; route its
-    # complaints to the same place as everything else.
-    services.smartd = {
-      enable = mkDefault true;
-      notifications.systembus-notify.enable = mkDefault false;
-    };
-  };
+      systemd.services.offsite-backup-pull.onSuccess = [ "offsite-backup-report.service" ];
+    })
+
+    (mkIf (cfg.enable && cfg.healthcheck.enable) {
+      systemd.services.offsite-healthcheck-success = pingUnit "success" "";
+      systemd.services.offsite-healthcheck-failure = pingUnit "failure" cfg.healthcheck.failSuffix;
+
+      systemd.services.offsite-backup-pull = {
+        onSuccess = [ "offsite-healthcheck-success.service" ];
+        onFailure = [ "offsite-healthcheck-failure.service" ];
+      };
+
+      systemd.services.offsite-backup-check.onFailure = [ "offsite-healthcheck-failure.service" ];
+    })
+
+    (mkIf cfg.enable {
+      # An ageing spinning disk is the weakest component here.
+      services.smartd.enable = mkDefault true;
+    })
+  ];
 }
