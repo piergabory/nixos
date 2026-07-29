@@ -30,6 +30,10 @@ in
       unitConfig = mountCondition;
       serviceConfig = resticEnv;
 
+      # Long-running oneshot: never let a rebuild block on it. See pull.nix.
+      restartIfChanged = false;
+      stopIfChanged = false;
+
       script = ''
         set -euo pipefail
         ${restic} -r ${cfg.repository} \
@@ -42,6 +46,10 @@ in
       description = "Verify the integrity of the replicated backup repository";
       unitConfig = mountCondition;
       serviceConfig = resticEnv;
+
+      # Long-running oneshot: never let a rebuild block on it. See pull.nix.
+      restartIfChanged = false;
+      stopIfChanged = false;
 
       # Re-hashes a rotating fraction of the pack files. On an ageing drive,
       # silent corruption is otherwise only discovered during a restore, which
