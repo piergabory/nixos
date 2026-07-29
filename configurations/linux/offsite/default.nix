@@ -1,6 +1,3 @@
-{ lib, ... }:
-with lib;
-
 {
   imports = [
     ./hardware.nix
@@ -11,7 +8,10 @@ with lib;
     networking.hostName = "offsite";
     console.keyMap = "mac-fr";
     services.kmscon.enable = true;
-    services.syncthing.enable = mkForce false;
+    systemd.services.syncthing.serviceConfig = {
+      StateDirectory = "syncthing";
+      StateDirectoryMode = "0700";
+    };
 
     modules.offsiteBackup = {
       enable = true;
