@@ -5,6 +5,10 @@ let
   domain = config.modules.homelab.domain;
   cfg = config.services.jellyfin;
 in {
+  imports = [
+    ./backup.nix
+  ];
+
   config = mkIf cfg.enable {
     services.jellyfin = {
       dataDir = "/storage/jellyfin";

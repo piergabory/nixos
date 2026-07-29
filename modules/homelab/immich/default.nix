@@ -5,6 +5,10 @@ let
   domain = config.modules.homelab.domain;
   cfg = config.services.immich;
 in {
+  imports = [
+    ./backup.nix
+  ];
+
   config = mkIf cfg.enable {
     services.immich = {
       port = 2283;

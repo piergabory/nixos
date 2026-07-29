@@ -10,16 +10,17 @@ in {
     ./budget
     ./dawarich
     ./home-assistant
+    ./immich
+    ./jellyfin
     ./mastodon
     ./minecraft-server
+    ./nginx
     ./pihole
     ./radicale
     ./secrets
     ./vaultwarden
     ./backup.nix
-    ./immich.nix
-    ./jellyfin.nix
-    ./nginx.nix
+    ./offsite-access.nix
     ./postfix.nix
   ];
 
@@ -65,6 +66,13 @@ in {
           21067 # HomeKit Lights
         ];
       };
+    };
+
+    modules.homelab.offsiteAccess = {
+      enable = true;
+      authorizedKeys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd4F5DU/rs1rpNbPB3BX5OXGgIUzT+qgXf6sloq6ns1 offsite-backup-pull"
+      ];
     };
   };
 }
