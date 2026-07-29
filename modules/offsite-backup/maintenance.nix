@@ -10,6 +10,11 @@ let
     TimeoutStartSec = "infinity";
     Nice = 15;
     IOSchedulingClass = "idle";
+
+    # systemd units start with no HOME, and restic refuses to run without
+    # somewhere to put its cache.
+    CacheDirectory = "offsite-backup";
+    Environment = [ "RESTIC_CACHE_DIR=/var/cache/offsite-backup" ];
   };
 
   mountCondition = optionalAttrs (cfg.dataDisk.device != null) {
