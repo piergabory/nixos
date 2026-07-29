@@ -260,5 +260,13 @@ in
         message = "modules.offsiteBackup.source.hostKey must be set so the source can be authenticated unattended.";
       }
     ];
+
+    # Swap belongs to the host's hardware configuration, not here, but restic
+    # is memory-hungry when indexing a repository of this size and the machines
+    # this runs on tend to be old and small.
+    warnings = optional (config.swapDevices == [ ]) ''
+      modules.offsiteBackup is enabled but no swap is configured. restic may be
+      killed by the OOM reaper while pruning a large repository.
+    '';
   };
 }
