@@ -6,6 +6,7 @@ let
 in {
   imports = [
     ./pihole-ftl.nix
+    ./backup.nix
   ];
 
   options.services.pihole = {

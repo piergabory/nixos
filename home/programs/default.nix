@@ -3,6 +3,7 @@ with lib;
 {
   imports = [
     ./browser
+    ./ssh.nix
   ];
 
   config = {

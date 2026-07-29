@@ -8,6 +8,7 @@
   ] ++ lib.optionals (!isDarwin) [
     ./desktop
     ./homelab
+    ./offsite-backup
     ./syncthing
     ./audio.nix
     ./bluetooth.nix

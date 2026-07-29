@@ -5,6 +5,10 @@ let
   lab = config.modules.homelab;
   cfg = config.services.nginx;
 in {
+  imports = [
+    ./backup.nix
+  ];
+
   config = mkIf cfg.enable {
     security.acme = {
       acceptTerms = true;
