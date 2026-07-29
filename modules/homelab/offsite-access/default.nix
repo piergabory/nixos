@@ -7,7 +7,9 @@ let
 in
 {
   imports = [
+    ./report.nix
     ./deadman.nix
+    ./status-report.nix
   ];
 
   options.modules.homelab.offsiteAccess = {

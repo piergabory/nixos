@@ -11,6 +11,7 @@ in
     ./pull.nix
     ./maintenance.nix
     ./tunnel.nix
+    ./report.nix
     ./healthcheck.nix
     ./resilience.nix
   ];

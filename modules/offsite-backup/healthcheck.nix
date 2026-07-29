@@ -27,29 +27,9 @@ let
 in
 {
   config = mkMerge [
-    # Report success back to the home-lab, which raises the alarm if reports
-    # stop arriving. Unlike a failure notification sent from here, this also
-    # catches the machine being unplugged, offline, or dead.
-    (mkIf (cfg.enable && cfg.report.enable) {
-      systemd.services.offsite-backup-report = {
-        description = "Record a successful replication with the home-lab";
-
-        serviceConfig = {
-          Type = "oneshot";
-          # The far end forces its own command, so nothing here is trusted to
-          # choose what runs. Retry briefly: a report lost to a flaky link
-          # would otherwise look like a failure a few days later.
-          ExecStart = "${cfg.sshWrapper}/bin/ssh -o ConnectTimeout=30 ${cfg.report.alias} true";
-          Restart = "on-failure";
-          RestartSec = "5m";
-        };
-
-        unitConfig.StartLimitBurst = 5;
-      };
-
-      systemd.services.offsite-backup-pull.onSuccess = [ "offsite-backup-report.service" ];
-    })
-
+    # Optional, and off by default: the home-lab already alerts on missing
+    # reports without depending on a third party. This exists for anyone who
+    # would rather not have the alarm depend on the machine being replicated.
     (mkIf (cfg.enable && cfg.healthcheck.enable) {
       systemd.services.offsite-healthcheck-success = pingUnit "success" "";
       systemd.services.offsite-healthcheck-failure = pingUnit "failure" cfg.healthcheck.failSuffix;
@@ -63,7 +43,8 @@ in
     })
 
     (mkIf cfg.enable {
-      # An ageing spinning disk is the weakest component here.
+      # An ageing spinning disk is the weakest component here, and its
+      # attributes are included in the periodic status report.
       services.smartd.enable = mkDefault true;
     })
   ];
