@@ -10,5 +10,10 @@ let
 in
 {
   "offsite-pull-key.age".publicKeys = keys;
+
+  # Only needed if modules.offsiteBackup.healthcheck is enabled, which it is
+  # not: the home-lab already alerts on missing reports without depending on a
+  # third party. The rule is kept so the file can be created with
+  # `ragenix -e offsite-healthcheck-url.age` should that ever change.
   "offsite-healthcheck-url.age".publicKeys = keys;
 }
