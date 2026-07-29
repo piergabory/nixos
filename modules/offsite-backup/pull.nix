@@ -118,12 +118,18 @@ in
       script = ''
         set -euo pipefail
 
-        if ! ${restic} -r ${cfg.repository} \
-              --password-file ${cfg.passwordFile} \
-              cat config > /dev/null 2>&1; then
+        # A plain file test rather than asking restic: the replica is a local
+        # path, and `restic cat config` reports failure for reasons unrelated
+        # to existence, which led to init being run against a repository that
+        # was already there.
+        if [ ! -e ${cfg.repository}/config ]; then
           echo "Replica does not exist yet, initialising it."
           ${restic} -r ${cfg.repository} --password-file ${cfg.passwordFile} init
         fi
+
+        # Fail loudly and early if the replica cannot be opened, rather than
+        # letting a password mismatch surface as an obscure copy error.
+        ${restic} -r ${cfg.repository} --password-file ${cfg.passwordFile} cat config > /dev/null
 
         # copy, not sync: snapshots already replicated are skipped, and
         # snapshots deleted upstream stay here until this machine's own
