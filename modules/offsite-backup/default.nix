@@ -224,29 +224,6 @@ in
         description = "Appended to the base URL when reporting a failure.";
       };
     };
-
-    autoUpgrade = {
-      enable = mkOption {
-        type = types.bool;
-        default = true;
-        description = ''
-          Track the flake and rebuild unattended. Without this, fixing anything
-          on a remote machine requires the tunnel to already be working.
-        '';
-      };
-
-      flake = mkOption {
-        type = types.str;
-        default = "github:piergabory/nixos#offsite";
-        description = "Flake reference to upgrade from.";
-      };
-
-      onCalendar = mkOption {
-        type = types.str;
-        default = "Mon 05:00";
-        description = "When to check for upgrades.";
-      };
-    };
   };
 
   config = mkIf cfg.enable {
