@@ -7,7 +7,7 @@ let
   sourceAlias = "offsite-backup-source";
   tunnelAlias = "offsite-backup-tunnel";
 
-  # Keyed on the alias rather than the hostname, so the pin survives the
+  # Keyed on the aliases rather than the hostname, so the pin survives this
   # machine moving between networks and the name resolving to a different
   # address at home than it does anywhere else.
   knownHosts = pkgs.writeText "offsite-known-hosts" ''
@@ -15,53 +15,75 @@ let
     ${tunnelAlias} ${cfg.source.hostKey}
   '';
 
+  sshConfig = pkgs.writeText "offsite-ssh-config" ''
+    Host ${sourceAlias}
+      HostName ${cfg.source.host}
+      Port ${toString cfg.source.port}
+      User ${cfg.source.user}
+      IdentityFile ${cfg.source.identityFile}
+      IdentitiesOnly yes
+      HostKeyAlias ${sourceAlias}
+      UserKnownHostsFile ${knownHosts}
+      GlobalKnownHostsFile /dev/null
+      StrictHostKeyChecking yes
+      BatchMode yes
+      ServerAliveInterval 30
+      ServerAliveCountMax 3
+
+    Host ${tunnelAlias}
+      HostName ${cfg.tunnel.host}
+      Port ${toString cfg.tunnel.port}
+      User ${cfg.tunnel.user}
+      IdentityFile ${cfg.source.identityFile}
+      IdentitiesOnly yes
+      HostKeyAlias ${tunnelAlias}
+      UserKnownHostsFile ${knownHosts}
+      GlobalKnownHostsFile /dev/null
+      StrictHostKeyChecking yes
+      BatchMode yes
+      ExitOnForwardFailure yes
+      ServerAliveInterval 30
+      ServerAliveCountMax 3
+  '';
+
+  # Deliberately not placed in /etc/ssh/ssh_config. OpenSSH reads the invoking
+  # user's ~/.ssh/config first and the first value obtained for a keyword wins,
+  # so any `Host *` block in root's dotfiles silently overrides a system-wide
+  # setting. home-manager writes exactly such a block. Forcing -F here makes
+  # these services depend only on the Nix store.
+  #
+  # Named `ssh` and placed at the front of the unit PATH because restic's sftp
+  # backend shells out to whichever `ssh` it finds there.
+  sshWrapper = pkgs.writeShellScriptBin "ssh" ''
+    exec ${pkgs.openssh}/bin/ssh -F ${sshConfig} "$@"
+  '';
+
   sourceRepository = "sftp:${sourceAlias}:${cfg.source.path}";
 
   restic = "${pkgs.restic}/bin/restic";
 in
 {
+  options.modules.offsiteBackup.sshWrapper = mkOption {
+    type = types.package;
+    internal = true;
+    default = sshWrapper;
+    description = "ssh pinned to the backup-specific configuration.";
+  };
+
   config = mkIf cfg.enable {
-    # Aliases rather than a plain `Host pierr.re` block: the latter would also
-    # rewrite interactive logins to the home-lab for every user on this machine.
-    programs.ssh.extraConfig = ''
-      Host ${sourceAlias}
-        HostName ${cfg.source.host}
-        Port ${toString cfg.source.port}
-        User ${cfg.source.user}
-        IdentityFile ${cfg.source.identityFile}
-        IdentitiesOnly yes
-        HostKeyAlias ${sourceAlias}
-        UserKnownHostsFile ${knownHosts}
-        StrictHostKeyChecking yes
-        BatchMode yes
-        ServerAliveInterval 30
-        ServerAliveCountMax 3
-
-      Host ${tunnelAlias}
-        HostName ${cfg.tunnel.host}
-        Port ${toString cfg.tunnel.port}
-        User ${cfg.tunnel.user}
-        IdentityFile ${cfg.source.identityFile}
-        IdentitiesOnly yes
-        HostKeyAlias ${tunnelAlias}
-        UserKnownHostsFile ${knownHosts}
-        StrictHostKeyChecking yes
-        BatchMode yes
-        ExitOnForwardFailure yes
-        ServerAliveInterval 30
-        ServerAliveCountMax 3
-    '';
-
     systemd.services.offsite-backup-pull = {
       description = "Replicate the home-lab backup repository";
 
       after = [
         "network-online.target"
-        "offsite-restore-guide.service"
+        "offsite-backup-storage.service"
       ];
       wants = [ "network-online.target" ];
+      requires = [ "offsite-backup-storage.service" ];
 
+      # Order matters: the wrapper must shadow the real ssh for restic.
       path = [
+        sshWrapper
         pkgs.openssh
         pkgs.restic
       ];
@@ -84,7 +106,9 @@ in
 
       unitConfig = {
         StartLimitIntervalSec = 0;
-      } // optionalAttrs (cfg.dataDisk.device != null) {
+      }
+      // optionalAttrs (cfg.dataDisk.device != null) {
+        RequiresMountsFor = cfg.dataDisk.mountPoint;
         ConditionPathIsMountPoint = cfg.dataDisk.mountPoint;
       };
 

@@ -19,7 +19,7 @@ in
       serviceConfig = {
         Type = "simple";
         ExecStart = concatStringsSep " " [
-          "${pkgs.openssh}/bin/ssh"
+          "${cfg.sshWrapper}/bin/ssh"
           "-N"
           "-o ExitOnForwardFailure=yes"
           "-R ${toString cfg.tunnel.remotePort}:127.0.0.1:22"

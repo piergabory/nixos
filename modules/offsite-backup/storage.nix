@@ -18,11 +18,11 @@ let
 
     - Repository: ./restic/workstation
     - Password:   ./restic-password.txt
-    - Binary:     ./restic  (statically usable on any x86_64 Linux)
+    - Binary:     ./restic-binary
 
     ## List what is available
 
-        ./restic -r ./restic/workstation --password-file ./restic-password.txt snapshots
+        ./restic-binary -r ./restic/workstation --password-file ./restic-password.txt snapshots
 
     Snapshots are tagged by service: immich, vaultwarden, radicale, authelia,
     actual, mastodon, dawarich, airtrail, jellyfin, pihole, nginx, minecraft,
@@ -30,7 +30,7 @@ let
 
     ## Restore one service
 
-        ./restic -r ./restic/workstation --password-file ./restic-password.txt \
+        ./restic-binary -r ./restic/workstation --password-file ./restic-password.txt \
             restore latest --tag vaultwarden --target /tmp/restored
 
     Files land under /tmp/restored with their original absolute paths, e.g.
@@ -49,7 +49,7 @@ let
 
     ## Verify the repository is intact
 
-        ./restic -r ./restic/workstation --password-file ./restic-password.txt check
+        ./restic-binary -r ./restic/workstation --password-file ./restic-password.txt check
   '';
 in
 {
@@ -67,13 +67,8 @@ in
       };
     };
 
-    systemd.tmpfiles.rules = [
-      "d ${mount} 0700 root root -"
-      "d ${mount}/restic 0700 root root -"
-    ];
-
-    # A 2013 Mac mini has little RAM, and restic's index for a repository this
-    # size does not comfortably fit in it during prune.
+    # A 2013 Mac mini has limited memory, and restic's index for a repository
+    # this size does not comfortably fit alongside a prune.
     swapDevices = [
       {
         device = "/var/swapfile";
@@ -81,11 +76,18 @@ in
       }
     ];
 
-    systemd.services.offsite-restore-guide = {
-      description = "Publish emergency restore instructions next to the replica";
+    # Deliberately not systemd.tmpfiles: those rules are applied early in boot,
+    # before /mnt/backup is mounted, which would create the directory tree on
+    # the root filesystem and then hide it under the mount.
+    systemd.services.offsite-backup-storage = {
+      description = "Prepare the replica disk and publish restore instructions";
       wantedBy = [ "multi-user.target" ];
       after = [ "local-fs.target" ];
-      unitConfig.ConditionPathIsMountPoint = mkIf (cfg.dataDisk.device != null) mount;
+
+      unitConfig = optionalAttrs (cfg.dataDisk.device != null) {
+        RequiresMountsFor = mount;
+        ConditionPathIsMountPoint = mount;
+      };
 
       serviceConfig = {
         Type = "oneshot";
@@ -93,9 +95,14 @@ in
       };
 
       script = ''
+        set -euo pipefail
+
+        install -d -m 0700 ${mount}
+        install -d -m 0700 ${mount}/restic
+
         install -m 0600 ${restoreGuide} ${mount}/RESTORE.md
         install -m 0600 ${cfg.passwordFile} ${mount}/restic-password.txt
-        install -m 0700 ${pkgs.restic}/bin/restic ${mount}/restic
+        install -m 0700 ${pkgs.restic}/bin/restic ${mount}/restic-binary
       '';
     };
   };
