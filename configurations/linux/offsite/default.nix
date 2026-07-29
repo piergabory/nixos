@@ -1,3 +1,6 @@
+{ lib, ... }:
+with lib;
+
 {
   imports = [
     ./hardware.nix
@@ -8,6 +11,7 @@
     networking.hostName = "offsite";
     console.keyMap = "mac-fr";
     services.kmscon.enable = true;
+    services.syncthing.enable = mkForce false;
 
     modules.offsiteBackup = {
       enable = true;
