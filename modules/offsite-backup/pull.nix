@@ -13,6 +13,7 @@ let
   knownHosts = pkgs.writeText "offsite-known-hosts" ''
     ${sourceAlias} ${cfg.source.hostKey}
     ${tunnelAlias} ${cfg.source.hostKey}
+    ${cfg.report.alias} ${cfg.source.hostKey}
   '';
 
   sshConfig = pkgs.writeText "offsite-ssh-config" ''
@@ -44,6 +45,18 @@ let
       ExitOnForwardFailure yes
       ServerAliveInterval 30
       ServerAliveCountMax 3
+
+    Host ${cfg.report.alias}
+      HostName ${cfg.source.host}
+      Port ${toString cfg.source.port}
+      User ${cfg.report.user}
+      IdentityFile ${cfg.source.identityFile}
+      IdentitiesOnly yes
+      HostKeyAlias ${cfg.report.alias}
+      UserKnownHostsFile ${knownHosts}
+      GlobalKnownHostsFile /dev/null
+      StrictHostKeyChecking yes
+      BatchMode yes
   '';
 
   # Deliberately not placed in /etc/ssh/ssh_config. OpenSSH reads the invoking

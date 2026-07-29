@@ -202,6 +202,32 @@ in
       };
     };
 
+    report = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Record every successful replication with the source host, which
+          raises the alarm if reports stop arriving. This detects the machine
+          being unplugged or offline, which a notification sent from here
+          cannot.
+        '';
+      };
+
+      user = mkOption {
+        type = types.str;
+        default = "offsitereport";
+        description = "Account on the source host permitted to record a report.";
+      };
+
+      alias = mkOption {
+        type = types.str;
+        default = "offsite-backup-report";
+        internal = true;
+        description = "ssh alias used for the report connection.";
+      };
+    };
+
     healthcheck = {
       enable = mkEnableOption "Ping an external monitor on replication success and failure";
 
