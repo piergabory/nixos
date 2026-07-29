@@ -22,7 +22,10 @@ in
           "${cfg.sshWrapper}/bin/ssh"
           "-N"
           "-o ExitOnForwardFailure=yes"
-          "-R ${toString cfg.tunnel.remotePort}:127.0.0.1:22"
+          # The bind address is spelled out on purpose. "-R port:host:hostport"
+          # sends an empty bind address, which does not match a PermitListen
+          # rule that names one, and the server then refuses the forward.
+          "-R 127.0.0.1:${toString cfg.tunnel.remotePort}:127.0.0.1:22"
           "offsite-backup-tunnel"
         ];
 

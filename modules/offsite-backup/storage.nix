@@ -89,6 +89,13 @@ in
         set -euo pipefail
 
         install -d -m 0700 ${mount}
+
+        # Earlier revisions installed the restic binary at this path, which is
+        # where the repository directory belongs. Clear it out if present.
+        if [ -f ${mount}/restic ]; then
+          rm -f ${mount}/restic
+        fi
+
         install -d -m 0700 ${mount}/restic
 
         install -m 0600 ${restoreGuide} ${mount}/RESTORE.md
