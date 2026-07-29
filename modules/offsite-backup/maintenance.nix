@@ -13,6 +13,7 @@ let
   };
 
   mountCondition = optionalAttrs (cfg.dataDisk.device != null) {
+    RequiresMountsFor = cfg.dataDisk.mountPoint;
     ConditionPathIsMountPoint = cfg.dataDisk.mountPoint;
   };
 in
