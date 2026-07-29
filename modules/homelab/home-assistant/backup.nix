@@ -28,5 +28,26 @@ in {
         };
       };
     };
+
+    # The rsync job above only moves Home Assistant's own archives onto the
+    # storage array. Without this they never enter the restic repository, and
+    # so would never reach the offsite replica.
+    services.restic.backups.home-assistant = {
+      inherit (config.services.backups) repository passwordFile pruneOpts;
+      initialize = true;
+
+      timerConfig = config.services.backups.timerConfig // {
+        OnCalendar = "04:30";
+      };
+
+      paths = [
+        "/storage/backups/homeassistant"
+      ];
+
+      extraBackupArgs = [
+        "--tag home-assistant"
+        "--one-file-system"
+      ];
+    };
   };
 }

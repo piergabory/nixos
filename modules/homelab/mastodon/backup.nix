@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -23,7 +23,9 @@ in {
         backupPrepareCommand = ''
           rm -rf /var/backup/restic/mastodon
           mkdir -p /var/backup/restic/mastodon
-          ${config.services.postgresql.package}/bin/pg_dump mastodon > /var/backup/restic/mastodon/mastodon.sql
+          ${pkgs.util-linux}/bin/runuser -u postgres \
+            -- ${config.services.postgresql.package}/bin/pg_dump mastodon \
+            > /var/backup/restic/mastodon/mastodon.sql
         '';
 
         extraBackupArgs = [
