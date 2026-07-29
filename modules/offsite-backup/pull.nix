@@ -90,6 +90,14 @@ in
     systemd.services.offsite-backup-pull = {
       description = "Replicate the home-lab backup repository";
 
+      # This is a Type=oneshot that can legitimately run for hours. Left to its
+      # default, nixos-rebuild would restart it on every switch and then block
+      # waiting for the copy to finish, which makes the machine impossible to
+      # update while it is working. The timer decides when it runs; a
+      # configuration change simply takes effect on the next run.
+      restartIfChanged = false;
+      stopIfChanged = false;
+
       after = [
         "network-online.target"
         "offsite-backup-storage.service"

@@ -94,6 +94,13 @@ in
       name: _:
       nameValuePair "restic-backups-${name}" {
         serviceConfig.UMask = "0027";
+
+        # These are Type=oneshot units that can run for hours; the Immich job
+        # takes most of a night. Restarting them on switch would make
+        # nixos-rebuild block until the backup finished. Their timers decide
+        # when they run, so a change takes effect on the next run.
+        restartIfChanged = false;
+        stopIfChanged = false;
       }
     ) config.services.restic.backups
     // {
@@ -101,6 +108,10 @@ in
       # exclusive lock, and it is wasted work to repeat it a dozen times a night.
       restic-prune = {
         description = "Expire and repack the backup repository";
+
+        # Long-running oneshot: never let a rebuild block on it.
+        restartIfChanged = false;
+        stopIfChanged = false;
 
         serviceConfig = {
           Type = "oneshot";
