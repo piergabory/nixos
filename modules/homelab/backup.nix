@@ -85,6 +85,15 @@ in
   config = {
     users.groups.${cfg.group} = { };
 
+    # Restoring is an emergency operation. Having to locate a Nix store path
+    # before you can read your own backups is the wrong thing to discover
+    # halfway through a disaster. sqlite is here for the same reason: half the
+    # services store their data in it, and a restore is worth verifying.
+    environment.systemPackages = [
+      pkgs.restic
+      pkgs.sqlite
+    ];
+
     # Restic runs as root. Without a relaxed umask the repository is only
     # readable by root, which defeats the point of a dedicated replica user.
     # 0027 grants the backup group read, but not write: replication has been
