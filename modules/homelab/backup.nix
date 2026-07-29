@@ -87,12 +87,13 @@ in
 
     # Restic runs as root. Without a relaxed umask the repository is only
     # readable by root, which defeats the point of a dedicated replica user.
-    # Combined with the setgid bit below, every new pack file lands in the
-    # backup group with group read/write.
+    # 0027 grants the backup group read, but not write: replication has been
+    # verified to work against a fully read-only source, so a compromised
+    # offsite machine cannot damage the originals it is copying from.
     systemd.services = mapAttrs' (
       name: _:
       nameValuePair "restic-backups-${name}" {
-        serviceConfig.UMask = "0007";
+        serviceConfig.UMask = "0027";
       }
     ) config.services.restic.backups
     // {
@@ -103,7 +104,7 @@ in
 
         serviceConfig = {
           Type = "oneshot";
-          UMask = "0007";
+          UMask = "0027";
           Nice = 15;
           IOSchedulingClass = "idle";
           TimeoutStartSec = "infinity";
@@ -139,12 +140,12 @@ in
     };
 
     systemd.tmpfiles.rules = [
-      # 0751 on the two parents: traversable, but not listable, by the
-      # replica user. /storage/backups/restic doubles as its SSH chroot, so it
-      # must stay root-owned and not writable by group or other.
+      # 0751 on the two parents: traversable, but not listable, by the replica
+      # user. The repository itself is setgid so new files inherit the backup
+      # group, and group-readable but not group-writable.
       "d /storage/backups 0751 root root -"
       "d /storage/backups/restic 0751 root root -"
-      "d /storage/backups/restic/workstation 2770 root ${cfg.group} -"
+      "d /storage/backups/restic/workstation 2750 root ${cfg.group} -"
       "d /var/backup/restic 0700 root root -"
     ];
   };

@@ -85,11 +85,8 @@ in
 
       path = mkOption {
         type = types.str;
-        default = "/workstation";
-        description = ''
-          Repository path as seen by the source account. That account is
-          chrooted, so this is relative to the chroot, not the real filesystem.
-        '';
+        default = "/storage/backups/restic/workstation";
+        description = "Absolute path of the source repository on the source host.";
       };
 
       hostKey = mkOption {

@@ -4,11 +4,6 @@ with lib;
 let
   cfg = config.modules.homelab.offsiteAccess;
   backups = config.services.backups;
-
-  # The replica user is chrooted into the parent of the repository, so from its
-  # point of view the repository lives at "/<basename>".
-  chrootDirectory = builtins.dirOf backups.repository;
-  repositoryInChroot = "/" + builtins.baseNameOf backups.repository;
 in
 {
   options.modules.homelab.offsiteAccess = {
@@ -44,7 +39,7 @@ in
     repositoryPath = mkOption {
       type = types.str;
       readOnly = true;
-      default = repositoryInChroot;
+      default = backups.repository;
       description = "Repository path as seen by the replica user, for use in its restic URL.";
     };
   };
@@ -53,7 +48,7 @@ in
     users.users.${cfg.replicaUser} = {
       isSystemUser = true;
       group = backups.group;
-      home = chrootDirectory;
+      home = backups.repository;
       createHome = false;
       shell = "${pkgs.shadow}/bin/nologin";
       openssh.authorizedKeys.keys = cfg.authorizedKeys;
@@ -79,7 +74,6 @@ in
 
     services.openssh.extraConfig = ''
       Match User ${cfg.replicaUser}
-        ChrootDirectory ${chrootDirectory}
         ForceCommand internal-sftp
         AllowTcpForwarding no
         AllowAgentForwarding no
