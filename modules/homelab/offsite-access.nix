@@ -90,7 +90,7 @@ in
         ForceCommand ${pkgs.coreutils}/bin/false
         AllowTcpForwarding remote
         PermitOpen none
-        PermitListen 127.0.0.1:${toString cfg.tunnelPort}
+        PermitListen 127.0.0.1:${toString cfg.tunnelPort} localhost:${toString cfg.tunnelPort}
         AllowAgentForwarding no
         X11Forwarding no
         PermitTTY no
