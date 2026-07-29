@@ -94,6 +94,12 @@ in
       serviceConfig = {
         Type = "oneshot";
 
+        # systemd units start with no HOME, and restic refuses to run without
+        # somewhere to put its cache. A persistent cache also keeps repeat
+        # copies cheap, so this is not merely to silence an error.
+        CacheDirectory = "offsite-backup";
+        Environment = [ "RESTIC_CACHE_DIR=/var/cache/offsite-backup" ];
+
         # Seeding this repository means moving a couple of hundred gigabytes
         # over a home uplink. There is no meaningful upper bound to set.
         TimeoutStartSec = "infinity";

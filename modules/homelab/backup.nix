@@ -108,6 +108,11 @@ in
           IOSchedulingClass = "idle";
           TimeoutStartSec = "infinity";
 
+          # systemd units start with no HOME, and restic refuses to run
+          # without somewhere to put its cache.
+          CacheDirectory = "restic-prune";
+          Environment = [ "RESTIC_CACHE_DIR=/var/cache/restic-prune" ];
+
           # If a long-running backup still holds the lock, come back later
           # rather than skipping retention for the day.
           Restart = "on-failure";
