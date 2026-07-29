@@ -32,23 +32,5 @@ in
     # Replication and the tunnel both need a routable address, and DHCP on an
     # unknown network can be slow to settle.
     systemd.services.NetworkManager-wait-online.enable = mkDefault true;
-
-    system.autoUpgrade = mkIf cfg.autoUpgrade.enable {
-      enable = true;
-      flake = cfg.autoUpgrade.flake;
-      dates = cfg.autoUpgrade.onCalendar;
-      randomizedDelaySec = "45min";
-      # The whole point is to be able to fix this machine by pushing a commit,
-      # without needing the tunnel to already work.
-      allowReboot = true;
-      rebootWindow = {
-        lower = "05:00";
-        upper = "07:00";
-      };
-      flags = [
-        "--refresh"
-        "--no-write-lock-file"
-      ];
-    };
   };
 }
