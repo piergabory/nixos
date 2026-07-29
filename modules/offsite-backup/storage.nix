@@ -67,15 +67,6 @@ in
       };
     };
 
-    # A 2013 Mac mini has limited memory, and restic's index for a repository
-    # this size does not comfortably fit alongside a prune.
-    swapDevices = [
-      {
-        device = "/var/swapfile";
-        size = 4096;
-      }
-    ];
-
     # Deliberately not systemd.tmpfiles: those rules are applied early in boot,
     # before /mnt/backup is mounted, which would create the directory tree on
     # the root filesystem and then hide it under the mount.
