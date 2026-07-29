@@ -130,6 +130,40 @@ in
             forget --prune ${concatStringsSep " " cfg.retention}
         '';
       };
+
+      # The repository directories are created here rather than by
+      # systemd.tmpfiles, which refuses to act on these paths with "unsafe path
+      # transition /storage (owned by piergabory) -> /storage/backups (owned by
+      # root)" and does so silently, so those rules never applied at all.
+      restic-repository-permissions = {
+        description = "Create the backup repository and enforce its permissions";
+        wantedBy = [ "multi-user.target" ];
+        before = map (name: "restic-backups-${name}.service") (
+          builtins.attrNames config.services.restic.backups
+        );
+
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+        };
+
+        script = ''
+          set -euo pipefail
+
+          # Traversable, but not listable, by the replica user.
+          install -d -m 0751 -o root -g root /storage/backups
+          install -d -m 0751 -o root -g root /storage/backups/restic
+
+          # setgid so new files inherit the backup group; group-readable but
+          # not group-writable, so the replica cannot alter what it copies.
+          install -d -m 2750 -o root -g ${cfg.group} ${cfg.repository}
+
+          # The one exception. restic locks the source before copying, and that
+          # lock is what stops the prune job from removing packs midway through
+          # a replication, so it is worth having rather than suppressing.
+          install -d -m 2770 -o root -g ${cfg.group} ${cfg.repository}/locks
+        '';
+      };
     };
 
     systemd.timers.restic-prune = {
@@ -139,13 +173,10 @@ in
       };
     };
 
+    # Deliberately not systemd.tmpfiles: it refuses to act on these paths with
+    # "unsafe path transition /storage (owned by piergabory) -> /storage/backups
+    # (owned by root)", and does so silently, so the rules never applied at all.
     systemd.tmpfiles.rules = [
-      # 0751 on the two parents: traversable, but not listable, by the replica
-      # user. The repository itself is setgid so new files inherit the backup
-      # group, and group-readable but not group-writable.
-      "d /storage/backups 0751 root root -"
-      "d /storage/backups/restic 0751 root root -"
-      "d /storage/backups/restic/workstation 2750 root ${cfg.group} -"
       "d /var/backup/restic 0700 root root -"
     ];
   };
