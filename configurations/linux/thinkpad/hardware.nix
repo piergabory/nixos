@@ -32,7 +32,7 @@
       fsType = "ext4";
     };
 
-    "boot" = {
+    "/boot" = {
       device = "/dev/disk/by-uuid/1AC4-EC73";
       fsType = "vfat";
       options = [

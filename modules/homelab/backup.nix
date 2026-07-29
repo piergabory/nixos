@@ -1,7 +1,13 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   inherit (lib)
+    mkIf
     mkOption
     types
     mapAttrs'
@@ -9,6 +15,7 @@ let
     concatStringsSep
     ;
 
+  homelab = config.modules.homelab;
   cfg = config.services.backups;
 in
 
@@ -82,7 +89,7 @@ in
     };
   };
 
-  config = {
+  config = mkIf homelab.enable {
     users.groups.${cfg.group} = { };
 
     # Restoring is an emergency operation. Having to locate a Nix store path
@@ -99,92 +106,93 @@ in
     # 0027 grants the backup group read, but not write: replication has been
     # verified to work against a fully read-only source, so a compromised
     # offsite machine cannot damage the originals it is copying from.
-    systemd.services = mapAttrs' (
-      name: _:
-      nameValuePair "restic-backups-${name}" {
-        serviceConfig.UMask = "0027";
+    systemd.services =
+      mapAttrs' (
+        name: _:
+        nameValuePair "restic-backups-${name}" {
+          serviceConfig.UMask = "0027";
 
-        # These are Type=oneshot units that can run for hours; the Immich job
-        # takes most of a night. Restarting them on switch would make
-        # nixos-rebuild block until the backup finished. Their timers decide
-        # when they run, so a change takes effect on the next run.
-        restartIfChanged = false;
-        stopIfChanged = false;
-      }
-    ) config.services.restic.backups
-    // {
-      # One prune for the whole repository rather than one per job: it needs an
-      # exclusive lock, and it is wasted work to repeat it a dozen times a night.
-      restic-prune = {
-        description = "Expire and repack the backup repository";
+          # These are Type=oneshot units that can run for hours; the Immich job
+          # takes most of a night. Restarting them on switch would make
+          # nixos-rebuild block until the backup finished. Their timers decide
+          # when they run, so a change takes effect on the next run.
+          restartIfChanged = false;
+          stopIfChanged = false;
+        }
+      ) config.services.restic.backups
+      // {
+        # One prune for the whole repository rather than one per job: it needs an
+        # exclusive lock, and it is wasted work to repeat it a dozen times a night.
+        restic-prune = {
+          description = "Expire and repack the backup repository";
 
-        # Long-running oneshot: never let a rebuild block on it.
-        restartIfChanged = false;
-        stopIfChanged = false;
+          # Long-running oneshot: never let a rebuild block on it.
+          restartIfChanged = false;
+          stopIfChanged = false;
 
-        serviceConfig = {
-          Type = "oneshot";
-          UMask = "0027";
-          Nice = 15;
-          IOSchedulingClass = "idle";
-          TimeoutStartSec = "infinity";
+          serviceConfig = {
+            Type = "oneshot";
+            UMask = "0027";
+            Nice = 15;
+            IOSchedulingClass = "idle";
+            TimeoutStartSec = "infinity";
 
-          # systemd units start with no HOME, and restic refuses to run
-          # without somewhere to put its cache.
-          CacheDirectory = "restic-prune";
-          Environment = [ "RESTIC_CACHE_DIR=/var/cache/restic-prune" ];
+            # systemd units start with no HOME, and restic refuses to run
+            # without somewhere to put its cache.
+            CacheDirectory = "restic-prune";
+            Environment = [ "RESTIC_CACHE_DIR=/var/cache/restic-prune" ];
 
-          # If a long-running backup still holds the lock, come back later
-          # rather than skipping retention for the day.
-          Restart = "on-failure";
-          RestartSec = "30m";
+            # If a long-running backup still holds the lock, come back later
+            # rather than skipping retention for the day.
+            Restart = "on-failure";
+            RestartSec = "30m";
+          };
+
+          unitConfig.StartLimitIntervalSec = 0;
+
+          script = ''
+            set -euo pipefail
+            ${pkgs.restic}/bin/restic \
+              -r ${cfg.repository} \
+              --password-file ${cfg.passwordFile} \
+              forget --prune ${concatStringsSep " " cfg.retention}
+          '';
         };
 
-        unitConfig.StartLimitIntervalSec = 0;
+        # The repository directories are created here rather than by
+        # systemd.tmpfiles, which refuses to act on these paths with "unsafe path
+        # transition /storage (owned by piergabory) -> /storage/backups (owned by
+        # root)" and does so silently, so those rules never applied at all.
+        restic-repository-permissions = {
+          description = "Create the backup repository and enforce its permissions";
+          wantedBy = [ "multi-user.target" ];
+          before = map (name: "restic-backups-${name}.service") (
+            builtins.attrNames config.services.restic.backups
+          );
 
-        script = ''
-          set -euo pipefail
-          ${pkgs.restic}/bin/restic \
-            -r ${cfg.repository} \
-            --password-file ${cfg.passwordFile} \
-            forget --prune ${concatStringsSep " " cfg.retention}
-        '';
-      };
+          serviceConfig = {
+            Type = "oneshot";
+            RemainAfterExit = true;
+          };
 
-      # The repository directories are created here rather than by
-      # systemd.tmpfiles, which refuses to act on these paths with "unsafe path
-      # transition /storage (owned by piergabory) -> /storage/backups (owned by
-      # root)" and does so silently, so those rules never applied at all.
-      restic-repository-permissions = {
-        description = "Create the backup repository and enforce its permissions";
-        wantedBy = [ "multi-user.target" ];
-        before = map (name: "restic-backups-${name}.service") (
-          builtins.attrNames config.services.restic.backups
-        );
+          script = ''
+            set -euo pipefail
 
-        serviceConfig = {
-          Type = "oneshot";
-          RemainAfterExit = true;
+            # Traversable, but not listable, by the replica user.
+            install -d -m 0751 -o root -g root /storage/backups
+            install -d -m 0751 -o root -g root /storage/backups/restic
+
+            # setgid so new files inherit the backup group; group-readable but
+            # not group-writable, so the replica cannot alter what it copies.
+            install -d -m 2750 -o root -g ${cfg.group} ${cfg.repository}
+
+            # The one exception. restic locks the source before copying, and that
+            # lock is what stops the prune job from removing packs midway through
+            # a replication, so it is worth having rather than suppressing.
+            install -d -m 2770 -o root -g ${cfg.group} ${cfg.repository}/locks
+          '';
         };
-
-        script = ''
-          set -euo pipefail
-
-          # Traversable, but not listable, by the replica user.
-          install -d -m 0751 -o root -g root /storage/backups
-          install -d -m 0751 -o root -g root /storage/backups/restic
-
-          # setgid so new files inherit the backup group; group-readable but
-          # not group-writable, so the replica cannot alter what it copies.
-          install -d -m 2750 -o root -g ${cfg.group} ${cfg.repository}
-
-          # The one exception. restic locks the source before copying, and that
-          # lock is what stops the prune job from removing packs midway through
-          # a replication, so it is worth having rather than suppressing.
-          install -d -m 2770 -o root -g ${cfg.group} ${cfg.repository}/locks
-        '';
       };
-    };
 
     systemd.timers.restic-prune = {
       wantedBy = [ "timers.target" ];
