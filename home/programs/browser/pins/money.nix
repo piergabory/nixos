@@ -1,6 +1,6 @@
 let
   homelabDomain = "pierr.re";
-  position = 600;
+  position = 700;
 in
 {
   programs.zen-browser.profiles.default.spaces.general.pins."Money" = {
