@@ -6,6 +6,7 @@
     ./developer.nix
     ./work.nix
     ./chat.nix
+    ./money.nix
   ];
 
   config.programs.zen-browser.profiles.default = {
