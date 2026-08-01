@@ -1,7 +1,8 @@
 let
   homelabDomain = "pierr.re";
   position = 400;
-in {
+in
+{
   programs.zen-browser.profiles.default.spaces.general.pins."Home Lab" = {
     inherit position;
     id = "homelab_group";
@@ -26,16 +27,6 @@ in {
         id = "homelab_media_library";
         url = "https://jelly.${homelabDomain}/web/#/home";
         position = position + 4;
-      };
-      "Mastodon" = {
-        id = "homelab_mastodon_instance";
-        url = "https://mas.${homelabDomain}/home";
-        position = position + 5;
-      };
-      "Budget" = {
-        id = "homelab_budgeting_tool";
-        url = "https://budget.${homelabDomain}/budget";
-        position = position + 6;
       };
       "Location History" = {
         id = "homelab_location_history";
