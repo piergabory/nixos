@@ -36,6 +36,16 @@ in
 
       script = ''
         set -euo pipefail
+
+        # An interrupted pull leaves its lock behind, and restic only clears
+        # stale locks in the `unlock` command -- acquiring one never does, so
+        # prune would otherwise stay wedged indefinitely. Plain unlock, not
+        # --remove-all: a running copy refreshes its lock every five minutes
+        # and so is never mistaken for dead.
+        ${restic} -r ${cfg.repository} \
+          --password-file ${cfg.passwordFile} \
+          unlock
+
         ${restic} -r ${cfg.repository} \
           --password-file ${cfg.passwordFile} \
           forget --prune ${concatStringsSep " " cfg.pruneOpts}

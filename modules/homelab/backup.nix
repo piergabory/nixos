@@ -152,6 +152,21 @@ in
 
           script = ''
             set -euo pipefail
+
+            # A killed backup or a replica that lost power leaves its lock
+            # behind, and restic only clears stale locks in the `unlock`
+            # command -- acquiring a lock never does. Without this the retry
+            # above spins every 30 minutes forever and retention silently
+            # stops being applied; that went unnoticed for three days.
+            #
+            # Not --remove-all: plain unlock only drops locks whose owner is
+            # provably gone. A live restic refreshes its lock every five
+            # minutes, so the hours-long Immich job is never touched.
+            ${pkgs.restic}/bin/restic \
+              -r ${cfg.repository} \
+              --password-file ${cfg.passwordFile} \
+              unlock
+
             ${pkgs.restic}/bin/restic \
               -r ${cfg.repository} \
               --password-file ${cfg.passwordFile} \
