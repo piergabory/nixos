@@ -5,6 +5,7 @@
     ./homelab.nix
     ./developer.nix
     ./work.nix
+    ./chat.nix
   ];
 
   config.programs.zen-browser.profiles.default = {
