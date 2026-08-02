@@ -47,8 +47,8 @@ in
       type = types.attrs;
       default = {
         OnCalendar = "03:00";
-        RandomizedDelaySec = "1h";
-        Persistent = true;
+        RandomizedDelaySec = "0";
+        Persistent = false;
       };
       description = "Default timer configuration for restic backups.";
     };
@@ -79,8 +79,8 @@ in
       type = types.attrs;
       default = {
         OnCalendar = "06:00";
-        RandomizedDelaySec = "30m";
-        Persistent = true;
+        RandomizedDelaySec = "0";
+        Persistent = false;
       };
       description = ''
         When to expire snapshots. Should sit after every backup job has had a

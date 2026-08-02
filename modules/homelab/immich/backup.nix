@@ -15,7 +15,10 @@ in
       };
 
       paths = [
-        cfg.mediaLocation
+        "${cfg.mediaLocation}/backups"
+        "${cfg.mediaLocation}/library"
+        "${cfg.mediaLocation}/profile"
+        "${cfg.mediaLocation}/upload"
       ];
 
       # Derivatives are fully regenerable from the originals, and account for

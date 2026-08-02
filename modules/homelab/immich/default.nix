@@ -32,9 +32,25 @@ in {
         "+${pkgs.coreutils}/bin/chmod o+x /storage"
       ];
       tmpfiles.rules = [
-        "d /storage/immich 0750 immich immich -"
+        "d /var/lib/immich 0700 immich immich -"
+        "d /var/lib/immich/encoded-video 0700 immich immich -"
+        "d /var/lib/immich/profile 0700 immich immich -"
+        "d /var/lib/immich/thumbs 0700 immich immich -"
       ];
     };
+
+    fileSystems = lib.listToAttrs (map (name: {
+      name = "/storage/immich/${name}";
+      value = {
+        device = "/var/lib/immich/${name}";
+        fsType = "none";
+        options = [ "bind" ];
+      };
+    }) [
+      "encoded-video"
+      "profile"
+      "thumbs"
+    ]);
 
     environment.systemPackages = with pkgs; [
       immich-cli
