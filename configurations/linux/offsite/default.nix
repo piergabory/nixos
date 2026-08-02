@@ -13,6 +13,9 @@
       StateDirectoryMode = "0700";
     };
 
+    # Small SSD
+    boot.loader.systemd-boot.configurationLimit = 10;
+
     modules.offsiteBackup = {
       enable = true;
 

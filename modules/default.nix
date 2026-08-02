@@ -11,6 +11,7 @@
     ./offsite-backup
     ./syncthing
     ./audio.nix
+    ./auto-upgrade.nix
     ./bluetooth.nix
     ./openssh.nix
     ./photography.nix

@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
@@ -91,17 +96,6 @@ in
         Unit = "offsite-backup-check.service";
       };
     };
-
-    # The root filesystem is a small, cheap SSD. Left alone, generations and
-    # the store will fill it and the machine becomes unrecoverable remotely.
-    nix.gc = {
-      automatic = true;
-      dates = "weekly";
-      options = "--delete-older-than 30d";
-    };
-
-    nix.settings.auto-optimise-store = true;
-    boot.loader.systemd-boot.configurationLimit = mkDefault 10;
 
     environment.systemPackages = [ pkgs.restic ];
   };
