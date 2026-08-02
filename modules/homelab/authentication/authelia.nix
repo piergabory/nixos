@@ -170,6 +170,10 @@ in
               domain = cfg.host;
               policy = "bypass";
             }
+            {
+              domain = "ipstats.${cfg.domain}";
+              policy = "one_factor";
+            }
           ];
         };
 

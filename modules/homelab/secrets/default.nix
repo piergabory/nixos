@@ -18,6 +18,7 @@ in
     age.secrets = {
       icloud-smtp-relay.file = ./icloud-smtp-relay.age;
       restic-password.file = ./restic-password.age;
+      maxmind-license-key.file = ./maxmind-license-key.age;
     };
   };
 }

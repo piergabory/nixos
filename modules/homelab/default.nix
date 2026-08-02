@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.modules.homelab;
-in {
+in
+{
   imports = [
     ./airtrail
     ./authentication
@@ -22,6 +23,7 @@ in {
     ./backup.nix
     ./offsite-access
     ./postfix.nix
+    ./goaccess.nix
   ];
 
   options.modules.homelab = {
@@ -49,6 +51,14 @@ in {
       nginx.enable = true;
       postfix.enable = true;
       minecraft-server.enable = true;
+
+      goaccess = {
+        enable = true;
+        domain = "ipstats.${cfg.domain}";
+        maxmindAccountID = 1388296;
+        maxmindLicenseKeyFile = config.age.secrets.maxmind-license-key.path;
+        geoipDatabase = "/var/lib/GeoIP/GeoLite2-City.mmdb";
+      };
 
       authentication = {
         enable = true;
