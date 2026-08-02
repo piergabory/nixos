@@ -21,7 +21,7 @@ in
         # "Obsidian gruvbox" is a community theme living in the (unmanaged)
         # `.obsidian/themes` directory, installed from the Obsidian UI.
         cssTheme = "Obsidian gruvbox";
-        baseFontSize = 18;
+        baseFontSize = 14;
       };
 
       app = {
