@@ -15,5 +15,6 @@
     Kagarino = "096a5986-8b76-48b5-9877-2bab5a13721e";
     catemi = "1c6f7bba-5b79-40a0-9218-d8aeae6f2da6";
     thedinghy = "21161988-82e8-4173-b85b-9f580b1dd66f";
+    OleAverageJoe = "c436834b-7e7e-4cac-a437-0ddb9f77591b";
   };
 }
