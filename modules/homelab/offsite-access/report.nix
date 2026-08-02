@@ -63,7 +63,7 @@ in
       group = cfg.reportUser;
       home = stateDirectory;
       createHome = false;
-      shell = "${pkgs.shadow}/bin/nologin";
+      shell = "${pkgs.bash}/bin/bash";
       openssh.authorizedKeys.keys = map (
         key: ''command="${recordCommand}",restrict ${key}''
       ) cfg.authorizedKeys;
