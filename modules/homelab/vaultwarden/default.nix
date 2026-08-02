@@ -16,6 +16,7 @@ in {
 
       config = {
         DOMAIN = "https://vault.${lab.domain}";
+        SIGNUPS_ALLOWED = false;
 
         ROCKET_ADDRESS = "127.0.0.1";
         ROCKET_PORT = 8222;
