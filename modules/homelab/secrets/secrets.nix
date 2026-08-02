@@ -12,4 +12,5 @@ let
 in {
   "restic-password.age".publicKeys = keysWithOffsite;
   "icloud-smtp-relay.age".publicKeys = keys;
+  "maxmind-license-key.age".publicKeys = keys;
 }

@@ -37,6 +37,12 @@ in {
       };
     };
 
+    # Keep one month of daily rotations for GoAccess.
+    services.logrotate.settings.nginx = {
+      frequency = "daily";
+      rotate = 31;
+    };
+
     networking.firewall.allowedTCPPorts = [ 80 443 ];
 
     systemd.tmpfiles.rules = [
