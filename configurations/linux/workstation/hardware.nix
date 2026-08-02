@@ -2,6 +2,7 @@
   config,
   lib,
   modulesPath,
+  pkgs,
   ...
 }:
 
@@ -71,6 +72,40 @@
     "/storage" = {
       device = "/dev/disk/by-uuid/5f3732cd-17aa-41d7-93ae-64453ead7510";
       fsType = "ext4";
+    };
+  };
+
+  systemd.services.storage-disk-standby = {
+    description = "Configure standby timeout for storage RAID disks";
+    wantedBy = [ "multi-user.target" ];
+    after = [ "local-fs.target" ];
+
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = pkgs.writeShellScript "storage-disk-standby" ''
+        set -eu
+        ${pkgs.hdparm}/bin/hdparm -S 180 \
+          /dev/disk/by-id/ata-ST4000VN006-3CW104_ZW63YLKE \
+          /dev/disk/by-id/ata-ST4000VN006-3CW104_ZW63YT4F
+      '';
+    };
+  };
+
+  services.smartd = {
+    enable = true;
+    autodetect = false;
+    devices = [
+      {
+        device = "/dev/disk/by-id/ata-ST4000VN006-3CW104_ZW63YLKE";
+      }
+      {
+        device = "/dev/disk/by-id/ata-ST4000VN006-3CW104_ZW63YT4F";
+      }
+    ];
+    notifications.mail = {
+      enable = true;
+      recipient = config.modules.homelab.email;
     };
   };
 

@@ -23,8 +23,8 @@ in {
         group = "root";
 
         timerConfig = {
-          OnCalendar = "*:0/5";
-          Persistent = true;
+          OnCalendar = "*-*-* 01:15";
+          Persistent = false;
         };
       };
     };
