@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./hardware.nix
@@ -29,6 +30,22 @@
       dataDisk.device = "/dev/disk/by-uuid/e1059cfd-c775-472d-aa75-b475011fb8df";
 
       schedule.onCalendar = "Mon,Wed,Fri 04:00";
+    };
+
+    systemd.services.offsite-disk-standby = {
+      description = "Configure standby timeout for the offsite backup disk";
+      wantedBy = [ "multi-user.target" ];
+      after = [ "local-fs.target" ];
+
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+        ExecStart = pkgs.writeShellScript "offsite-disk-standby" ''
+          set -eu
+          ${pkgs.hdparm}/bin/hdparm -S 180 \
+            /dev/disk/by-uuid/e1059cfd-c775-472d-aa75-b475011fb8df
+        '';
+      };
     };
   };
 }
