@@ -3,15 +3,22 @@ with lib;
 let
   domain = config.modules.homelab.domain;
   cfg = config.services.dawarich;
-in {
+in
+{
   imports = [
     ./backup.nix
   ];
 
   config = mkIf cfg.enable {
+    services.photon.enable = true;
+
     services.dawarich = {
       localDomain = "geo.${domain}";
       webPort = 64645;
+      environment = {
+        PHOTON_API_HOST = "127.0.0.1:${toString config.services.photon.port}";
+        PHOTON_API_USE_HTTPS = "false";
+      };
     };
 
     services.nginx.virtualHosts."geo.${domain}" = {

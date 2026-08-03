@@ -17,6 +17,7 @@ in
     ./minecraft-server
     ./nginx
     ./pihole
+    ./photon.nix
     ./radicale
     ./secrets
     ./vaultwarden
