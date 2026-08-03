@@ -49,7 +49,8 @@
     };
 
     kernelModules = [ "kvm-amd" ];
-    kernelParams = [ "amdgpu.dc=1" "nvidia-drm.modeset=1" ];
+    blacklistedKernelModules = [ "amdgpu" ];
+    kernelParams = [ "nvidia-drm.modeset=1" ];
     kernel.sysctl."kernel.split_lock_mitigate" = 0;
     extraModulePackages = [ ];
   };
