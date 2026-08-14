@@ -28,11 +28,6 @@ in
         url = "https://app.revolut.com/home";
         position = position + 4;
       };
-      "Crédit Agricole" = {
-        id = "ca_paris";
-        url = "https://espace-client.credit-agricole.fr/ca-paris/particulier/synthese#compte";
-        position = position + 5;
-      };
       "BNP Paribas Legrand" = {
         id = "bnp_legrand";
         url = "https://monepargne.ere.bnpparibas/accueil";
