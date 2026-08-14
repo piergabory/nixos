@@ -13,7 +13,7 @@ in
     enable = mkEnableOption "Manage music library";
   };
 
-  config = mkIf (cfg.enable && pkgs.stdenv.isLinux) {
+  config = mkIf (cfg.enable && pkgs.stdenv.hostPlatform.isLinux) {
     programs = {
       rmpc.enable = true;
 

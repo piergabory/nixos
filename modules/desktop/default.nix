@@ -24,21 +24,21 @@ in
     programs = {
       niri = {
         enable = true;
-        package = inputs.niri.packages.${pkgs.stdenv.hostPlatform.system}.niri-unstable;
       };
       xwayland.enable = true;
     };
 
-    mainUser.homeConfiguration = {
-      imports = [
-        inputs.niri.homeModules.niri
-        ./niri
-        ./waybar
-      ];
-      programs = {
-        niri = {
-          enable = true;
-          settings.input.keyboard.xkb =
+      mainUser.homeConfiguration = {
+        imports = [
+          inputs.niri.homeModules.niri
+          ./niri
+          ./waybar
+        ];
+        programs = {
+          niri = {
+            enable = true;
+            package = pkgs.niri;
+            settings.input.keyboard.xkb =
             let
               xkb = config.services.xserver.xkb;
             in
@@ -50,6 +50,7 @@ in
         waybar.enable = true;
       };
       services.mako.enable = true;
+      xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
     };
   };
 }
