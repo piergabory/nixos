@@ -22,18 +22,18 @@ with lib;
         ];
       };
 
-      foot = mkIf pkgs.stdenv.isLinux {
+      foot = mkIf pkgs.stdenv.hostPlatform.isLinux {
         enable = true;
         server.enable = true;
         settings.main.pad = "8x8";
       };
 
-      vicinae = mkIf pkgs.stdenv.isLinux {
+      vicinae = mkIf pkgs.stdenv.hostPlatform.isLinux {
         enable = true;
         systemd.enable = true;
       };
 
-      zapzap = mkIf pkgs.stdenv.isLinux {
+      zapzap = mkIf pkgs.stdenv.hostPlatform.isLinux {
         enable = true;
         package = pkgs.symlinkJoin {
           name = "zapzap-wayland";
@@ -53,7 +53,7 @@ with lib;
         ragenix
       ]
       ++ (
-        if stdenv.isLinux then
+        if stdenv.hostPlatform.isLinux then
           [
             imv # image viewer for tiling managers
             mpv # video player

@@ -1,9 +1,16 @@
-{ inputs, config, lib, pkgs, ... }:
+{
+  inputs,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.programs.zen-browser;
-in {
+in
+{
   imports = [
     inputs.zen-browser.homeModules.beta
     ./policies.nix
@@ -12,7 +19,7 @@ in {
 
   config = mkIf cfg.enable {
     programs.zen-browser = {
-      nativeMessagingHosts = mkIf pkgs.stdenv.isLinux [ pkgs.firefoxpwa ];
+      nativeMessagingHosts = mkIf pkgs.stdenv.hostPlatform.isLinux [ pkgs.firefoxpwa ];
 
       profiles.default = {
         search = {
