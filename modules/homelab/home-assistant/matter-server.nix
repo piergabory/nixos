@@ -27,5 +27,11 @@ in {
       # Matter devices advertise scoped IPv6 addresses on the wired LAN.
       extraArgs.primary-interface = "eth0";
     };
+
+    # The current DCL response contains a certificate that matter-server 8.1.2
+    # cannot parse. Keep the known-good certificate cache for now.
+    systemd.services.matter-server.preStart = ''
+      touch /var/cache/matter-server/certs/.version
+    '';
   };
 }
