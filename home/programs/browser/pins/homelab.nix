@@ -43,15 +43,20 @@ in
         url = "https://auth.${homelabDomain}/settings";
         position = position + 9;
       };
+      "Goaccess" = {
+        id = "ip_stats";
+        url = "https://ipstats.${homelabDomain}";
+        position = position + 10;
+      };
       "CardDav/CalDav Server" = {
         id = "homelab_dav";
         url = "https://dav.${homelabDomain}/radicale/.web/";
-        position = position + 10;
+        position = position + 11;
       };
       "Home Page" = {
         id = "domain_homepage";
         url = "https://www.${homelabDomain}";
-        position = position + 11;
+        position = position + 12;
       };
     };
   };
