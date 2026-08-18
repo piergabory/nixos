@@ -63,7 +63,7 @@ with lib;
             clock-rs
             unzip
             parted
-            nautilus
+            kdePackages.dolphin
             signal-desktop
             slack
             telegram-desktop
