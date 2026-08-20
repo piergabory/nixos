@@ -13,6 +13,7 @@
     stylix = {
       enable = true;
       autoEnable = true;
+      image = ../assets/house.jpg;
       polarity = "dark";
       base16Scheme = lib.mkDefault "${pkgs.base16-schemes}/share/themes/gruvbox-dark-hard.yaml";
 

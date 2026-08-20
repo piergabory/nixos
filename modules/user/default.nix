@@ -57,5 +57,12 @@ in
     nix.settings.trusted-users = [
       cfg.username
     ];
+
+    services.accounts-daemon.enable = true;
+
+    environment.etc."AccountsService/users/${cfg.username}".text = ''
+      [User]
+      Icon=${../../assets/pierre.jpg}
+    '';
   };
 }
