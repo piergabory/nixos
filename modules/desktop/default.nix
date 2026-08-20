@@ -76,6 +76,13 @@ in
         Install.WantedBy = [ "graphical-session.target" ];
       };
       services.mako.enable = true;
+      xdg.configFile."kscreenlockerrc".text = ''
+        [Greeter]
+        WallpaperPlugin=org.kde.image
+
+        [Greeter][Wallpaper][org.kde.image][General]
+        Image=file://${../../assets/house.jpg}
+      '';
       xdg.portal.extraPortals = mkForce [
         pkgs.kdePackages.xdg-desktop-portal-kde
         pkgs.xdg-desktop-portal-gtk
