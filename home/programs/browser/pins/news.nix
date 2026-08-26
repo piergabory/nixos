@@ -18,7 +18,7 @@ in {
       };
       "Le Monde" = {
         id = "lemonde";
-        url = "https://www.lemonde.fr";
+        url = "https://www.lemonde.fr/";
         position = position + 3;
       };
       "The Guardian" = {

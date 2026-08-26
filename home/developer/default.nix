@@ -19,7 +19,6 @@
     programs.tokscale.enable = true;
 
     home.packages = with pkgs; [
-      warp-terminal
     ];
   };
 }
