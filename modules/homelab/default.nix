@@ -25,6 +25,7 @@ in
     ./offsite-access
     ./postfix.nix
     ./goaccess.nix
+    ./searx
   ];
 
   options.modules.homelab = {
@@ -52,6 +53,7 @@ in
       nginx.enable = true;
       postfix.enable = true;
       minecraft-server.enable = true;
+      searx.enable = true;
 
       goaccess = {
         enable = true;

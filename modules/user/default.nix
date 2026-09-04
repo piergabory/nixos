@@ -58,7 +58,11 @@ in
       cfg.username
     ];
 
-    services.accounts-daemon.enable = true;
+    services =
+      { }
+      // optionalAttrs (!isDarwin) {
+        accounts-daemon.enable = true;
+      };
 
     environment.etc."AccountsService/users/${cfg.username}".text = ''
       [User]

@@ -24,7 +24,12 @@ in
       profiles.default = {
         search = {
           force = true;
-          default = "ddg"; # duck duck go
+          default = "Pierr";
+          engines.Pierr.urls = [
+            {
+              template = "https://search.pierr.re/search?q={searchTerms}&language=all";
+            }
+          ];
         };
 
         settings = {
