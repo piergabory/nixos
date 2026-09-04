@@ -174,6 +174,10 @@ in
               domain = "ipstats.${cfg.domain}";
               policy = "one_factor";
             }
+            {
+              domain = "search.${cfg.domain}";
+              policy = "one_factor";
+            }
           ];
         };
 
