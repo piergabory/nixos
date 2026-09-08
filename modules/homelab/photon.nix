@@ -21,7 +21,8 @@ in
       oci-containers = {
         backend = "podman";
         containers.photon = {
-          image = "ghcr.io/rtuszik/photon-docker:2.3.1";
+          image = "ghcr.io/rtuszik/photon-docker:2.4";
+          pull = "always";
           autoStart = true;
           environment = {
             REGION = "planet";
@@ -31,6 +32,9 @@ in
           };
           ports = [ "127.0.0.1:${toString cfg.port}:2322" ];
           volumes = [ "/var/lib/photon:/photon/data" ];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.hass-container;
-in {
+in
+{
   config = mkIf cfg.enable {
     virtualisation = {
       containers.enable = true;
@@ -11,6 +12,7 @@ in {
         backend = "podman";
         containers.homeassistant = {
           image = "ghcr.io/home-assistant/home-assistant:stable";
+          pull = "always";
           environment.TZ = "Europe/Paris";
           autoStart = true;
           privileged = true;
@@ -21,6 +23,9 @@ in {
             "/var/lib/homeassistant:/config"
             "/run/dbus:/run/dbus:ro"
           ];
+          labels = {
+            "io.containers.autoupdate" = "registry";
+          };
         };
       };
     };

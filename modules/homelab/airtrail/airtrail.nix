@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.airtrail;
-in {
+in
+{
   options.services.airtrail = {
     enable = mkEnableOption "Airtrail service";
     environmentFile = mkOption {
@@ -27,6 +33,7 @@ in {
         containers = {
           airtrail = {
             image = "johly/airtrail:latest";
+            pull = "always";
             autoStart = true;
             environmentFiles = [ "/run/airtrail/app.env" ];
             volumes = [
@@ -36,10 +43,14 @@ in {
             extraOptions = [
               "--pod=airtrail"
             ];
+            labels = {
+              "io.containers.autoupdate" = "registry";
+            };
           };
 
           airtrail-db = {
             image = "postgres:16-alpine";
+            pull = "always";
             autoStart = true;
             environmentFiles = [ "/run/airtrail/postgres.env" ];
             volumes = [
@@ -48,6 +59,9 @@ in {
             extraOptions = [
               "--pod=airtrail"
             ];
+            labels = {
+              "io.containers.autoupdate" = "registry";
+            };
           };
         };
       };
