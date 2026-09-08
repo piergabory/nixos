@@ -19,13 +19,13 @@ in
     ./pihole
     ./photon.nix
     ./radicale
+    ./searx
     ./secrets
     ./vaultwarden
     ./backup.nix
     ./offsite-access
     ./postfix.nix
     ./goaccess.nix
-    ./searx
   ];
 
   options.modules.homelab = {
@@ -86,6 +86,17 @@ in
       authorizedKeys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKd4F5DU/rs1rpNbPB3BX5OXGgIUzT+qgXf6sloq6ns1 offsite-backup-pull"
       ];
+    };
+
+    # Automatically update podman containers.
+    systemd.timers.podman-auto-update = {
+      wantedBy = [ "timers.target" ];
+
+      timerConfig = {
+        OnCalendar = "monthly";
+        Persistent = true;
+        RandomizedDelaySec = "1h";
+      };
     };
   };
 }
