@@ -32,7 +32,7 @@ in
         backend = "podman";
         containers = {
           airtrail = {
-            image = "johly/airtrail:latest";
+            image = "docker.io/johly/airtrail:latest";
             pull = "always";
             autoStart = true;
             environmentFiles = [ "/run/airtrail/app.env" ];
@@ -49,7 +49,7 @@ in
           };
 
           airtrail-db = {
-            image = "postgres:16-alpine";
+            image = "docker.io/library/postgres:16-alpine";
             pull = "always";
             autoStart = true;
             environmentFiles = [ "/run/airtrail/postgres.env" ];
