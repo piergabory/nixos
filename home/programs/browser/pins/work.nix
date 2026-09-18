@@ -1,6 +1,7 @@
 let
   position = 100;
-in {
+in
+{
   programs.zen-browser.profiles.default = {
     pins = {
       "Merge Requests" = {
@@ -17,7 +18,7 @@ in {
       };
       "Teams" = {
         id = "essential_work_chat";
-        url = "https://teams.microsoft.com/v2/";
+        url = "https://teams.cloud.microsoft/";
         position = 3;
         isEssential = true;
       };
@@ -40,7 +41,7 @@ in {
         };
         "Teams" = {
           id = "work_chat";
-          url = "https://teams.microsoft.com/v2/";
+          url = "https://teams.cloud.microsoft/";
           position = position + 3;
         };
       };
