@@ -32,6 +32,11 @@ in
         url = "https://www.linkedin.com/mynetwork/grow/";
         position = position + 5;
       };
+      "Messages" = {
+        id = "google_messages";
+        url = "https://messages.google.com/web/conversations";
+        position = position + 6;
+      };
     };
   };
 }
