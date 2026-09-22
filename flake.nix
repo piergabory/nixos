@@ -8,6 +8,11 @@
 
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
 
+    nix-on-droid = {
+      url = "github:nix-community/nix-on-droid/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -50,51 +55,70 @@
     };
   };
 
-  outputs = inputs@{ nixpkgs, ... }: {
-    nixosConfigurations = {
-      workstation = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./configurations/linux/workstation
-        ];
-        specialArgs = {
-          inherit inputs;
-          isDarwin = false;
+  outputs =
+    inputs@{ nixpkgs, ... }:
+    {
+      nixosConfigurations = {
+        workstation = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configurations/linux/workstation
+          ];
+          specialArgs = {
+            inherit inputs;
+            isDarwin = false;
+            isDroid = false;
+          };
+        };
+
+        thinkpad = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configurations/linux/thinkpad
+          ];
+          specialArgs = {
+            inherit inputs;
+            isDarwin = false;
+            isDroid = false;
+          };
+        };
+
+        offsite = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          modules = [
+            ./configurations/linux/offsite
+          ];
+          specialArgs = {
+            inherit inputs;
+            isDarwin = false;
+            isDroid = false;
+          };
         };
       };
 
-      thinkpad = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
+        system = "aarch64-darwin";
         modules = [
-          ./configurations/linux/thinkpad
+          ./configurations/darwin/work-macbook.nix
         ];
         specialArgs = {
           inherit inputs;
-          isDarwin = false;
+          isDarwin = true;
+          isDroid = false;
         };
       };
 
-       offsite = nixpkgs.lib.nixosSystem {
-         system = "x86_64-linux";
-         modules = [
-           ./configurations/linux/offsite
-         ];
-         specialArgs = {
-           inherit inputs;
-           isDarwin = false;
-         };
-       };
-    };
-
-    darwinConfigurations.macbook = inputs.nix-darwin.lib.darwinSystem {
-      system = "aarch64-darwin";
-      modules = [
-        ./configurations/darwin/work-macbook.nix
-      ];
-      specialArgs = {
-        inherit inputs;
-        isDarwin = true;
+      nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
+        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        home-manager-path = inputs.home-manager.outPath;
+        modules = [
+          ./configurations/linux/droid
+        ];
+        extraSpecialArgs = {
+          inherit inputs;
+          isDarwin = false;
+          isDroid = true;
+        };
       };
     };
-  };
 }

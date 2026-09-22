@@ -1,20 +1,27 @@
+{ lib, isDroid ? false, ... }:
+
 {
-  imports = [
-    ./accounts
-    ./programs
-    ./developer
-    ./music.nix
-    ./xdg.nix
-  ];
+  imports =
+    [
+      ./developer
+    ]
+    ++ lib.optionals (!isDroid) [
+      ./accounts
+      ./programs
+      ./music.nix
+      ./xdg.nix
+    ];
 
-  config = {
-    home.stateVersion = "26.05";
+  config =
+    {
+      home.stateVersion = "26.05";
 
-    musicLibrary.enable = true;
-
-    stylix = {
-      enable = true;
-      autoEnable = true;
+      stylix = {
+        enable = true;
+        autoEnable = !isDroid;
+      };
+    }
+    // lib.optionalAttrs (!isDroid) {
+      musicLibrary.enable = true;
     };
-  };
 }

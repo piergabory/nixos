@@ -3,6 +3,7 @@
   inputs,
   lib,
   isDarwin,
+  isDroid,
   ...
 }:
 with lib;
@@ -26,7 +27,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "home-manager-backup";
-    extraSpecialArgs = { inherit inputs; };
+    extraSpecialArgs = { inherit inputs isDroid; };
 
     users = {
       "${cfg.username}" = {
