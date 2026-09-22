@@ -1,15 +1,18 @@
-{ pkgs, ... }:
+{ lib, pkgs, isDroid ? false, ... }:
 
 {
-  imports = [
-    ./languages
-    ./git.nix
-    ./nixvim
-    ./zed-editor.nix
-    ./tokscale.nix
-  ];
+  imports =
+    [
+      ./git.nix
+      ./nixvim
+    ]
+    ++ lib.optionals (!isDroid) [
+      ./languages
+      ./zed-editor.nix
+      ./tokscale.nix
+    ];
 
-  config = {
+  config = lib.optionalAttrs (!isDroid) {
     programs.opencode = {
       enable = true;
       package = if pkgs.stdenv.hostPlatform.isDarwin then null else pkgs.opencode;
