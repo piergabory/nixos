@@ -1,4 +1,9 @@
-{ inputs, ... }:
+{
+  inputs,
+  lib,
+  isDroid ? false,
+  ...
+}:
 
 {
   imports = [
@@ -12,6 +17,12 @@
     programs.nixvim = {
       enable = true;
       nixpkgs.source = inputs.nixpkgs;
+      # Nixvim instantiates its own Nixpkgs from `nixpkgs.source`, so the
+      # Nix-on-Droid overlay applied in `flake.nix` does not reach the plugins
+      # it builds. See overlays/proot-unpack.nix.
+      nixpkgs.overlays = lib.optionals isDroid [
+        (import ../../../overlays/proot-unpack.nix)
+      ];
       defaultEditor = true;
       viAlias = true;
       vimAlias = true;

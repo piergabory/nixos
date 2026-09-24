@@ -109,7 +109,12 @@
       };
 
       nixOnDroidConfigurations.default = inputs.nix-on-droid.lib.nixOnDroidConfiguration {
-        pkgs = import nixpkgs { system = "aarch64-linux"; };
+        pkgs = import nixpkgs {
+          system = "aarch64-linux";
+          overlays = [
+            (import ./overlays/proot-unpack.nix)
+          ];
+        };
         home-manager-path = inputs.home-manager.outPath;
         modules = [
           ./configurations/linux/droid
