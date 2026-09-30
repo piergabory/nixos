@@ -5,6 +5,9 @@
     [
       ./developer
     ]
+    ++ lib.optionals isDroid [
+      ./droid.nix
+    ]
     ++ lib.optionals (!isDroid) [
       ./accounts
       ./programs
