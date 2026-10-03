@@ -66,7 +66,6 @@ with lib;
             kdePackages.dolphin
             signal-desktop
             slack
-            telegram-desktop
             gimp-with-plugins
             darktable
           ]
