@@ -10,7 +10,7 @@ in
     pins = {
       "Nebula" = {
         id = "nebula";
-        url = "https://www.nebula.tv/featured";
+        url = "https://nebula.tv/library/latest-videos";
         position = position + 1;
       };
       "Youtube" = {
