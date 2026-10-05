@@ -22,6 +22,11 @@ in
         position = 3;
         isEssential = true;
       };
+      "Outlook" = {
+        id = "essential_work_email";
+        url = "https://outlook.cloud.microsoft/mail/";
+        position = position + 3;
+      };
     };
 
     spaces.general.pins."Work" = {
@@ -42,6 +47,11 @@ in
         "Teams" = {
           id = "work_chat";
           url = "https://teams.cloud.microsoft/";
+          position = position + 3;
+        };
+        "Outlook" = {
+          id = "work_email";
+          url = "https://outlook.cloud.microsoft/mail/";
           position = position + 3;
         };
       };
