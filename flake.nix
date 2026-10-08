@@ -11,7 +11,10 @@
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
-    nix-darwin.url = "github:nix-darwin/nix-darwin/master";
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     nix-on-droid = {
       url = "github:nix-community/nix-on-droid/master";
