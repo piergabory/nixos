@@ -70,7 +70,9 @@ with lib;
             darktable
           ]
         else
-          [ ]
+          [
+            mole-cleaner
+          ]
       );
   };
 }
