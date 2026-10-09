@@ -26,6 +26,7 @@ in
         id = "essential_work_email";
         url = "https://outlook.cloud.microsoft/mail/";
         position = position + 3;
+        isEssential = true;
       };
     };
 
