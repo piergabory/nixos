@@ -22,6 +22,7 @@
 
     home.packages = with pkgs; [
       tokscale
+      opencode-desktop
     ];
   };
 }
