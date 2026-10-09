@@ -51,6 +51,8 @@ with lib;
       [
         fastfetch
         ragenix
+        yazi
+        zellij
       ]
       ++ (
         if stdenv.hostPlatform.isLinux then
