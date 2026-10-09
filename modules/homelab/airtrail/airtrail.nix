@@ -30,6 +30,10 @@ in
       containers.enable = true;
       oci-containers = {
         backend = "podman";
+        # These containers are members of a pod managed by separate systemd
+        # units. Podman's auto-update fails to resolve those pod-member units
+        # ("no PODMAN_SYSTEMD_UNIT label found"), even though the labels are
+        # present. A dedicated timer below checks for image changes instead.
         containers = {
           airtrail = {
             image = "docker.io/johly/airtrail:latest";
@@ -43,9 +47,6 @@ in
             extraOptions = [
               "--pod=airtrail"
             ];
-            labels = {
-              "io.containers.autoupdate" = "registry";
-            };
           };
 
           airtrail-db = {
@@ -59,9 +60,6 @@ in
             extraOptions = [
               "--pod=airtrail"
             ];
-            labels = {
-              "io.containers.autoupdate" = "registry";
-            };
           };
         };
       };
@@ -128,7 +126,54 @@ in
               printf 'POSTGRES_DB=%s\n' "$DB_DATABASE_NAME"
               printf 'POSTGRES_USER=%s\n' "$DB_USERNAME"
               printf 'POSTGRES_PASSWORD=%s\n' "$DB_PASSWORD"
-            } > /run/airtrail/postgres.env
+          } > /run/airtrail/postgres.env
+          '';
+        };
+
+        airtrail-image-update = {
+          description = "Check for and apply AirTrail container image updates";
+          wants = [ "network-online.target" ];
+          after = [ "network-online.target" ];
+          serviceConfig.Type = "oneshot";
+          script = ''
+            set -eu
+            podman=${pkgs.podman}/bin/podman
+            systemctl=${pkgs.systemd}/bin/systemctl
+
+            # Pull both images before restarting anything, so a registry failure
+            # leaves the currently running AirTrail pod untouched.
+            "$podman" pull docker.io/library/postgres:16-alpine
+            "$podman" pull docker.io/johly/airtrail:latest
+
+            current_db="$($podman inspect --format '{{.Image}}' airtrail-db)"
+            latest_db="$($podman image inspect --format '{{.Id}}' docker.io/library/postgres:16-alpine)"
+            current_app="$($podman inspect --format '{{.Image}}' airtrail)"
+            latest_app="$($podman image inspect --format '{{.Id}}' docker.io/johly/airtrail:latest)"
+
+            if [ "$current_db" != "$latest_db" ]; then
+              echo "PostgreSQL image update found; restarting database"
+              "$systemctl" restart podman-airtrail-db.service
+
+              ready=false
+              for attempt in $(${pkgs.coreutils}/bin/seq 1 60); do
+                if "$podman" exec airtrail-db pg_isready -q >/dev/null 2>&1; then
+                  ready=true
+                  break
+                fi
+                ${pkgs.coreutils}/bin/sleep 2
+              done
+              if [ "$ready" != true ]; then
+                echo "AirTrail database did not become ready within 120 seconds" >&2
+                exit 1
+              fi
+            fi
+
+            if [ "$current_db" != "$latest_db" ] || [ "$current_app" != "$latest_app" ]; then
+              echo "AirTrail image update found; restarting application"
+              "$systemctl" restart podman-airtrail.service
+            else
+              echo "AirTrail images are already current"
+            fi
           '';
         };
       };
@@ -137,6 +182,15 @@ in
         "d /var/lib/airtrail/postgres 0700 70 root -"
         "d /var/lib/airtrail/uploads 0755 1000 1000 -"
       ];
+
+      timers.airtrail-image-update = {
+        wantedBy = [ "timers.target" ];
+        timerConfig = {
+          OnCalendar = "Sun *-*-* 04:00:00";
+          Persistent = true;
+          RandomizedDelaySec = "1h";
+        };
+      };
     };
   };
 }

@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -81,6 +81,17 @@ in
   config = mkIf cfg.enable {
     services.authelia.instances.main = {
       enable = true;
+
+      # nixpkgs' Authelia 4.39.28 pnpm dependency hash is stale. This is the
+      # hash Nix calculated from the upstream lockfile; remove this override
+      # once the pinned nixpkgs input contains the corrected hash.
+      package = pkgs.authelia.override {
+        authelia-web = pkgs.authelia.web.overrideAttrs (old: {
+          pnpmDeps = old.pnpmDeps.overrideAttrs (_: {
+            outputHash = "sha256-zIaVEjbh/LIQMqnryrgVm+46GP+9gM91WCMyAqeDnaA=";
+          });
+        });
+      };
 
       secrets = with config.age.secrets; {
         jwtSecretFile = jwt.path;
