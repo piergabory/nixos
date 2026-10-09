@@ -1,4 +1,8 @@
-{ lib, pkgs, ... }:
+{
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 {
   imports = [
@@ -12,6 +16,7 @@ with lib;
       zen-browser.enable = true;
       btop.enable = true;
       obsidian.enable = true;
+      zellij.enable = true;
 
       thunderbird = {
         enable = true;
@@ -52,7 +57,6 @@ with lib;
         fastfetch
         ragenix
         yazi
-        zellij
       ]
       ++ (
         if stdenv.hostPlatform.isLinux then
