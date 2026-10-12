@@ -6,7 +6,6 @@
 
     opencode-v2 = {
       url = "github:anomalyco/opencode/v2";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
