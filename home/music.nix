@@ -27,7 +27,7 @@ in
           plugins = [
             "fetchart"
             "embedart"
-            "lyrics"
+            "musicbrainz"
           ];
 
           fetchart.auto = true;
