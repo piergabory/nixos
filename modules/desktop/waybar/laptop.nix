@@ -16,24 +16,8 @@ in {
         "bluetooth"
         "pulseaudio"
         "backlight"
-        (mkIf cfg.showBattery "battery")
-      ];
+      ] ++ optional cfg.showBattery "battery";
 
-      battery = mkIf cfg.showBattery {
-        format = "{icon} {capacity}% ";
-        format-icons = [
-          ""
-          ""
-          ""
-          ""
-          ""
-        ];
-        states = {
-          warning = 20;
-          critical = 10;
-          fatal = 5;
-        };
-      };
       "network" = {
         format = "{ifname}";
         format-wifi = "{icon} {essid}";
@@ -81,6 +65,22 @@ in {
       };
       "bluetooth" = {
         format = " {status}";
+      };
+    } // optionalAttrs cfg.showBattery {
+      battery = {
+        format = "{icon} {capacity}% ";
+        format-icons = [
+          ""
+          ""
+          ""
+          ""
+          ""
+        ];
+        states = {
+          warning = 20;
+          critical = 10;
+          fatal = 5;
+        };
       };
     };
   };
