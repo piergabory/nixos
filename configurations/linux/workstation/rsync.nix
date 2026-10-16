@@ -48,10 +48,4 @@ in
     };
   };
 
-  systemd.tmpfiles.rules = [
-    # The sync user needs to traverse Jellyfin's private top-level directory
-    # and write the music subdirectory, without exposing Jellyfin's state.
-    "z /storage/jellyfin 0710 jellyfin users -"
-    "Z /storage/jellyfin/music 0775 jellyfin users -"
-  ];
 }
