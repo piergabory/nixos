@@ -8,7 +8,6 @@ with lib;
     nixfmt
     nix-doc
     nix-btm
-    nix-top
     nix-tree
     nix-health
     nix-output-monitor
@@ -34,7 +33,10 @@ with lib;
     userSettings = {
       languages = {
         "Nix" = {
-          language_servers = [ "nil" "nixd" ];
+          language_servers = [
+            "nil"
+            "nixd"
+          ];
         };
       };
       lsp = {

@@ -33,6 +33,11 @@ in
         url = "https://monepargne.ere.bnpparibas/accueil";
         position = position + 6;
       };
+      "Finance" = {
+        id = "finance";
+        url = "https://www.google.com/finance/";
+        position = position + 7;
+      };
     };
   };
 }
