@@ -29,7 +29,6 @@
           "--skip=tui::ui::usage::tests::usage_reset_button_renders_when_credit_available"
         ];
       }))
-      opencode-desktop
     ];
   };
 }

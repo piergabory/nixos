@@ -1,6 +1,10 @@
 { inputs, lib, pkgs, ... }:
 
 {
+  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
+    inputs.opencode-v2.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
+  ];
+
   programs.opencode = {
     enable = true;
     package = inputs.opencode-v2.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
