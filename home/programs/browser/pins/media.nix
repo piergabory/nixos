@@ -28,6 +28,11 @@ in
         url = "https://mas.${homelabDomain}/home";
         position = position + 5;
       };
+      "Podcasts" = {
+        id = "podcasts";
+        url = "https://pocketcasts.com/new-releases";
+        position = position + 6;
+      };
     };
   };
 }
