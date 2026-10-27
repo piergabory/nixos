@@ -4,10 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    opencode-v2 = {
-      url = "github:anomalyco/opencode/v2";
-    };
-
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
     nix-darwin = {

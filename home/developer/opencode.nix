@@ -1,13 +1,12 @@
-{ inputs, lib, pkgs, ... }:
+{ lib, pkgs, ... }:
 
 {
-  home.packages = lib.optionals pkgs.stdenv.hostPlatform.isDarwin [
-    inputs.opencode-v2.packages.${pkgs.stdenv.hostPlatform.system}.opencode-desktop
+  home.packages = with pkgs; [
+    opencode-desktop
   ];
 
   programs.opencode = {
     enable = true;
-    package = inputs.opencode-v2.packages.${pkgs.stdenv.hostPlatform.system}.opencode;
     settings = {
       mcp = {
         atlassian = {
