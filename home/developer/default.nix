@@ -21,6 +21,8 @@
     programs.helix.enable = true;
 
     home.packages = with pkgs; [
+      hunk # Diff review TUI
+
       (tokscale.overrideAttrs (old: {
         # This UI test fails under the nixpkgs build environment because the
         # rendered usage screen omits the reset button; keep the remaining
