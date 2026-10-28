@@ -1,27 +1,32 @@
 { pkgs, lib, ... }:
 
-{
+let
+  isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
+in {
   home.packages = with pkgs; [
     swift
     swiftlint
     swiftpm
     swift-format
-  ] ++ lib.optionals pkgs.stdenv.hostPlatform.isDarwin (with darwin; [
-    xcode_27
-    xcode_26_6_Apple_silicon
-  ]);
+  ] ++ lib.optionals isDarwin [
+    pkgs.darwin.xcode_27
+  ];
 
-  # programs.nixvim.plugins = {
-    # conform-nvim.settings.formatter_by_ft = {
-      # Does not exist
-      # swift = [ "swift-format" ];
-    # };
+  home.file."Applications/Home Manager Apps/Xcode 26.6.app" = lib.mkIf isDarwin {
+    source = pkgs.darwin.xcode_26_6_Apple_silicon;
+  };
 
-    # Does not exist
-    # lsp.servers.swift.enable = true;
-  # };
+  programs.nixvim.plugins = {
+    conform-nvim.settings.formatters_by_ft.swift = [ "swift_format" ];
+    lsp.servers.sourcekit.enable = true;
+  };
 
   programs.zed-editor.extensions = [
     "swift"
   ];
+
+  programs.zed-editor.userSettings = {
+    languages.Swift.language_servers = [ "sourcekit-lsp" ];
+    lsp.sourcekit-lsp.binary.path = lib.getExe pkgs.sourcekit-lsp;
+  };
 }

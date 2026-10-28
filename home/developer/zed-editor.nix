@@ -13,6 +13,7 @@
     ];
 
     userSettings = {
+      disable_ai = true;
       vim_mode = true;
       feature = {
         copilot = true;
