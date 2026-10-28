@@ -27,7 +27,7 @@ in
     useGlobalPkgs = true;
     useUserPackages = true;
     backupFileExtension = "home-manager-backup";
-    extraSpecialArgs = { inherit inputs isDroid; };
+    extraSpecialArgs = { inherit inputs isDroid isDarwin; };
 
     users = {
       "${cfg.username}" = {

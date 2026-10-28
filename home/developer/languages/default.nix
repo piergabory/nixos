@@ -6,5 +6,6 @@
     # ./c.nix
     ./markdown.nix
     ./script.nix
+    ./swift.nix
   ];
 }
