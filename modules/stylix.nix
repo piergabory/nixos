@@ -47,8 +47,8 @@
             };
 
             monospace = {
-              package = pkgs.nerd-fonts.fira-code;
-              name = "FiraCode Nerd Font";
+              package = pkgs.ioskeley-mono.nf;
+              name = "Ioskeley Mono Nerd Font";
             };
 
             emoji = {
