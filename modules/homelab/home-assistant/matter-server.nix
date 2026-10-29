@@ -1,9 +1,14 @@
-{ config, lib, ... }:
+{
+  config,
+  lib,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.hass-container;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.avahi = {
       enable = true;
@@ -21,17 +26,12 @@ in {
       };
     };
 
-    services.matter-server = {
+    services.matterjs-server = {
       enable = true;
+      listenAddress = "::";
       openFirewall = true;
       # Matter devices advertise scoped IPv6 addresses on the wired LAN.
-      extraArgs.primary-interface = "eth0";
+      extraArgs = [ "--primary-interface=eth0" ];
     };
-
-    # The current DCL response contains a certificate that matter-server 8.1.2
-    # cannot parse. Keep the known-good certificate cache for now.
-    systemd.services.matter-server.preStart = ''
-      touch /var/cache/matter-server/certs/.version
-    '';
   };
 }
