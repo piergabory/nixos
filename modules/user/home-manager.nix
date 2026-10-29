@@ -9,9 +9,6 @@
 with lib;
 let
   cfg = config.mainUser;
-  homeCfg = cfg.homeConfiguration // {
-    imports = (cfg.homeConfiguration.imports or []) ++ [ ../../home ];
-  };
 in
 {
   imports = [
@@ -31,12 +28,12 @@ in
 
     users = {
       "${cfg.username}" = {
+        imports = cfg.homeConfiguration.imports ++ [ ../../home ];
         home = {
           username = cfg.username;
           homeDirectory = cfg.homeDirectory;
         };
-      }
-      // homeCfg;
+      };
 
       root = mkIf (!isDarwin) {
         imports = [ ../../home/root.nix ];
