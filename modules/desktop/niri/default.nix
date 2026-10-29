@@ -15,7 +15,6 @@
 
       spawn-at-startup = [
         { argv = [ "waybar" ]; }
-        { argv = ["foot" "--server"]; }
         { argv = [ "swaybg" "-i" "${../../../assets/house.jpg}" ]; }
       ];
 
