@@ -7,7 +7,6 @@ in
 {
   imports = [
     ./secrets
-    ./nginx.nix
   ];
 
   config = {

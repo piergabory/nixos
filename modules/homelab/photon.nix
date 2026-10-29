@@ -3,7 +3,6 @@ with lib;
 
 let
   cfg = config.services.photon;
-  domain = config.modules.homelab.domain;
 in
 {
   options.services.photon = {
@@ -42,17 +41,5 @@ in
     systemd.tmpfiles.rules = [
       "d /var/lib/photon 0750 9011 9011 -"
     ];
-
-    # Photon exposes an unauthenticated search and reverse-geocoding API, so
-    # browser access is protected while local services use the port directly.
-    services.nginx.virtualHosts."geocoder.${domain}" = {
-      forceSSL = true;
-      enableACME = true;
-      extraConfig = config.modules.oauth.internalAuthLocation;
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:${toString cfg.port}";
-        extraConfig = config.modules.oauth.forwardAuthConfig;
-      };
-    };
   };
 }
