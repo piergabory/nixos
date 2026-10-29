@@ -3,9 +3,11 @@
     programs = {
       git = {
         enable = true;
-        settings.user = {
-          name = "Pierre Gabory";
-          email = "mail@piergabory.net";
+        settings = {
+          user = {
+            name = "Pierre Gabory";
+            email = "mail@piergabory.net";
+          };
           init.defaultBranch = "main";
           pull.rebase = true;
           push.autoSetupRemote = true;
