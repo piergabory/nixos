@@ -47,7 +47,8 @@ let
       meta = {
         description = "Obsidian community plugin: ${id}";
         platforms = pkgs.lib.platforms.all;
-      } // meta;
+      }
+      // meta;
     };
 in
 {

@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.airtrail;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.restic.backups.airtrail = {
       inherit (config.services.backups) repository passwordFile pruneOpts;

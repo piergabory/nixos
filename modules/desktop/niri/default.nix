@@ -15,7 +15,13 @@
 
       spawn-at-startup = [
         { argv = [ "waybar" ]; }
-        { argv = [ "swaybg" "-i" "${../../../assets/house.jpg}" ]; }
+        {
+          argv = [
+            "swaybg"
+            "-i"
+            "${../../../assets/house.jpg}"
+          ];
+        }
       ];
 
       window-rules = [

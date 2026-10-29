@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.pihole;
-in {
+in
+{
   imports = [
     ./pihole-ftl.nix
     ./backup.nix
@@ -26,7 +27,10 @@ in {
     };
 
     networking.firewall.interfaces.eth0 = {
-      allowedTCPPorts = [ 53 8080 ];
+      allowedTCPPorts = [
+        53
+        8080
+      ];
       allowedUDPPorts = [ 53 ];
     };
   };

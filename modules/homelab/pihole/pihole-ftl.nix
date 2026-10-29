@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.pihole;
-in {
+in
+{
   config = mkIf cfg.enable {
     # pihole-ftl 6.7.1 fails to build with newer GCC: `sanitize_dns_hosts` in
     # src/config/validator.c declares `int i = 0;` to walk the dns.hosts JSON
@@ -16,6 +17,7 @@ in {
     nixpkgs.overlays = [
       (_final: prev: {
         pihole-ftl = prev.pihole-ftl.overrideAttrs (old: {
+          /*nixfmt:disable*/
           postPatch = (old.postPatch or "") + ''
             substituteInPlace src/config/validator.c \
               --replace-fail 'int i = 0;
@@ -32,6 +34,7 @@ in {
 		if(!cJSON_IsString(item))
 			continue;'
           '';
+          /*nixfmt:enable*/
         });
       })
     ];

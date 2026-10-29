@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.vaultwarden;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.restic.backups.vaultwarden = {
       inherit (config.services.backups) repository passwordFile pruneOpts;

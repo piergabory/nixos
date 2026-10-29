@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.hass-container;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.rsync = {
       enable = true;

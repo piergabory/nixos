@@ -1,6 +1,7 @@
 let
   position = 300;
-in {
+in
+{
   programs.zen-browser.profiles.default.spaces.general.pins."News" = {
     inherit position;
     id = "news_group";

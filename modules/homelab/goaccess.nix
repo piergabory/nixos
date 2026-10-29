@@ -50,7 +50,9 @@ in
       settings = {
         AccountID = cfg.maxmindAccountID;
         EditionIDs = [ "GeoLite2-City" ];
-        LicenseKey = { _secret = cfg.maxmindLicenseKeyFile; };
+        LicenseKey = {
+          _secret = cfg.maxmindLicenseKeyFile;
+        };
       };
     };
 
@@ -61,7 +63,10 @@ in
 
       services.goaccess = {
         description = "GoAccess Nginx log analyser";
-        after = [ "nginx.service" "geoipupdate.service" ];
+        after = [
+          "nginx.service"
+          "geoipupdate.service"
+        ];
         wants = [ "geoipupdate.service" ];
         wantedBy = [ "multi-user.target" ];
 

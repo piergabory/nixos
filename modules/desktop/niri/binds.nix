@@ -94,7 +94,10 @@
     };
 
     "Mod+T".action.spawn = "footclient";
-    "Mod+Space".action.spawn = [ "vicinae" "open" ];
+    "Mod+Space".action.spawn = [
+      "vicinae"
+      "open"
+    ];
 
     "Mod+O" = {
       repeat = false;

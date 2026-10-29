@@ -4,8 +4,9 @@ with lib;
 let
   domain = config.modules.homelab.domain;
   cfg = config.services.radicale;
-in {
-  imports  = [
+in
+{
+  imports = [
     ./secrets
     ./backup.nix
   ];

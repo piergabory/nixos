@@ -4,7 +4,8 @@ with lib;
 let
   domain = config.modules.homelab.domain;
   cfg = config.services.jellyfin;
-in {
+in
+{
   imports = [
     ./backup.nix
   ];

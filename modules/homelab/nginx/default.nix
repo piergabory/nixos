@@ -4,7 +4,8 @@ with lib;
 let
   lab = config.modules.homelab;
   cfg = config.services.nginx;
-in {
+in
+{
   imports = [
     ./backup.nix
   ];
@@ -43,7 +44,10 @@ in {
       rotate = 31;
     };
 
-    networking.firewall.allowedTCPPorts = [ 80 443 ];
+    networking.firewall.allowedTCPPorts = [
+      80
+      443
+    ];
 
     systemd.tmpfiles.rules = [
       "d /var/http/html 0755 piergabory nginx -"

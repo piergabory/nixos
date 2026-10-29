@@ -1,9 +1,15 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.actual;
-in {
+in
+{
   services.restic.backups.actual = mkIf cfg.enable {
     inherit (config.services.backups) repository passwordFile pruneOpts;
     initialize = true;

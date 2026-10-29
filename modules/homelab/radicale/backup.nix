@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.radicale;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.restic.backups.radicale = {
       inherit (config.services.backups) repository passwordFile pruneOpts;

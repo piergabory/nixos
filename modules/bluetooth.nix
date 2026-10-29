@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.modules.bluetooth;
-in {
+in
+{
   options.modules.bluetooth = {
     enable = mkEnableOption "Bluetooth networking";
   };

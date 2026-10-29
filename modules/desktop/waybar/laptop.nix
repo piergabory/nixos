@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.programs.waybar;
-in {
+in
+{
   options.programs.waybar = {
     enableStatusWidgets = mkEnableOption "Show widgets for laptops";
     showBattery = mkEnableOption "Show battery";
@@ -16,7 +17,8 @@ in {
         "bluetooth"
         "pulseaudio"
         "backlight"
-      ] ++ optional cfg.showBattery "battery";
+      ]
+      ++ optional cfg.showBattery "battery";
 
       "network" = {
         format = "{ifname}";
@@ -66,7 +68,8 @@ in {
       "bluetooth" = {
         format = " {status}";
       };
-    } // optionalAttrs cfg.showBattery {
+    }
+    // optionalAttrs cfg.showBattery {
       battery = {
         format = "{icon} {capacity}% ";
         format-icons = [

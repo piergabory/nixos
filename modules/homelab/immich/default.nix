@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   domain = config.modules.homelab.domain;
   cfg = config.services.immich;
-in {
+in
+{
   imports = [
     ./backup.nix
   ];
@@ -39,18 +45,22 @@ in {
       ];
     };
 
-    fileSystems = lib.listToAttrs (map (name: {
-      name = "/storage/immich/${name}";
-      value = {
-        device = "/var/lib/immich/${name}";
-        fsType = "none";
-        options = [ "bind" ];
-      };
-    }) [
-      "encoded-video"
-      "profile"
-      "thumbs"
-    ]);
+    fileSystems = lib.listToAttrs (
+      map
+        (name: {
+          name = "/storage/immich/${name}";
+          value = {
+            device = "/var/lib/immich/${name}";
+            fsType = "none";
+            options = [ "bind" ];
+          };
+        })
+        [
+          "encoded-video"
+          "profile"
+          "thumbs"
+        ]
+    );
 
     environment.systemPackages = with pkgs; [
       immich-cli

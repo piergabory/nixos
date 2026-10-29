@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.services.authentication;
-in {
+in
+{
   imports = [
     ./secrets
     ./authelia.nix

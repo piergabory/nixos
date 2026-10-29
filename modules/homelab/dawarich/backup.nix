@@ -1,11 +1,17 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.dawarich;
-in {
+in
+{
   config = mkIf cfg.enable {
-      services.restic.backups.dawarich = {
+    services.restic.backups.dawarich = {
       inherit (config.services.backups) repository passwordFile pruneOpts;
 
       initialize = true;

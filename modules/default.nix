@@ -5,7 +5,8 @@
     ./user
     ./shell.nix
     ./stylix.nix
-  ] ++ lib.optionals (!isDarwin) [
+  ]
+  ++ lib.optionals (!isDarwin) [
     ./desktop
     ./homelab
     ./offsite-backup

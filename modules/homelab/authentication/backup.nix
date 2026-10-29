@@ -1,9 +1,15 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 
 let
   cfg = config.services.authentication;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.restic.backups.authelia = {
       inherit (config.services.backups) repository passwordFile pruneOpts;

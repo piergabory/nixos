@@ -2,15 +2,19 @@
 
 let
   isDarwin = pkgs.stdenv.hostPlatform.isDarwin;
-in {
-  home.packages = with pkgs; [
-    swift
-    swiftlint
-    swiftpm
-    swift-format
-  ] ++ lib.optionals isDarwin [
-    pkgs.darwin.xcode_27
-  ];
+in
+{
+  home.packages =
+    with pkgs;
+    [
+      swift
+      swiftlint
+      swiftpm
+      swift-format
+    ]
+    ++ lib.optionals isDarwin [
+      pkgs.darwin.xcode_27
+    ];
 
   home.file."Applications/Home Manager Apps/Xcode 26.6.app" = lib.mkIf isDarwin {
     source = pkgs.darwin.xcode_26_6_Apple_silicon;

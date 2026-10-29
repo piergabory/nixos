@@ -4,7 +4,8 @@ with lib;
 let
   domain = config.modules.homelab.domain;
   cfg = config.services.airtrail;
-in {
+in
+{
   imports = [
     ./secrets
     ./backup.nix

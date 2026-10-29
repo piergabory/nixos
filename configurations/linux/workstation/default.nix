@@ -30,7 +30,7 @@
       cpuFreqGovernor = "performance";
     };
 
-    services =  {
+    services = {
       openssh.enable = true;
       syncthing.enable = true;
 

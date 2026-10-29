@@ -4,7 +4,8 @@ with lib;
 let
   lab = config.modules.homelab;
   cfg = config.services.vaultwarden;
-in {
+in
+{
   imports = [
     ./backup.nix
   ];

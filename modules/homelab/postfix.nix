@@ -1,10 +1,16 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 with lib;
 let
   password_path = "/var/lib/postfix/conf/sasl_passwd";
   lab = config.modules.homelab;
   cfg = config.services.postfix;
-in {
+in
+{
   config = mkIf cfg.enable {
     services.postfix = {
       rootAlias = lab.email;

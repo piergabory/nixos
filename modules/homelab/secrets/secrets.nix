@@ -7,9 +7,16 @@ let
   offsiteRoot = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKuRnatqXTEh4liurVS8LNOI3njCSVmOHt2Qs5TVYHXT root@offsite";
   offsiteSystem = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJHf8xIos3OZiw/V7IwItIbskxTCRh2t+fD0Stc9SG5n root@nixos";
 
-  keys = [ root system ];
-  keysWithOffsite = keys ++ [ offsiteRoot offsiteSystem ];
-in {
+  keys = [
+    root
+    system
+  ];
+  keysWithOffsite = keys ++ [
+    offsiteRoot
+    offsiteSystem
+  ];
+in
+{
   "restic-password.age".publicKeys = keysWithOffsite;
   "icloud-smtp-relay.age".publicKeys = keys;
   "maxmind-license-key.age".publicKeys = keys;

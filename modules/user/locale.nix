@@ -1,9 +1,15 @@
-{ config, lib, isDarwin, ... }:
+{
+  config,
+  lib,
+  isDarwin,
+  ...
+}:
 with lib;
 
 let
   cfg = config.mainUser;
-in {
+in
+{
   options.mainUser.keyboardLayout = mkOption {
     type = types.str;
     default = "fr";

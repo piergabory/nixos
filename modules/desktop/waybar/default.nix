@@ -3,7 +3,8 @@ with lib;
 
 let
   cfg = config.programs.waybar;
-in {
+in
+{
   imports = [
     ./laptop.nix
   ];
