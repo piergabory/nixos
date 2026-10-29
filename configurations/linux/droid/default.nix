@@ -64,6 +64,7 @@
       inherit inputs;
       osConfig = config;
       isDroid = true;
+      isDarwin = false;
     };
   };
 }
