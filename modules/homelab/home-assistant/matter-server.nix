@@ -31,7 +31,10 @@ in
       listenAddress = "::";
       openFirewall = true;
       # Matter devices advertise scoped IPv6 addresses on the wired LAN.
-      extraArgs = [ "--primary-interface=eth0" ];
+      extraArgs = [
+        "--primary-interface=eth0"
+        "--vendorid=4939"
+      ];
     };
   };
 }
