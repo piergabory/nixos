@@ -2,12 +2,6 @@
   programs.nixvim.keymaps = [
     {
       mode = "n";
-      key = "<leader>e";
-      action = "<cmd>Neotree toggle<cr>";
-      options.desc = "Explorer";
-    }
-    {
-      mode = "n";
       key = "<leader>ff";
       action = "<cmd>Telescope find_files<cr>";
       options.desc = "Find files";
@@ -44,12 +38,6 @@
     }
     {
       mode = "n";
-      key = "<leader>gl";
-      action = "<cmd>LazyGit<cr>";
-      options.desc = "LazyGit";
-    }
-    {
-      mode = "n";
       key = "<leader>xx";
       action = "<cmd>Trouble diagnostics toggle<cr>";
       options.desc = "Diagnostics";
@@ -65,30 +53,6 @@
       key = "<leader>td";
       action = "<cmd>TodoTelescope<cr>";
       options.desc = "Todos";
-    }
-    {
-      mode = "n";
-      key = "<leader>aa";
-      action = "<cmd>CodeCompanionActions<cr>";
-      options.desc = "AI actions";
-    }
-    {
-      mode = [
-        "n"
-        "v"
-      ];
-      key = "<leader>ac";
-      action = "<cmd>CodeCompanionChat Toggle<cr>";
-      options.desc = "AI chat";
-    }
-    {
-      mode = [
-        "n"
-        "v"
-      ];
-      key = "<leader>ai";
-      action = "<cmd>CodeCompanion<cr>";
-      options.desc = "AI inline";
     }
     {
       mode = "n";
