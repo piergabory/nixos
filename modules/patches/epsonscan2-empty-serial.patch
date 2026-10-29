@@ -1,0 +1,31 @@
+The V800 can report a USB device name ending with ':' and no serial number.
+Do not construct a std::string from the resulting null strtok pointer.
+
+--- a/src/Standalone/initdeviceselectcombobox.cpp
++++ b/src/Standalone/initdeviceselectcombobox.cpp
+@@ -98,7 +98,9 @@ void InitDeviceSelectCombobox::CreateDisplayName(char displayName[MAX_DISPLAYNA
+     }
+         if(find && strtok(temp_displayName, ":")){
+-            std::string serialNumber = strtok(NULL, ":");
+-            connection_display = connection_display + ":" + serialNumber;
++            const char *serialNumber = strtok(NULL, ":");
++            if (serialNumber) {
++                connection_display = connection_display + ":" + serialNumber;
++            }
+         }
+     }
+ #ifdef AKBMODE
+--- a/src/Standalone/deviceselectorcombobox.cpp
++++ b/src/Standalone/deviceselectorcombobox.cpp
+@@ -108,7 +108,9 @@ void DeviceSelectorCombobox::CreateDisplayName(char displayName[MAX_DISPLAYNAME]
+         }
+         if(find && strtok(temp_displayName, ":")){
+-            std::string serialNumber = strtok(NULL, ":");
+-            connection_display = connection_display + ":" + serialNumber;
++            const char *serialNumber = strtok(NULL, ":");
++            if (serialNumber) {
++                connection_display = connection_display + ":" + serialNumber;
++            }
+         }
+     }
+ #ifdef AKBMODE

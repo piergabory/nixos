@@ -8,6 +8,9 @@ with lib;
 
 let
   cfg = config.modules.film-photography;
+  epsonscan2 = pkgs.epsonscan2.overrideAttrs (old: {
+    patches = old.patches ++ [ ./patches/epsonscan2-empty-serial.patch ];
+  });
 in
 {
   options.modules.film-photography = {
@@ -19,6 +22,7 @@ in
       gimp-with-plugins
       darktable
       kdePackages.skanlite
+      epsonscan2
       imv
     ];
 
