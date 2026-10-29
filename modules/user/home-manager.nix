@@ -28,7 +28,7 @@ in
 
     users = {
       "${cfg.username}" = {
-        imports = cfg.homeConfiguration.imports ++ [ ../../home ];
+        imports = cfg.homeConfiguration.imports ++ [ cfg.homeProfile ];
         home = {
           username = cfg.username;
           homeDirectory = cfg.homeDirectory;
@@ -36,7 +36,7 @@ in
       };
 
       root = mkIf (!isDarwin) {
-        imports = [ ../../home/root.nix ];
+        imports = [ ../../home/cli.nix ];
         home = {
           username = "root";
           homeDirectory = "/root";

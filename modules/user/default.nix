@@ -30,6 +30,12 @@ in
       type = types.str;
       default = "/home/${cfg.username}";
     };
+    homeProfile = mkOption {
+      type = types.path;
+      default = ../../home;
+      defaultText = literalExpression "../../home";
+      description = "Base Home Manager profile for the main user.";
+    };
     homeConfiguration = mkOption {
       type = types.deferredModule;
       default = { };

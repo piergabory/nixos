@@ -7,6 +7,7 @@
 
   config = {
     networking.hostName = "offsite";
+    mainUser.homeProfile = ../../../home/cli.nix;
     console.keyMap = "mac-fr";
     services.kmscon.enable = true;
     systemd.services.syncthing.serviceConfig = {
