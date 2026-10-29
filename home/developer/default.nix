@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  isDarwin ? false,
   isDroid ? false,
   ...
 }:
@@ -14,6 +15,9 @@
     ./languages
     ./opencode.nix
     ./zed-editor.nix
+  ]
+  ++ lib.optionals isDarwin [
+    ./darwin
   ];
 
   config = lib.optionalAttrs (!isDroid) {
