@@ -38,15 +38,13 @@ in
       }
       // homeCfg;
 
-      root = mkIf (isDarwin == false) (
-        {
-          home = {
-            username = "root";
-            homeDirectory = "/root";
-          };
-        }
-        // homeCfg
-      );
+      root = mkIf (!isDarwin) {
+        imports = [ ../../home/root.nix ];
+        home = {
+          username = "root";
+          homeDirectory = "/root";
+        };
+      };
     };
   };
 }
