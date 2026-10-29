@@ -14,10 +14,6 @@ let
   };
 in
 {
-  imports = [
-    ./secrets
-  ];
-
   config = {
     programs.thunderbird.profiles.default.isDefault = true;
     accounts = {
