@@ -24,7 +24,6 @@ with lib;
     };
 
     lsp.servers = {
-      nil_ls.enable = true;
       nixd.enable = true;
     };
   };
@@ -34,13 +33,11 @@ with lib;
       languages = {
         "Nix" = {
           language_servers = [
-            "nil"
             "nixd"
           ];
         };
       };
       lsp = {
-        nil.binary.path = getExe pkgs.nil;
         nixd.binary.path = getExe pkgs.nixd;
       };
     };

@@ -14,7 +14,6 @@
     };
 
     lsp.servers = {
-      marksman.enable = true;
       markdown_oxide.enable = true;
     };
   };
