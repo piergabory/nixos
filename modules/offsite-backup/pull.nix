@@ -158,6 +158,10 @@ in
         # letting a password mismatch surface as an obscure copy error.
         ${restic} -r ${cfg.repository} --password-file ${cfg.passwordFile} cat config > /dev/null
 
+        # Clear stale destination locks left by an interrupted copy without
+        # waiting for monthly maintenance. Live locks are left untouched.
+        ${restic} -r ${cfg.repository} --password-file ${cfg.passwordFile} unlock
+
         # copy, not sync: snapshots already replicated are skipped, and
         # snapshots deleted upstream stay here until this machine's own
         # retention policy expires them.
