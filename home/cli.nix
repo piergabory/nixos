@@ -4,6 +4,7 @@
   imports = [
     ./developer/git.nix
     ./developer/nixvim
+    ./developer/opencode.nix
     ./programs/ssh.nix
   ];
 
