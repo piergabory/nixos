@@ -110,6 +110,9 @@ in
       mapAttrs' (
         name: _:
         nameValuePair "restic-backups-${name}" {
+          requires = [ "restic-repository-permissions.service" ];
+          after = [ "restic-repository-permissions.service" ];
+          unitConfig.RequiresMountsFor = cfg.repository;
           serviceConfig.UMask = "0027";
 
           # These are Type=oneshot units that can run for hours; the Immich job
@@ -148,7 +151,10 @@ in
             RestartSec = "30m";
           };
 
-          unitConfig.StartLimitIntervalSec = 0;
+          unitConfig = {
+            StartLimitIntervalSec = 0;
+            RequiresMountsFor = cfg.repository;
+          };
 
           script = ''
             set -euo pipefail
@@ -184,6 +190,7 @@ in
           before = map (name: "restic-backups-${name}.service") (
             builtins.attrNames config.services.restic.backups
           );
+          unitConfig.RequiresMountsFor = cfg.repository;
 
           serviceConfig = {
             Type = "oneshot";
