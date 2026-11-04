@@ -9,6 +9,7 @@ in
     ./secrets
     ./backup.nix
     ./container.nix
+    ./dreame-update.nix
     ./matter-server.nix
   ];
 
