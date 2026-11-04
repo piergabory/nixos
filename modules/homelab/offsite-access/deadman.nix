@@ -23,6 +23,9 @@ let
     snapshot_threshold=$(( 72 * 3600 ))
     now=$(${pkgs.coreutils}/bin/date +%s)
 
+    stderr_file=$(${pkgs.coreutils}/bin/mktemp)
+    trap 'rm -f "$stderr_file"' EXIT
+
     if [ -e ${cfg.timestampFile} ]; then
       last=$(${pkgs.coreutils}/bin/stat -c %Y ${cfg.timestampFile})
       age=$(( now - last ))
@@ -36,19 +39,23 @@ let
     if snapshots=$(${pkgs.restic}/bin/restic --no-cache \
       -r ${escapeShellArg backups.repository} \
       --password-file ${escapeShellArg backups.passwordFile} \
-      snapshots --json --latest 1 --group-by tags 2>&1); then
+      snapshots --json --latest 1 --group-by tags 2>"$stderr_file"); then
       if ${pkgs.jq}/bin/jq -e '
-        type == "array" and all(.[];
+        def flat:
+          [ .[] | if type == "object" and has("snapshots") then .snapshots[] else . end ];
+
+        type == "array" and (flat | all(.[];
           type == "object"
           and (.tags // [] | type == "array" and all(.[]; type == "string"))
           and (.time | type == "string" and test(
             "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[+-][0-9]{2}:[0-9]{2})$"
           ))
-        )
+        ))
       ' >/dev/null 2>&1 <<< "$snapshots"; then
         for tag in ${escapeShellArgs (attrNames sourceJobs)}; do
           if latest=$(${pkgs.jq}/bin/jq -er --arg tag "$tag" '
-            [.[] | select((.tags // []) | index($tag)) | .time] | max // empty
+            [ .[] | if type == "object" and has("snapshots") then .snapshots[] else . end
+              | select((.tags // []) | index($tag)) | .time ] | max // empty
           ' <<< "$snapshots"); then
             if timestamp=$(${pkgs.coreutils}/bin/date --date="$latest" +%s 2>/dev/null); then
               age=$(( now - timestamp ))
@@ -66,7 +73,10 @@ let
         issues+=("Source repository: restic returned invalid snapshot JSON.")
       fi
     else
-      issues+=("Source repository: unable to inspect snapshots." "$snapshots")
+      issues+=("Source repository: unable to inspect snapshots.")
+      if [ -s "$stderr_file" ]; then
+        issues+=("$(${pkgs.coreutils}/bin/cat "$stderr_file")")
+      fi
     fi
 
     if [ "''${#issues[@]}" -eq 0 ]; then
