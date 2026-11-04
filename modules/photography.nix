@@ -29,7 +29,7 @@ in
     # Support for EPSON flatbed scanners (V800)
     hardware.sane = {
       enable = true;
-      extraBackends = [ pkgs.epkowa ];
+      extraBackends = [ epsonscan2 ];
     };
     services.udev.packages = config.hardware.sane.extraBackends;
   };
