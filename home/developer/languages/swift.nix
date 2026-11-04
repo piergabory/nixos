@@ -7,8 +7,10 @@ in
   home.packages =
     with pkgs;
     [
-      swift
       swiftlint
+    ]
+    ++ lib.optionals (!isDarwin) [
+      swift
       swiftpm
       swift-format
     ]
@@ -21,8 +23,21 @@ in
   };
 
   programs.nixvim.plugins = {
-    conform-nvim.settings.formatters_by_ft.swift = [ "swift_format" ];
-    lsp.servers.sourcekit.enable = true;
+    conform-nvim.settings = {
+      formatters_by_ft.swift = [ "swift_format" ];
+      formatters.swift_format = lib.mkIf isDarwin {
+        command = "/usr/bin/xcrun";
+        prepend_args = [ "swift-format" ];
+      };
+    };
+    lsp.servers.sourcekit = {
+      enable = true;
+      package = lib.mkIf isDarwin null;
+      cmd = lib.mkIf isDarwin [
+        "/usr/bin/xcrun"
+        "sourcekit-lsp"
+      ];
+    };
   };
 
   programs.zed-editor.extensions = [
@@ -31,6 +46,15 @@ in
 
   programs.zed-editor.userSettings = {
     languages.Swift.language_servers = [ "sourcekit-lsp" ];
-    lsp.sourcekit-lsp.binary.path = lib.getExe pkgs.sourcekit-lsp;
+    lsp.sourcekit-lsp.binary =
+      if isDarwin then
+        {
+          path = "/usr/bin/xcrun";
+          arguments = [ "sourcekit-lsp" ];
+        }
+      else
+        {
+          path = lib.getExe pkgs.sourcekit-lsp;
+        };
   };
 }

@@ -8,22 +8,6 @@
   programs.opencode = {
     enable = true;
     settings = {
-      mcp = {
-        atlassian = {
-          type = "remote";
-          url = "https://mcp.atlassian.com/v1/mcp/authv2";
-        };
-      }
-      // lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
-        xcode = {
-          type = "local";
-          command = [
-            "xcrun"
-            "mcpbridge"
-          ];
-        };
-      };
-
       permissions = [
         {
           action = "external_directory";
