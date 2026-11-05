@@ -8,6 +8,7 @@ in
 {
   imports = [
     ./secrets
+    ./stylix.nix
   ];
 
   config = mkIf cfg.enable {
@@ -16,11 +17,56 @@ in
       configureNginx = false;
       environmentFile = config.age.secrets.searx-env.path;
 
-      settings.server = {
-        base_url = "https://${domain}/";
-        bind_address = "127.0.0.1";
-        port = 8332;
-        secret_key = "$SEARXNG_SECRETS";
+      settings = {
+        server = {
+          base_url = "https://${domain}/";
+          bind_address = "127.0.0.1";
+          port = 8332;
+          secret_key = "$SEARXNG_SECRETS";
+          image_proxy = true;
+        };
+
+        search.default_lang = "en-US";
+        ui.default_locale = "en";
+
+        engines = [
+          {
+            name = "duckduckgo";
+            disabled = false;
+            weight = 1.5;
+          }
+          {
+            name = "brave";
+            disabled = false;
+            weight = 1.0;
+          }
+        ];
+
+        plugins =
+          genAttrs
+            (map (name: "searx.plugins.${name}.SXNGPlugin") [
+              "calculator"
+              "infinite_scroll"
+              "hash_plugin"
+              "self_info"
+              "unit_converter"
+              "ahmia_filter"
+              "hostnames"
+              "time_zone"
+              "tracker_url_remover"
+            ])
+            (_: {
+              active = true;
+            })
+          //
+            genAttrs
+              (map (name: "searx.plugins.${name}.SXNGPlugin") [
+                "oa_doi_rewrite"
+                "tor_check"
+              ])
+              (_: {
+                active = false;
+              });
       };
     };
 
