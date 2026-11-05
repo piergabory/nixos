@@ -6,6 +6,10 @@
 }:
 let
   colors = config.lib.stylix.colors;
+  fontPackage = pkgs.ioskeley-mono.nf;
+  fontDirectory = "ioskeley-${
+    builtins.substring 0 12 (builtins.hashString "sha256" "${fontPackage}")
+  }";
 
   colorRoles = {
     base00 = [
@@ -137,8 +141,8 @@ let
       --color-error-background: #${colors.base08}22;
       --color-warning-background: #${colors.base0A}22;
       --color-success-background: #${colors.base0B}22;
-      --color-search-shadow: 0 2px 8px #${colors.base00}80;
-      --color-autocomplete-shadow: 0 2px 8px #${colors.base00}80;
+      --color-search-shadow: none;
+      --color-autocomplete-shadow: none;
       --color-result-detail-loader-border: #${colors.base05}33;
       --color-result-detail-loader-borderleft: transparent;
       --color-toolkit-loader-border: #${colors.base05}33;
@@ -149,20 +153,31 @@ let
     '';
 
   stylesheetContents = ''
-    #main_index .index > .title,
-    #search_logo {
-      display: none;
+    @font-face {
+      font-family: "Ioskeley";
+      src: url("${fontDirectory}/IoskeleyMonoNerdFontMono-Regular.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
     }
 
-    :root.theme-dark, :root.theme-black {
+    @font-face {
+      font-family: "Ioskeley";
+      src: url("${fontDirectory}/IoskeleyMonoNerdFontMono-Bold.ttf") format("truetype");
+      font-style: normal;
+      font-weight: 700;
+      font-display: swap;
+    }
+
+    :root,
+    :root.theme-auto,
+    :root.theme-light,
+    :root.theme-dark,
+    :root.theme-black {
       ${darkStyles}
     }
-    @media (prefers-color-scheme: dark) {
-      :root.theme-auto {
-        ${darkStyles}
-      }
-    }
-  '';
+  ''
+  + builtins.readFile ./tui.css;
   stylesheet = pkgs.writeText "searxng-stylix.css" stylesheetContents;
   stylesheetName = "stylix-${
     builtins.substring 0 12 (builtins.hashString "sha256" stylesheetContents)
@@ -188,6 +203,11 @@ in
         postInstall = (old.postInstall or "") + ''
           searx="$out/${pkgs.python3.sitePackages}/searx"
           install -m 444 ${stylesheet} "$searx/static/themes/simple/${stylesheetName}"
+          install -d "$searx/static/themes/simple/${fontDirectory}"
+          for weight in Regular Bold; do
+            install -m 444 "${fontPackage}/share/fonts/truetype/IoskeleyMonoNerdFontMono-$weight.ttf" \
+              "$searx/static/themes/simple/${fontDirectory}/"
+          done
           substituteInPlace "$searx/templates/simple/base.html" \
             --replace-fail '</head>' \
               "<link rel=\"stylesheet\" href=\"{{ url_for('static', filename='${stylesheetName}') }}\" type=\"text/css\"></head>"

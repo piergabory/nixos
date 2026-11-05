@@ -1,0 +1,637 @@
+/* Character-cell spacing and typographic hierarchy; only the prompt is boxed. */
+:root {
+  --tui-line: 1.5rem;
+  --tui-border: var(--color-base-font);
+  --tui-muted: var(--color-result-engines-font);
+  --tui-accent: var(--color-categories-item-selected-font);
+  --tui-url: color-mix(in srgb, var(--color-base-font) 75%, var(--color-base-background));
+  --tui-metadata: color-mix(in srgb, var(--color-base-font) 55%, var(--color-base-background));
+}
+
+html {
+  font-size: 14px;
+  line-height: var(--tui-line);
+  scroll-behavior: auto;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  font-family: "Ioskeley" !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  animation: none !important;
+  transition: none !important;
+}
+
+body {
+  height: auto;
+  min-height: 100dvh;
+  padding: var(--tui-line) 2ch;
+}
+
+body > main {
+  width: 100%;
+  max-width: 160ch;
+  margin: 0 auto var(--tui-line);
+}
+
+/* Hide SearXNG branding and UI glyphs, not imagery supplied by results. */
+.ionicon,
+.sxng-icon-set,
+.sxng-icon-set-small,
+.sxng-icon-set-big,
+#search_logo,
+.page_with_header .logo,
+.search_categories .help {
+  display: none !important;
+}
+
+/* Icon-only controls have no existing visible text to style. */
+#clear_search,
+#backToTop,
+.result-detail-close,
+.result-detail-previous,
+.result-detail-next {
+  display: none !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+pre,
+dl {
+  margin-block: 0 var(--tui-line);
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+:is(a, button, input, select, textarea, summary):focus-visible {
+  outline: 1px solid var(--tui-accent) !important;
+  outline-offset: 2px;
+}
+
+/* A text-only status/menu bar, kept in normal flow on every screen size. */
+#links_on_top {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2ch;
+  min-height: calc(2 * var(--tui-line));
+  padding: 0;
+  border: 0;
+  margin-bottom: var(--tui-line);
+  font-size: 1rem;
+}
+
+#links_on_top a {
+  margin: 0;
+  padding: 0;
+}
+
+#links_on_top a span {
+  display: inline !important;
+}
+
+/* The landing page is a command prompt rather than a centered logo. */
+#main_index {
+  margin-top: 0;
+}
+
+#main_index .index {
+  max-width: 100ch;
+  margin: calc(3 * var(--tui-line)) auto;
+  text-align: start;
+}
+
+#main_index .index > .title {
+  background-image: none;
+  min-height: 0;
+  margin: 0;
+  padding: var(--tui-line) 0;
+  border: 0;
+}
+
+#main_index .index h1 {
+  visibility: visible;
+  font-size: 1rem;
+  color: var(--tui-accent);
+  margin: 0;
+}
+
+#main_index #search,
+#search {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--color-base-background);
+}
+
+#main_index #search_header,
+#search_header {
+  display: grid;
+  grid-template: "search" auto "categories" auto / minmax(0, 1fr);
+  gap: var(--tui-line) 0;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+/* Cancel the upstream mobile full-screen input overlay. */
+#main_index #search_view,
+#main_results #search_view,
+#main_results #search_view:focus-within {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  height: auto;
+  padding: 0;
+  min-width: 0;
+  z-index: auto;
+  background: transparent;
+}
+
+#search .search_box {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  width: 100%;
+  max-width: none;
+  border: 1px solid var(--tui-border);
+  background: var(--color-base-background);
+}
+
+#search .search_box:focus-within {
+  border-color: var(--tui-accent);
+}
+
+#search #q,
+#search #send_search {
+  width: auto;
+  min-width: 0;
+  height: calc(2 * var(--tui-line));
+  margin: 0 !important;
+  padding: 0 1ch !important;
+  border: 0;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+  background: transparent;
+  color: var(--color-base-font);
+  z-index: auto;
+}
+
+#search #send_search {
+  color: var(--tui-accent);
+  cursor: pointer;
+}
+
+#send_search > .hide_if_nojs {
+  display: none !important;
+}
+
+/* Reuse the translated label already present in SearXNG's template. */
+#send_search > .show_if_nojs {
+  display: inline !important;
+}
+
+#main_index #categories_container,
+#main_results #categories_container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2ch;
+  width: auto;
+}
+
+#main_index #categories,
+#main_results #categories {
+  width: 100%;
+  overflow: visible;
+  font-size: 1rem;
+  text-align: start;
+}
+
+#categories .category {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1rem;
+  border: 0;
+}
+
+#categories .category label,
+#categories button.category {
+  display: inline-flex;
+  gap: 1ch;
+  padding: 0 !important;
+  line-height: var(--tui-line);
+  border: 0 !important;
+  color: var(--tui-muted);
+  text-transform: lowercase;
+}
+
+#categories .category_name {
+  display: inline !important;
+}
+
+#categories input:checked + label,
+#categories button.selected {
+  color: var(--tui-accent);
+  font-weight: 700;
+}
+
+#categories button.category:hover,
+#categories .category label:hover {
+  color: var(--tui-accent);
+  background: transparent;
+  text-decoration: underline;
+}
+
+/* Keep category checkboxes keyboard-accessible while visually hiding them. */
+#categories .category input[type="checkbox"] {
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+#categories input:focus-visible + label {
+  outline: 1px solid var(--tui-accent);
+}
+
+#main_index .search_filters,
+#search .search_filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--tui-line) 2ch;
+  margin: var(--tui-line) 0 0;
+  padding: 0;
+  overflow: visible;
+}
+
+button,
+input,
+select,
+textarea,
+.button {
+  font-size: 1rem;
+  line-height: var(--tui-line);
+  max-width: 100%;
+  accent-color: var(--tui-accent);
+}
+
+select,
+textarea,
+input[type="text"],
+input[type="number"],
+input[type="submit"],
+input[type="button"],
+button,
+.button,
+#results button[type="submit"] {
+  padding: 0;
+  border: 0;
+  background-color: var(--color-base-background);
+  color: var(--color-base-font);
+}
+
+select {
+  appearance: none;
+  background-image: none !important;
+  cursor: pointer;
+  color: var(--tui-muted);
+}
+
+select:hover,
+select:focus {
+  color: var(--tui-accent);
+}
+
+button:hover,
+input[type="submit"]:hover,
+.button:hover,
+#search #send_search:hover {
+  color: var(--color-base-background);
+  background-color: var(--tui-accent);
+}
+
+#search .autocomplete {
+  position: absolute;
+  inset: 100% -1px auto;
+  width: auto;
+  margin: 0;
+  border: 0;
+  background: var(--color-base-background);
+  z-index: 2000;
+}
+
+#search .autocomplete li {
+  padding: 0 1ch;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+/* Shared column edges; whitespace replaces result and sidebar panels. */
+#main_results #results,
+#main_results #results.only_template_images,
+#main_results #results.image-detail-open.only_template_images {
+  display: grid;
+  grid-template:
+    "corrections sidebar" auto
+    "answers sidebar" auto
+    "urls sidebar" 1fr
+    "pagination sidebar" auto
+    / minmax(0, 1fr) 36ch;
+  gap: 0 2ch;
+  width: 100% !important;
+  max-width: none;
+  margin: var(--tui-line) 0 0;
+}
+
+#results #urls,
+#results #sidebar {
+  min-width: 0;
+  width: auto;
+  margin: 0;
+  padding: 0;
+}
+
+#results .result,
+#answers,
+#corrections,
+#sidebar .sidebar-collapsible,
+#sidebar .infobox,
+.dialog-error,
+.dialog-warning,
+.dialog-information {
+  width: 100%;
+  height: auto;
+  margin: 0 0 calc(2 * var(--tui-line)) !important;
+  padding: 0;
+  border: 0 !important;
+  background: var(--color-base-background);
+  overflow-wrap: anywhere;
+}
+
+#results .result:focus-within,
+#results .result[data-vim-selected] {
+  background: var(--color-result-vim-selected);
+}
+
+#results .result {
+  --color-result-url-font: var(--tui-url);
+  --color-result-engines-font: var(--tui-metadata);
+  --color-result-publishdate-font: var(--tui-metadata);
+}
+
+#results .result h3,
+#results .result h3 a,
+#results .result .content,
+#results .result .url_wrapper {
+  max-width: none;
+  margin: 0;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+#results .result h3 {
+  margin-bottom: 0;
+}
+
+#results .result h3 a,
+#results .result-images span.title {
+  font-weight: 700;
+}
+
+/* Apply to every URL segment, not just the hostname, including on hover. */
+#results .result :is(.url_header, .url_wrapper, .result-url a),
+#results .result :is(.url_header, .url_wrapper, .result-url a) * {
+  color: var(--tui-url);
+  text-decoration: none;
+}
+
+#results .result .engines,
+#results .result .engines *,
+#results .result .cache_link,
+#results .result .proxyfied_link,
+#results .result .stat {
+  color: var(--tui-metadata);
+}
+
+#results .engines {
+  float: none;
+  justify-content: flex-start;
+  gap: 0 1ch;
+  margin-top: var(--tui-line);
+  padding-top: 0;
+  border: 0;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+/* Upstream makes engine captions and cached/proxied links smaller, some !important. */
+#results .engines *,
+#results .result .cache_link,
+#results .result .proxyfied_link {
+  font-size: 1rem !important;
+  line-height: var(--tui-line);
+}
+
+#results .engines span {
+  margin: 0;
+}
+
+#sidebar summary.title {
+  padding: 0;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--tui-accent);
+  list-style: none;
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}
+
+#sidebar details[open] > summary {
+  margin-bottom: var(--tui-line);
+}
+
+#sidebar-end-collapsible {
+  display: none;
+}
+
+/* Result imagery remains visible, aligned to the same character-cell grid. */
+#results .template_group_images,
+#results.only_template_images #urls {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24ch), 1fr));
+  gap: 0 2ch;
+  align-items: start;
+}
+
+#results .template_group_images::after {
+  display: none;
+}
+
+#results .result-images .image_thumbnail {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: calc(8 * var(--tui-line));
+  margin-bottom: var(--tui-line);
+  object-fit: contain;
+  filter: none;
+}
+
+#results .result-images .image_resolution {
+  position: static;
+  padding: 0;
+  background: transparent;
+  color: var(--tui-metadata);
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+#results .result-images > a,
+#results .result-images span.title,
+#results .result-images span.source {
+  display: block;
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0;
+  white-space: normal;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+#results .result-images span.title {
+  color: var(--color-result-link-font);
+}
+
+#results .result-images span.source {
+  color: var(--tui-url);
+  text-decoration: none;
+}
+
+/* Keep the image preview inline rather than in a separate overlay. */
+#results.image-detail-open article.result-images[data-vim-selected] .detail {
+  display: block;
+  position: static;
+  inset: auto;
+  margin-top: var(--tui-line);
+  padding: var(--tui-line) 0 0;
+  border: 0;
+  overflow: visible;
+}
+
+#results.image-detail-open article.result-images[data-vim-selected] .detail a.result-images-source img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 60vh;
+  object-fit: contain;
+  margin-bottom: var(--tui-line);
+}
+
+#results.image-detail-open article.result-images[data-vim-selected] .result-images-labels,
+#results.image-detail-open article.result-images[data-vim-selected] .result-images-labels :is(h4, p) {
+  height: auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+#results.image-detail-open article.result-images[data-vim-selected] .result-images-labels p span {
+  width: auto;
+  margin-inline-end: 1ch;
+}
+
+#pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--tui-line) 1ch;
+  padding: var(--tui-line) 0;
+  border: 0;
+}
+
+#pagination .numbered_pagination {
+  flex-wrap: wrap;
+  gap: 0 1ch;
+}
+
+#pagination .page_number_current {
+  border: 0;
+  color: var(--tui-accent);
+  font-weight: 700;
+}
+
+.page_with_header {
+  width: 100%;
+  margin: 0;
+  padding: var(--tui-line) 0;
+  border: 0;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 0 1ch;
+  line-height: var(--tui-line);
+  border: 0;
+}
+
+body > footer {
+  max-width: 160ch;
+  min-height: 0;
+  margin: auto auto 0;
+  padding: var(--tui-line) 0;
+  border: 0;
+  text-align: start;
+  color: var(--tui-muted);
+}
+
+footer p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: var(--tui-line);
+}
+
+@media (max-width: 1000px) {
+  #main_results #results,
+  #main_results #results.only_template_images,
+  #main_results #results.image-detail-open.only_template_images {
+    grid-template:
+      "corrections" auto
+      "answers" auto
+      "urls" auto
+      "pagination" auto
+      "sidebar" auto
+      / minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  body {
+    padding: var(--tui-line) 1ch;
+  }
+
+  #main_index .index {
+    margin-block: var(--tui-line);
+  }
+}
