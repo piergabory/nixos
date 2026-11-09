@@ -6,7 +6,7 @@ in
     pins = {
       "Merge Requests" = {
         id = "essential_gitlab_netatmo";
-        url = "https://gitlab.corp.netatmo.com/dashboard/merge_requests";
+        url = "https://grpleg.gitlab.host/dashboard/merge_requests";
         position = 1;
         isEssential = true;
       };
@@ -37,7 +37,7 @@ in
       pins = {
         "Merge Requests" = {
           id = "gitlab_netatmo";
-          url = "https://gitlab.corp.netatmo.com/dashboard/merge_requests";
+          url = "https://grpleg.gitlab.host/dashboard/merge_requests";
           position = position + 1;
         };
         "Kanban" = {
