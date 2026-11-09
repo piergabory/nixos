@@ -28,9 +28,7 @@
       hunk # Diff review TUI
 
       (tokscale.overrideAttrs (old: {
-        # This UI test fails under the nixpkgs build environment because the
-        # rendered usage screen omits the reset button; keep the remaining
-        # tokscale test suite enabled.
+        buildInputs = old.buildInputs ++ [ zstd ];
         checkFlags = old.checkFlags ++ [
           "--skip=tui::ui::usage::tests::usage_reset_button_renders_when_credit_available"
         ];
