@@ -21,12 +21,16 @@
   ];
 
   config = lib.optionalAttrs (!isDroid) {
+    home.sessionVariables.GITLAB_HOST = "grpleg.gitlab.host";
+
     programs.github-copilot-cli.enable = true;
     programs.helix.enable = true;
 
     home.packages = with pkgs; [
       hunk # Diff review TUI
       github-cli
+      glab
+      glab-tui
 
       (tokscale.overrideAttrs (old: {
         buildInputs = old.buildInputs ++ [ zstd ];

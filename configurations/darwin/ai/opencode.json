@@ -16,6 +16,13 @@
       "xcode": {
         "type": "local",
         "command": ["xcrun", "mcpbridge"]
+      },
+      "gitlab": {
+        "type": "remote",
+        "url": "https://grpleg.gitlab.host/api/v4/mcp",
+        "headers": {
+          "X-Gitlab-Enabled-Mcp-Server-Toolsets": "core,merge_requests,work_items,repository,ci"
+        }
       }
     }
   }
