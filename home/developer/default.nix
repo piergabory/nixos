@@ -26,6 +26,7 @@
 
     home.packages = with pkgs; [
       hunk # Diff review TUI
+      github-cli
 
       (tokscale.overrideAttrs (old: {
         buildInputs = old.buildInputs ++ [ zstd ];
