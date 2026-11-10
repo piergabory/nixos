@@ -1,6 +1,14 @@
 { isDarwin, pkgs, ... }:
 
 {
+  # Zsh is configured here rather than through Home Manager, so Home Manager's
+  # session variables (including Nixvim's defaultEditor) are not loaded by Zsh.
+  # Keep the system defaults consistent with the shared Home Manager editor.
+  environment.variables = {
+    EDITOR = "nvim";
+    VISUAL = "nvim";
+  };
+
   programs.zsh = {
     enable = true;
     enableCompletion = true;
