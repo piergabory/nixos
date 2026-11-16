@@ -19,9 +19,3 @@ There are three purposes to this configuration:
 - Maintaining a home server hosting all the digital services I need,
   with no reliance on subscriptions or third parties.
 - Switch to free and open-source software at every oportunity.
-
-## Generative AI
-
-Generative AI has been widely used in this project for prototyping. Some parts of the nix
-code is mostly generated and it shows. However, the main project structure, core components
-and critical services are always rewritten by hand.
