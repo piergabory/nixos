@@ -28,9 +28,6 @@
     shell = "${pkgs.zsh}/bin/zsh";
   };
 
-
-  mainUser.homeProfile = ../../../home/cli.nix;
-
   # Nix-on-Droid stages a new `proot-static` in `installProotStatic`, which runs
   # *after* `installPackages`. glibc >= 2.42 (Nixpkgs >= 26.05) needs the
   # 2026-02-20 proot: the older one makes `tcgetattr` fail, so `nix-env` dies
@@ -110,7 +107,10 @@
   };
 
   home-manager = {
-    config = ../../../home;
+    config.imports = [
+      ../../../home/cli.nix
+      ../../../home/droid.nix
+    ];
     backupFileExtension = "home-manager-backup";
     useGlobalPkgs = true;
     extraSpecialArgs = {

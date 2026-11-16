@@ -38,6 +38,12 @@ to distribute to the machines.
 
 ## Personal agent tooling
 
+On **droid**, `packages/opencode-droid.nix` repackages the pinned upstream ARM64
+CLI release instead of building OpenCode's Bun workspaces on the phone.
+`home/developer/opencode.nix` selects this package, owns the phone's
+`~/.local/bin/opencode` link, and adapts the pinned Stylix target to OpenCode 2's
+`cli.json`. Other machines retain the Nixpkgs package and desktop app.
+
 `home/developer/hunk/default.nix`, imported by the shared OpenCode module, owns the global
 Hunk review skill, code-review communication guidance, and `hunk-review-open`
 launcher. The launcher reuses or opens a Hunk pane in the matching OpenCode

@@ -1,14 +1,29 @@
-{ lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  isDroid ? false,
+  ...
+}:
 
 {
   imports = [ ./hunk ];
 
-  home.packages = with pkgs; [
-    opencode-desktop
-  ];
+  home.packages = with pkgs; lib.optionals (!isDroid) [ opencode-desktop ];
+
+  # This directory precedes the Nix profile in the phone's PATH. Home Manager
+  # backs up the old unmanaged binary before linking the managed executable.
+  home.file = lib.mkIf isDroid {
+    ".local/bin/opencode".source = "${config.programs.opencode.package}/bin/opencode";
+  };
 
   programs.opencode = {
     enable = true;
+    package = lib.mkIf isDroid (pkgs.callPackage ../../packages/opencode-droid.nix { });
+    # The pinned Stylix target still selects its theme through the OpenCode 1
+    # option. Keep its theme file, but select it through cli.json on Droid.
+    tui = lib.mkIf isDroid (lib.mkForce { });
+    cli.theme = lib.mkIf isDroid "stylix";
     settings = {
       permissions = [
         {
