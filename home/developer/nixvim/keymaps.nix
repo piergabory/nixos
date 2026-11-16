@@ -1,3 +1,5 @@
+{ lib, isDroid ? false, ... }:
+
 {
   programs.nixvim.keymaps = [
     {
@@ -30,6 +32,7 @@
       action = "<cmd>Telescope current_buffer_fuzzy_find<cr>";
       options.desc = "Search buffer";
     }
+  ] ++ lib.optionals (!isDroid) [
     {
       mode = "n";
       key = "<leader>gg";
@@ -66,6 +69,7 @@
       action = "<cmd>ToggleTerm<cr>";
       options.desc = "Terminal";
     }
+  ] ++ [
     {
       mode = "n";
       key = "<leader>qq";

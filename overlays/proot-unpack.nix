@@ -35,12 +35,10 @@
 # If another package ever has to be compiled on-device and fails the same way,
 # add its `name`/`pname` to `namesToFix` below.
 #
-# This overlay has to be wired in twice:
-#
-#   1. `flake.nix`, through the `pkgs` argument of `nixOnDroidConfiguration`.
-#   2. `home/developer/nixvim/default.nix`, through
-#      `programs.nixvim.nixpkgs.overlays` — nixvim instantiates its own Nixpkgs
-#      from `nixpkgs.source`, so the first one does not reach its plugins.
+# This overlay is wired in `flake.nix`, through the `pkgs` argument of
+# `nixOnDroidConfiguration`. On Droid, Home Manager and Nixvim both reuse that
+# package set (`useGlobalPkgs` and `useGlobalPackages`, respectively), so the
+# plugin fixes reach Nixvim without evaluating a second Nixpkgs instance.
 #
 # The build set can be checked without a phone: evaluate the configuration with
 # `user.uid`/`user.gid` set explicitly (that avoids the aarch64 `ids.nix`
