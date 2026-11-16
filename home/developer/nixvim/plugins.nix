@@ -1,5 +1,7 @@
 {
   programs.nixvim.plugins = {
+    lz-n.enable = true;
+
     # Syntax parsing/highlighting and indentation; use :InspectTree for parser inspection.
     treesitter = {
       enable = true;
@@ -58,7 +60,10 @@
     lualine.enable = true;
 
     # Fuzzy finder for files, text, buffers, and help; use <leader>ff or :Telescope.
-    telescope.enable = true;
+    telescope = {
+      enable = true;
+      lazyLoad.settings.cmd = [ "Telescope" ];
+    };
 
     # Inline image rendering support; use image-capable buffers/markdown previews.
     image.enable = true;
@@ -67,13 +72,19 @@
     gitsigns.enable = true;
 
     # Full-screen Git UI inside Neovim; use <leader>gg or :Neogit.
-    neogit.enable = true;
+    neogit = {
+      enable = true;
+      lazyLoad.settings.cmd = [ "Neogit" ];
+    };
 
     # Popup guide for keybindings; press <leader> and wait or use :WhichKey.
     which-key.enable = true;
 
     # Diagnostics, quickfix, and references list UI; use <leader>xx or :Trouble.
-    trouble.enable = true;
+    trouble = {
+      enable = true;
+      lazyLoad.settings.cmd = [ "Trouble" ];
+    };
 
     # Finds TODO/FIXME-style comments; use <leader>td or :TodoTelescope.
     todo-comments.enable = true;
@@ -103,7 +114,13 @@
     project-nvim.enable = true;
 
     # Floating/split terminal inside Neovim; use <leader>ft or :ToggleTerm.
-    toggleterm.enable = true;
+    toggleterm = {
+      enable = true;
+      lazyLoad.settings.cmd = [
+        "ToggleTerm"
+        "TermExec"
+      ];
+    };
 
     # Improved vim.ui prompts/select menus; used automatically by plugins.
     dressing.enable = true;
