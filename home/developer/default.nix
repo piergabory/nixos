@@ -10,10 +10,10 @@
   imports = [
     ./git.nix
     ./nixvim
+    ./opencode.nix
   ]
   ++ lib.optionals (!isDroid) [
     ./languages
-    ./opencode.nix
     ./zed-editor.nix
   ]
   ++ lib.optionals isDarwin [
