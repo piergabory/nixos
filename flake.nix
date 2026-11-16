@@ -59,13 +59,11 @@
   outputs =
     inputs@{ nixpkgs, ... }:
     {
-      # Isolated package testing without evaluating or activating the phone's
-      # whole Home Manager configuration.
       packages.aarch64-linux.opencode-droid =
         let
           pkgs = import nixpkgs { system = "aarch64-linux"; };
         in
-        pkgs.callPackage ./packages/opencode-droid.nix { };
+        pkgs.callPackage ./configurations/linux/droid/opencode-package.nix { };
 
       nixosConfigurations = {
         workstation = nixpkgs.lib.nixosSystem {
@@ -121,7 +119,7 @@
         pkgs = import nixpkgs {
           system = "aarch64-linux";
           overlays = [
-            (import ./overlays/proot-unpack.nix)
+            (import ./configurations/linux/droid/proot-unpack.nix)
           ];
         };
         home-manager-path = inputs.home-manager.outPath;
