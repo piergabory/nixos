@@ -35,3 +35,10 @@ global instruction file with a brief note about their intended scope.
 
 The root `AGENTS.md` describes this repository; it is not a global instruction file
 to distribute to the machines.
+
+## Personal agent tooling
+
+`home/developer/hunk/default.nix`, imported by the shared OpenCode module, owns the global
+Hunk review skill, code-review communication guidance, and `hunk-review-open`
+launcher. The launcher reuses or opens a Hunk pane in the matching OpenCode
+Zellij tab without taking keyboard focus. This tooling is not company-specific.

@@ -1,6 +1,8 @@
 { lib, pkgs, ... }:
 
 {
+  imports = [ ./hunk ];
+
   home.packages = with pkgs; [
     opencode-desktop
   ];

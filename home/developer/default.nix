@@ -27,7 +27,6 @@
     programs.helix.enable = true;
 
     home.packages = with pkgs; [
-      hunk # Diff review TUI
       github-cli
       glab
       glab-tui
