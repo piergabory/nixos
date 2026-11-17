@@ -6,6 +6,14 @@ let
 in
 {
   config = mkIf cfg.enable {
+    # Work around nixpkgs reading piholePackage.src.src.tag instead of src.tag.
+    environment.etc."pihole/versions" = mkForce {
+      text = ''
+        CORE_VERSION=${config.services.pihole-ftl.piholePackage.src.tag}
+        FTL_VERSION=${config.services.pihole-ftl.package.src.tag}
+      '';
+    };
+
     services.pihole-ftl = {
       enable = true;
       openFirewallDNS = false;

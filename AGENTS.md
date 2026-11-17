@@ -50,3 +50,13 @@ desktop app. Droid's PRoot and activation workarounds also live under
 Hunk review skill, code-review communication guidance, and `hunk-review-open`
 launcher. The launcher reuses or opens a Hunk pane in the matching OpenCode
 Zellij tab without taking keyboard focus. This tooling is not company-specific.
+
+## Temporary workarounds
+
+`modules/homelab/pihole/pihole-ftl.nix` temporarily overrides the entire
+`environment.etc."pihole/versions"` entry with `mkForce` because nixpkgs reads
+the nonexistent `piholePackage.src.src.tag` instead of `piholePackage.src.tag`.
+Overriding only `.text` still evaluates the broken upstream expression.
+At the next nixpkgs update or Pi-hole maintenance opportunity, check whether
+upstream has fixed this, remove the override as soon as a rebuild succeeds
+without it, and remove this note too.
