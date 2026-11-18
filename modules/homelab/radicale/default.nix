@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 with lib;
 
 let
@@ -18,6 +18,25 @@ in
           type = "htpasswd";
           htpasswd_filename = config.age.secrets.radicale-admin.path;
           htpasswd_encryption = "bcrypt";
+        };
+        rights = {
+          type = "from_file";
+          file = toString (pkgs.writeText "radicale-read-only-rights" ''
+            [root]
+            user = .+
+            collection =
+            permissions = R
+
+            [principal]
+            user = .+
+            collection = {user}
+            permissions = R
+
+            [collections]
+            user = .+
+            collection = {user}/[^/]+
+            permissions = r
+          '');
         };
         server.hosts = [ "127.0.0.1:5232" ];
       };

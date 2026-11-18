@@ -9,6 +9,7 @@ in
     ./airtrail
     ./authentication
     ./budget
+    ./bulwark
     ./dawarich
     ./home-assistant
     ./immich
@@ -43,6 +44,7 @@ in
     services = {
       actual.enable = true;
       airtrail.enable = true;
+      bulwark.enable = true;
       dawarich.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
