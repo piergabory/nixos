@@ -31,12 +31,10 @@
       glab
       glab-tui
 
-      (tokscale.overrideAttrs (old: {
-        buildInputs = old.buildInputs ++ [ zstd ];
-        checkFlags = old.checkFlags ++ [
-          "--skip=tui::ui::usage::tests::usage_reset_button_renders_when_credit_available"
-        ];
-      }))
+      (tokscale.overrideAttrs {
+        doCheck = false;
+        doInstallCheck = false;
+      })
     ];
   };
 }

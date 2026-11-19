@@ -24,6 +24,7 @@
     stylix = {
       enable = true;
       autoEnable = !isDroid;
+      targets.wayprompt.enable = false;
     };
   }
   // lib.optionalAttrs (!isDroid) {

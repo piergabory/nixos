@@ -84,6 +84,12 @@ Zellij tab without taking keyboard focus. This tooling is not company-specific.
 
 ## Temporary workarounds
 
+`home/default.nix` temporarily disables `stylix.targets.wayprompt` because the
+pinned Stylix still configures `programs.wayprompt`, which Home Manager removed
+after nixpkgs dropped the unmaintained package. At the next Stylix or Home Manager
+update, check whether Stylix has removed or adapted the target; remove the disable
+line as soon as a rebuild succeeds without it, and remove this note too.
+
 `modules/homelab/pihole/pihole-ftl.nix` temporarily overrides the entire
 `environment.etc."pihole/versions"` entry with `mkForce` because nixpkgs reads
 the nonexistent `piholePackage.src.src.tag` instead of `piholePackage.src.tag`.
