@@ -11,7 +11,7 @@ in
     ./secrets
   ];
 
-  config = mkIf config.services.bulwark.enable {
+  config = mkIf config.services.bulwark-lite.enable {
     services.stalwart = {
       enable = true;
       stateVersion = "26.05";

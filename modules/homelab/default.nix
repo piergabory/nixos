@@ -44,7 +44,7 @@ in
     services = {
       actual.enable = true;
       airtrail.enable = true;
-      bulwark.enable = true;
+      bulwark-lite.enable = true;
       dawarich.enable = true;
       immich.enable = true;
       jellyfin.enable = true;
