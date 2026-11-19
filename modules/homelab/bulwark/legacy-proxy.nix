@@ -25,13 +25,7 @@ let
   };
 in
 {
-  config = lib.mkIf config.services.bulwark.enable {
-    services.bulwark.settings.jmapServers.icloud = {
-      label = "iCloud Mail";
-      url = "https://${domain}";
-      domains = [ "icloud.com" "me.com" "mac.com" ];
-    };
-
+  config = lib.mkIf config.services.bulwark-lite.enable {
     virtualisation = {
       containers.enable = true;
       oci-containers = {
