@@ -28,7 +28,7 @@ in
   config = lib.mkIf config.services.bulwark.enable {
     services.bulwark.settings.jmapServers.icloud = {
       label = "iCloud Mail";
-      url = "https://${domain}/jmap/session";
+      url = "https://${domain}";
       domains = [ "icloud.com" "me.com" "mac.com" ];
     };
 
@@ -47,11 +47,13 @@ in
             DEFAULT_PROVIDER = "icloud";
             PROVIDERS_FILE = "/etc/legacy-proxy/providers.json";
             TRUST_PROXY = "10.88.0.1";
+            NODE_OPTIONS = "--require=/etc/legacy-proxy/icloud-compat.cjs";
           };
           environmentFiles = [ environmentFile ];
           volumes = [
             "${dataDir}:/data"
             "${providers}:/etc/legacy-proxy/providers.json:ro"
+            "${./icloud-compat.cjs}:/etc/legacy-proxy/icloud-compat.cjs:ro"
           ];
           extraOptions = [
             "--cap-drop=ALL"

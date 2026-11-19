@@ -4,11 +4,13 @@ Bulwark at `https://mail.pierr.re` connects to two separate JMAP accounts:
 
 - **Calendars and contacts**: Stalwart at `https://jmap.pierr.re`, signed in
   through Authelia. Existing CalDAV/CardDAV clients keep using this server.
-- **iCloud Mail**: the legacy bridge at `https://icloud-jmap.pierr.re/jmap/session`.
+- **iCloud Mail**: the legacy bridge at `https://icloud-jmap.pierr.re`.
   Select this server when adding an account, then use your primary full iCloud
   email address and an Apple app-specific password, not your Apple Account password.
 
 Use Bulwark's account menu to add the second account and switch between them.
+Use the bridge's base URL without `/jmap/session`: Bulwark appends
+`/.well-known/jmap` for discovery, and the bridge redirects it to the session.
 The accounts do not share contacts or calendars automatically. iCloud-hosted
 custom-domain sender addresses may need to be added as identities in the mail
 account; Apple must already authorise those addresses.
@@ -22,6 +24,11 @@ enabled. No incoming SMTP port, MX records or email hosting changes are needed.
 The bridge's built-in login limits trust the default Podman gateway
 `10.88.0.1` for nginx's forwarded client addresses; update that setting if the
 container network changes.
+
+`icloud-compat.cjs` is preloaded before ImapFlow to quote colon-bearing
+`KEYWORD`/`UNKEYWORD` search arguments. iCloud rejects the unquoted `$label:*`
+keywords used by Bulwark's tag counters with `BAD Parse Error`. Recheck whether
+this workaround is needed when upgrading the pinned bridge/ImapFlow version.
 
 On activation, the secrets service creates vault/session keys only if absent.
 Existing keys and databases are reused. The keys live in
@@ -41,10 +48,14 @@ After rebuilding, check:
 ```console
 systemctl status bulwark-legacy-proxy-secrets podman-bulwark-legacy-proxy
 curl --fail http://127.0.0.1:3004/healthz
+curl -I https://icloud-jmap.pierr.re/.well-known/jmap
 curl -I https://icloud-jmap.pierr.re/jmap/session
 ```
 
-An unauthenticated session request should return `401`. Mail remains available
+Discovery should redirect to `/jmap/session`; an unauthenticated session request
+should return `401`. A `404` for `/jmap/session/.well-known/jmap` during sign-in
+means the client was given the session URL instead of the base URL.
+Mail remains available
 through iCloud.com and directly connected mail apps if the home server is down.
 
 ## Stalwart backup and restore
