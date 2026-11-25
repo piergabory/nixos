@@ -69,6 +69,12 @@ remain unchanged. Operational and restore details are in
 
 ## Personal agent tooling
 
+`home/developer/opencode.nix` configures GitHub's remote MCP server for machines
+using the shared OpenCode profile. The server uses a `GITHUB_MCP_PAT` environment
+variable because GitHub's hosted endpoint does not support OpenCode's dynamic
+OAuth client registration. Each machine must provide its own token outside Nix;
+the token is not stored in this repository or the Nix store.
+
 On **droid**, `configurations/linux/droid/opencode-package.nix` repackages the
 pinned upstream ARM64 CLI release instead of building OpenCode's Bun workspaces
 on the phone. `configurations/linux/droid/opencode.nix` selects this package,

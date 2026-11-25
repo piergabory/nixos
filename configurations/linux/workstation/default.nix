@@ -1,3 +1,5 @@
+{ pkgs, ... }:
+
 {
   imports = [
     ../linux.nix
@@ -7,6 +9,8 @@
   ];
 
   config = {
+    environment.systemPackages = [ pkgs.github-cli ];
+
     networking = {
       hostName = "workstation";
       networkmanager.dns = "none";

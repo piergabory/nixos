@@ -13,6 +13,12 @@
   programs.opencode = {
     enable = true;
     settings = {
+      mcp.servers.github = {
+        type = "remote";
+        url = "https://api.githubcopilot.com/mcp/";
+        oauth = false;
+      };
+
       permissions = [
         {
           action = "external_directory";
