@@ -17,6 +17,7 @@
         type = "remote";
         url = "https://api.githubcopilot.com/mcp/";
         oauth = false;
+        headers.Authorization = "Bearer {file:~/.local/share/opencode/github-mcp-token}";
       };
 
       permissions = [
